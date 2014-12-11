@@ -1,0 +1,45 @@
+<div class="container">
+<%= form_for :masterpiece, url: masterpieces_path, :html=>{:class =>'form-horizontal'} do |f| %>
+<p>
+  <%= f.label :titre %><br>
+  <%= f.text_field :titre, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :lieu %><br>
+  <%= f.text_field :lieu, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :auteur %><br>
+  <%= f.text_field :auteur, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :date %><br>
+  <%= f.text_field :date, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :courant %><br>
+  <%= f.text_field :courant, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :son %><br>
+  <%= f.text_field :son, :class => "form-control" %>
+</p>
+<p>
+  <%= f.label :image %><br>
+  <%= f.text_field :image, :class => "form-control" %>
+</p>
+
+<p>
+  <%= f.label :localisation %><br>
+  <%= f.text_field :localisation, :class => "form-control" %>
+</p>
+
+<p id="myBtn">
+  <%= f.submit :class => "btn btn-success" %>
+</p>
+<% end %>
+</div>
+
+<div id="myBtn">
+  <%= link_to 'Retour', masterpieces_path, :class => "btn btn-success" %>
+</div>

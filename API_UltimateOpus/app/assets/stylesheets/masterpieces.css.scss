@@ -1,0 +1,122 @@
+// Place all the styles related to the masterpieces controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+p{
+  font-style: italic;
+}
+
+
+
+#myPiece{
+  width: 100%;
+  background: rgba(0,0,0, .5);
+  height: 330px;
+
+  .img{
+    float: left;
+    width: 30%;
+    height: 100%;
+    background: #000000;
+  }
+  .datas{
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    #title{
+      font-size: 25px;
+      font-weight:600;
+      text-align: center;
+      padding: 10px 0px;
+      border-bottom: 1px rgba(255,255,255, .5) solid;
+    }
+    #data{
+      text-align: center;
+      padding: 12px;
+    }
+  }
+}
+
+h1{
+  font-size: 55px;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+table{
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+  font-size: 20px;
+}
+
+td{
+  img{
+    padding: 0px 5px;
+  }
+}
+
+.myCard{
+  background: rgba(0,0,0, .7);
+  width: 33.33333%;
+  height: 500px;
+  padding: 20px 10px;
+  float: left;
+  margin: 0;
+}
+
+#cards{
+  width: 100%;
+  p{
+    text-align: center;
+  }
+}
+
+a{
+  img{
+    width: 30px;
+    padding: 0px 5px;
+    height: auto;
+  }
+}
+
+span{
+  img{
+    width: 15px;
+    position: relative;
+    right: 0px;
+    padding: 0px 0px 25px 0px;
+    top: 0px;
+    height: auto;
+  }
+}
+
+strong{
+  font-size: 9px;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#bg{
+  height: 100%;
+  background-size: cover;
+}
+
+#title_cont{
+  font-weight: 300;
+  font-size: 25px;
+  padding: 20px 0px 30px 0px;
+  text-align: left!important;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#content{
+  font-weight: 300;
+  font-size: 16px;
+  text-align: left!important;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#title_car{
+  padding: 10px 0px;
+  font-size: 28px;
+  margin: 0px 0px 15px 0px;
+  border-bottom: 1px solid rgba(255,255,255, .7);
+}

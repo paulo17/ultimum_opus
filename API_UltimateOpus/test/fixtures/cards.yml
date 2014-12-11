@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  caracteristique: MyString
+  titre_contenu: MyString
+  content: MyText
+  masterpiece_id: 
+
+two:
+  caracteristique: MyString
+  titre_contenu: MyString
+  content: MyText
+  masterpiece_id: 

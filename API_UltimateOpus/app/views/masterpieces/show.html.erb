@@ -1,0 +1,91 @@
+<div id="myPiece">
+  <div class="img">
+    <div id="bg" style="background: url('http://maximeberthelot.fr/UltimateOpus/API/img/img_mpiece/<%= @masterpiece.image %>') 50% 50%;"></div>
+  </div>
+  <div class="datas">
+    <p id="title"><%= @masterpiece.titre %></p>
+    <p id="data">
+      <strong>Lieu de création de l'oeuvre:</strong>
+      <%= @masterpiece.lieu %>
+    </p>
+    <p id="data">
+      <strong>Crée par:</strong>
+      <%= @masterpiece.auteur %>
+    </p>
+    <p id="data">
+      <strong>Le:</strong>
+      <%= @masterpiece.date %>
+    </p>
+    <p id="data">
+      <strong>Courant:</strong>
+      <%= @masterpiece.courant %>
+    </p>
+    <p id="data">
+      <strong>Univers Sonore:</strong>
+      <%= @masterpiece.son %>
+    </p>
+    <p id="data">
+      <strong>Localisation actuelle:</strong>
+      <%= @masterpiece.localisation %>
+    </p>
+
+  </div>
+</div>
+
+<div id="cards">
+    <h2>Fiche(s)</h2>
+
+    <% @masterpiece.cards.each do |card| %>
+        <div class="myCard">
+          <span>
+          <%= link_to [card.masterpiece, card],
+                      method: :delete, data: { confirm: 'Tu es sur ??' }  do %>
+              <%= image_tag('http://maximeberthelot.fr/H3data/img/delete.png')%>
+          <% end %>
+          </span>
+            <p id="title_car">
+              <%= card.caracteristique %>
+            </p>
+            <p id="title_cont">
+              <%= card.titre_contenu %>
+            </p>
+            <p id="content">
+              <%= card.content %>
+            </p>
+          <p>
+
+          </p>
+        </div>
+    <% end %>
+</div>
+
+<div class="addCards container">
+
+
+    <%= form_for([@masterpiece, @masterpiece.cards.build], :html=>{:class =>'form-horizontal'}) do |f| %>
+      <h2>Ajoutez une caractéristique à l'oeuvre:</h2>
+      <p>
+          <%= f.label :caracteristique %><br>
+          <%= f.text_field :caracteristique, :class => "form-control"  %>
+        </p>
+        <p>
+          Titre du contenu<br>
+          <%= f.text_field :titre_contenu, :class => "form-control"  %>
+        </p>
+        <p>
+          Texte associé  <br>
+          <%= f.text_area :content, :class => "form-control"  %>
+        </p>
+        <p id="myBtn_2">
+          <%= f.submit :class => "btn btn-success" %>
+        </p>
+    <% end %>
+</div>
+<div id="btnPiece">
+    <div id="myBtn">
+    <%= link_to 'Retour', masterpieces_path, :class => "btn btn-success" %>
+    </div>
+    <div id="myBtn">
+      <%= link_to "Editer l'oeuvre", edit_masterpiece_path(@masterpiece), :class => "btn btn-success" %>
+    </div>
+</div>

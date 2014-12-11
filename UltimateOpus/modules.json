@@ -1,0 +1,10 @@
+[
+    { "name": "vendors", "exclude": ["normalize", "css-builder"] },
+    { "name": "config", "exclude": ["vendors"] },
+    { "name": "localeManager", "exclude": ["vendors", "config"] },
+
+    { "name": "main", "exclude": ["vendors", "normalize", "config"] },
+    { "name": "app", "exclude": ["vendors", "normalize", "config"] },
+
+    { "name": "views/home/home_view", "exclude" : ["vendors", "app", "normalize", "config"] }
+]
