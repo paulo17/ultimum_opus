@@ -40,8 +40,8 @@ Have fun ! :)
 
 ## Demo
 
-Comming soon
+Coming soon
 
 ## API RoR - Backend
 
-Comming soon
+Coming soon
