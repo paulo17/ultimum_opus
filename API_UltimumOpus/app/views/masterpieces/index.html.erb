@@ -1,0 +1,33 @@
+<h1>Nos chefs d'oeuvres</h1>
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr >
+      <th>Titre</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @masterpieces.each do |masterpiece| %>
+      <tr>
+        <td><%= masterpiece.titre %></td>
+        <td><%= link_to edit_masterpiece_path(masterpiece) do %>
+              <%= image_tag('http://maximeberthelot.fr/H3data/img/edit.png')%>
+          <% end %>
+          <%= link_to masterpiece_path(masterpiece) do %>
+              <%= image_tag('http://maximeberthelot.fr/H3data/img/show.png')%>
+          <% end %>
+          <%= link_to masterpiece_path(masterpiece),
+                      method: :delete, data: { confirm: 'Tu es sur ??' }  do %>
+              <%= image_tag('http://maximeberthelot.fr/H3data/img/destroy.png')%>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<div id="myBtn">
+  <%= link_to 'Ajouter', new_masterpiece_path, :class => "btn btn-success" %>
+</div>
