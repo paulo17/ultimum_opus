@@ -3,5 +3,67 @@
 body{
   margin: -21px 0px;
   padding: 0px;
-  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  font-family: 'Avenir Next';
+  background: #000610;
+}
+
+#car_title{
+  font-size: 26px;
+  text-align: center;
+  color: #ffffff;
+  letter-spacing: 7px;
+  margin: 0;
+  font-weight: 100;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 11px rgba(255, 255, 255, 0.90);
+}
+
+p{
+  padding: 0;
+  margin: 0;
+}
+
+.svg-wrapper {
+  transform: translateY(-50%);
+  margin: 0 auto;
+  cursor: pointer;
+  width: 125px;
+  height: 25px;
+
+  float: left;
+}
+.shape {
+  stroke-dasharray: 370;
+  stroke-dashoffset: 405;
+  stroke-width: 1px;
+  cursor: pointer;
+  fill: transparent;
+  stroke: white;
+  border-bottom: 1px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+.text {
+  font-size: 10px;
+  color: rgba(202, 202, 202, 0.52);
+  border: 1px solid rgba(202, 202, 202, 0.52);
+  top: -31px;
+  padding: 5px 0px 6px 0px;
+  cursor: pointer;
+  text-align: center;
+  width: 124px;
+  font-weight: 100;
+  position: relative;
+  &:hover{
+    transition: color 1s;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+.svg-wrapper:hover .shape {
+  stroke: white;
+  stroke-width: 1px;
+  cursor: pointer;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 300;
 }

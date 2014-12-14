@@ -31,15 +31,15 @@ define([
             this.myCellView = new MyCellView(options);
             this.footerView = new FooterView(options);
 
-            this.lineSVG();
-
         },
 
         detect_scroll: function() {
-            console.log('detected');
+            this.getFooter();
         },
-        lineSVG: function(){
 
+        getFooter: function(){
+            console.log('footer');
+            TweenMax.to($("#footer"), 0.85, { "bottom": '0px', ease: Expo.easeInOut });
         },
 
         getMyCover: function(){
