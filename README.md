@@ -37,6 +37,9 @@ and after
 
 ```
     $ bundle install
+    $ rake db:create (if the DB doesn't exist yet)
+    $ rake db:migrate
+    $ rails s -d (start rails as daemon)
 ```
 
 ## To start this project
