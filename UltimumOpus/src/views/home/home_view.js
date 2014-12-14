@@ -37,9 +37,6 @@ define([
 
         detect_scroll: function() {
 
-            var body = $("html, body");
-           // body.animate({scrollTop:1000}, $(window).height(), 'swing');
-
             this.getFooter();
         },
 
