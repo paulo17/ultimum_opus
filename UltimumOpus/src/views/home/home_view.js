@@ -25,6 +25,9 @@ define([
             // bind to window
             $(window).scroll(this.detect_scroll);
 
+            //Start Anim
+
+
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
             // Init all views on my home
@@ -34,6 +37,7 @@ define([
             this.footerView = new FooterView(options);
 
         },
+
 
         detect_scroll: function() {
 
@@ -46,6 +50,8 @@ define([
         },
 
         getMyCover: function(){
+
+            // Set !div in current height and width
             $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
@@ -69,10 +75,11 @@ define([
                 line.style.strokeDasharray = [ length ,pathLength].join(' ');
             }
 
-            this.centerBlock();
+
+            this.startHome();
         },
 
-        centerBlock: function(){
+        startHome: function(){
             var getCenter = $( window ).height();
             var centerStep = $(".brand").height();
             var mytop;
@@ -81,6 +88,22 @@ define([
             mytop = (getCenter/2)-50;
 
             $( '.brand').css( { 'top' : mytop+41} );
+
+            TweenMax.to($(".second"), 2.5, { "right": '0', ease: Expo.easeInOut });
+            TweenMax.to($(".second"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
+            $({blurRadius: 10}).animate({blurRadius: 0}, {
+                duration: 2600,
+                easing: 'swing', // or "linear"
+                // use jQuery UI or Easing plugin for more options
+                step: function() {
+                    console.log(this.blurRadius);
+                    $('.second').css({
+                        "-webkit-filter": "blur("+this.blurRadius+"px)",
+                        "filter": "blur("+this.blurRadius+"px)"
+                    });
+                }
+            });
+
 
 
         },
