@@ -7,7 +7,9 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
+        className: "Cell_Content",
         events: {},
+
         
         initialize: function(options) {
         },

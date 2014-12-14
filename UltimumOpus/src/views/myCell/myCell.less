@@ -5,3 +5,104 @@
 #Cell{
   background: #090b14;
 }
+
+
+#Cell{
+  background: #000410;
+  overflow: hidden;
+
+  .Cell_Content{
+    width: 100%;
+    height: 90%;
+
+
+    #rightBlock{
+      width: 50%;
+      padding: 3.5% 0px;
+      position: relative;
+      height: 100%;
+      float: left;
+      #img{
+        margin: 0;
+        padding: 0;
+        left: 20%;
+        width: 50%;
+        top: 10%;
+        position: relative;
+        height: auto;
+        z-index: 2;
+        text-align: center;
+        img{
+          padding-right: 8%;
+          width: 100%;
+          -ms-transform: rotate(30deg); /* IE 9 */
+          -webkit-transform: rotate(30deg); /* Chrome, Safari, Opera */
+          transform: rotate(30deg);
+          height: auto;
+          -webkit-blend-mode: screen;
+          background-blend-mode: color-dodge, normal;
+        }
+      }
+      #img_name{
+        text-align: center;
+        width: 40%;
+        height: 20%;
+        z-index: 1;
+        bottom: 15%;
+        right: 53%;
+        position: absolute;
+        img{
+          width: 40%;
+        }
+      }
+    }
+
+    #leftBlock{
+      padding: 3.5% 0px;
+      position: relative;
+      width: 50%;
+      float: left;
+      height: 100%;
+      .txt_content{
+        width: 80%;
+        float: right;
+        text-align: justify;
+        height: 55%;
+        position: relative;
+        top: 20%;
+        .title_content{
+          width: 50%;
+          #b_title{
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0;
+            margin: 0;
+            font-size: 1.8vw;
+          }
+          #l_title{
+            padding: 0px;
+            margin: 0;
+            color: rgba(202, 202, 202, 0.52);
+            font-weight: 100;
+            font-size: 1.1vw;
+            font-style: italic;
+            float: right;
+
+          }
+        }
+        #txt{
+          color: #ffffff;
+          width: 85%;
+          padding: 10% 0px;
+          font-weight: 100;
+          p{
+            padding: 2.5% 0px;
+            font-size: 1vw;
+            line-height: 1.85vw;
+          }
+        }
+      }
+
+    }
+  }
+}
