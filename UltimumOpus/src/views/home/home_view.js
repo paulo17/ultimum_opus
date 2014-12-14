@@ -31,16 +31,41 @@ define([
             this.myCellView = new MyCellView(options);
             this.footerView = new FooterView(options);
 
+            this.lineSVG();
+
         },
 
         detect_scroll: function() {
             console.log('detected');
+        },
+        lineSVG: function(){
+
         },
 
         getMyCover: function(){
             $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+
+            $(window).scroll(function() {
+                drawLine( $('#route'),
+                    document.getElementById('path') );
+            });
+
+            // init the line length
+            drawLine( $('#route'),
+                document.getElementById('path') );
+
+            //draw the line
+            function drawLine(container, line){
+
+                var pathLength = line.getTotalLength(),
+                    maxScrollTop = $(document).height() - $(window).height(),
+                    percentDone = $(window).scrollTop() / maxScrollTop,
+                    length = percentDone * pathLength;
+                line.style.strokeDasharray = [ length ,pathLength].join(' ');
+            }
+
             this.centerBlock();
         },
 
