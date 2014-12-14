@@ -3,16 +3,16 @@
 body{
   margin: -21px 0px;
   padding: 0px;
-  letter-spacing: 0.5px;
   font-family: 'Avenir Next';
   background: #000610;
+  font-size: 3vw;
 }
 
 #car_title{
-  font-size: 26px;
+  font-size: 3vw;
   text-align: center;
   color: #ffffff;
-  letter-spacing: 7px;
+  letter-spacing: .2vw;
   margin: 0;
   font-weight: 100;
   text-transform: uppercase;
@@ -28,42 +28,29 @@ p{
   transform: translateY(-50%);
   margin: 0 auto;
   cursor: pointer;
-  width: 125px;
+  width: 40%;
   height: 25px;
-
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
   float: left;
 }
-.shape {
-  stroke-dasharray: 370;
-  stroke-dashoffset: 405;
-  stroke-width: 1px;
-  cursor: pointer;
-  fill: transparent;
-  stroke: white;
-  border-bottom: 1px solid black;
-  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
-}
-.text {
-  font-size: 10px;
+
+.btnDiscover{
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 40%;
   color: rgba(202, 202, 202, 0.52);
   border: 1px solid rgba(202, 202, 202, 0.52);
-  top: -31px;
-  padding: 5px 0px 6px 0px;
+  padding: 2% 0px 2% 0px;
   cursor: pointer;
   text-align: center;
-  width: 124px;
-  font-weight: 100;
-  position: relative;
-  &:hover{
-    transition: color 1s;
+  font-size: 1vw;
+  &:hover {
+    transition: color 1s, border 1s;
+    border: 1px solid white;
     color: #ffffff;
-    cursor: pointer;
   }
 }
-.svg-wrapper:hover .shape {
-  stroke: white;
-  stroke-width: 1px;
-  cursor: pointer;
-  stroke-dashoffset: 0;
-  stroke-dasharray: 300;
-}
+

@@ -9,9 +9,10 @@ define([
     'views/footer/footer_view',
     'views/myADN/myADN_view',
     'views/myCell/myCell_view',
+    'views/discover/discover_view',
     'gsap'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage, FooterView, MyADNView, MyCellView,TweenMax)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage, FooterView, MyADNView, MyCellView, DiscoverView,TweenMax)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -29,11 +30,16 @@ define([
             // Init all views on my home
             this.myADNView = new MyADNView(options);
             this.myCellView = new MyCellView(options);
+            this.discoverView = new DiscoverView(options);
             this.footerView = new FooterView(options);
 
         },
 
         detect_scroll: function() {
+
+            var body = $("html, body");
+           // body.animate({scrollTop:1000}, $(window).height(), 'swing');
+
             this.getFooter();
         },
 
@@ -96,8 +102,10 @@ define([
             this.myADNView.render();
             this.myCellView.render();
             this.footerView.render();
+            this.discoverView.render();
 
             // Set content on view on div choose
+            this.$el.find('#discover').append(this.discoverView.el);
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
             this.$el.find('#footer').append(this.footerView.el);
