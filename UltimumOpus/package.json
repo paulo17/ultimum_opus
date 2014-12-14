@@ -1,15 +1,15 @@
 {
-  "name": "YourProject",
+  "name": "UltimumOpus",
   "version": "0.1.0",
   "homepage": "",
-  "description": "Site",
+  "description": "WebApp",
   "author": {
-    "name": "Your Name",
-    "email": "your.name@domain.com"
+    "name": "maximeberthelot",
+    "email": "hello@maximeberthelot.fr"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gitid/repo.git"
+    "url": "https://github.com/ecolehetic/H3P2017E07.git"
   },
   "bugs": {
     "url": "https://github.com/gitid/repo/issues"

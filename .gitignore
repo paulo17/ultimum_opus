@@ -1,9 +1,9 @@
-UltimateOpus/node_modules
+UltimumOpus/node_modules
 .DS_Store
-UltimateOpus/.DS_Store
-UltimateOpus/.idea
-UltimateOpus/.tmp
-UltimateOpus/.tmp-dist
-UltimateOpus/dist
+UltimumOpus/.DS_Store
+UltimumOpus/.idea
+UltimumOpus/.tmp
+UltimumOpus/.tmp-dist
+UltimumOpus/dist
 .idea
-API_UltimateOpus/.idea
+API_UltimumOpus/.idea
