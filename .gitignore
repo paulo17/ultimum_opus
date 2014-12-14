@@ -7,3 +7,4 @@ UltimumOpus/.tmp-dist
 UltimumOpus/dist
 .idea
 API_UltimumOpus/.idea
+API_UltimumOpus/sftp-config.json
