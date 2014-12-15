@@ -48,20 +48,23 @@ p{
   font-style: italic;
   font-family: "Playfair Display";
   bottom: 0px;
-  width: 40%;
-  padding: 2% 0px 2% 0px;
+  width: 35%;
+  height: 7.5%;
+  margin-top: 10px;
+  /*padding: 2% 0px 2% 0px;*/
   cursor: pointer;
   text-align: center;
   font-size: .7vw;
 }
 
 .btn-svg{
-  height: 20px;
-  width: 200px;
+  /*height: 20px;
+  width: 200px;*/
   transform:translate(-50%,-50%);
 }
 
 .btn-svg h2{
+  width: 100%;
   position: absolute;
   color: #696a70;
   margin: 0px;
@@ -83,42 +86,43 @@ p{
 
 .btn-svg line{
   stroke: #696a70;
-  stroke-width: 18;
+  stroke-width: 3;
 }
 
 .top{
-  stroke-dasharray: 3000 3000;
+  stroke-dasharray: 150% 100%;
   transition: all 1s;
 }
 
 .bottom{
-  stroke-dasharray: 3000 3000;
+  stroke-dasharray: 150% 100%;
   transition: all 1s;
 }
 .left{
-  stroke-dasharray: 500 500;
+  stroke-dasharray: 30% 10%;
   transition: all 1s;
 }
 .right{
-  stroke-dasharray: 500 500;
+  stroke-dasharray: 30% 10%;
   transition: all 1s;
 }
 .btn-svg:hover .top{
-  -webkit-transform: translateX(-6000px);
+  -webkit-transform: translateX(-60%);
 }
 .btn-svg:hover .bottom{
-  -webkit-transform: translateX(6000px);
+  -webkit-transform: translateX(45%);
 }
 .btn-svg:hover .left{
-  -webkit-transform: translateY(1000px);
+  -webkit-transform: translateY(60%);
 }
 .btn-svg:hover .right{
-  -webkit-transform: translateY(-1000px);
+  -webkit-transform: translateY(-60%);
 }
 
 .btn-svg:hover line{
   stroke: white;
 }
+
 
 .txt_content {
   float: right;
