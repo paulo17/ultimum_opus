@@ -5,7 +5,7 @@ define([
     'signals/page_dom_added_signal',
     'text!templates/home/home.html',
     'css!templates/home/home.css',
-    'utils/fullPage',
+    'views/loader/loader_view',
     'views/footer/footer_view',
     'views/myShell/myShell_view',
     'views/myCab/myCab_view',
@@ -16,42 +16,17 @@ define([
     'views/myFlower/myFlower_view',
     'gsap'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax)
 {
     return Backbone.View.extend({
         el: "#content",
         events: {
             'click .Sidebar':'closeSidebar',
-            'keydown' : 'keydown'
+            'keydown' : 'keydown',
+            'mouseenter .LContentFlw':'imageAnimation'
         },
         
         initialize: function(options) {
-            _.bindAll(this, 'detect_scroll');
-            _.bindAll(this, 'keydown');
-            // bind to window
-            //$(window).scroll(this.detect_scroll);
-            $(document).keydown(this.keydown);
-
-            var winHeight = $(window).innerHeight();
-            $(document).ready(function () {
-                console.log(winHeight);
-                $(".panel").height(winHeight);
-
-            });
-
-            window.addEventListener('resize', function (event) {
-                $(".panel").height($(window).innerHeight());
-            });
-            $(window).on('scroll',function(){
-                $("#main").css('bottom',$(window).scrollTop()*-1);
-            });
-
-
-            $(window).on('scroll',function(){
-                $("#main").css('bottom',$(window).scrollTop()*-1);
-            });
-
-
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
 
@@ -64,6 +39,7 @@ define([
             this.rightDiscoverView = new RightDiscoverView(options);
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
+            this.loaderVieww = new LoaderView(options);
 
         },
 
@@ -76,6 +52,7 @@ define([
             this.rightDiscoverView.remove();
             this.leftDiscoverView.remove();
             this.footerView.remove();
+            this.loaderView.remove();
 
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
@@ -94,6 +71,9 @@ define([
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
+            // Go Bottom
+            window.scrollTo(0,$(window).height()*$('.panel').length);
+            console.log("goBot")
 
             // SVG
            // $(window).scroll(function() {
@@ -120,38 +100,29 @@ define([
         },
 
         setScroll: function(){
-            $("body").height($(window).height()*$(".panel").length);
+
         },
 
-        detect_scroll: function(e) {
-            //var st = $(window).scrollTop();
+
+        detect_scroll: function() {
+
+
+
             //console.log(st);
             //console.log(this.lastScrollTop);
-            //
-            //if (st > this.lastScrollTop){
-            //    console.log('down');
-            //    this.nextPage('down');
-            //} else {
-            //    console.log('up');
-            //    this.nextPage('up');
-            //}
-            //
-            //this.lastScrollTop = st;
-            this.getFooter();
-        },
 
-        keydown: function(e){
-            switch(e.which) {
-                case 38: // up
-                    console.log('up');
-                    //this.nextPage('up');
-                    break;
-                case 40: // down
-                    console.log('down');
-                    //this.nextPage('down');
-                    break;
-                default: return;
-            }
+            //if (st > this.lastScrollTop){
+                //console.log('down');
+               // this.nextPage('down');
+            //} else {
+                //console.log('up');
+                //this.nextPage('up');
+           // }
+
+            //this.lastScrollTop = st;
+            //this.getFooter();
+
+
         },
 
         nextPage: function(animation){
@@ -170,6 +141,7 @@ define([
 
                         panelCurrent.next()
                             .removeClass()
+<<<<<<< HEAD
                             .addClass('panel panel-current');
 
                         $('html, body').animate(
@@ -177,6 +149,18 @@ define([
                             1250);
 
                         //panelCurrent.prev().removeClass(outClass);
+=======
+                            .addClass('panel panel-current ' + inClass);
+
+                        panelCurrent.prev().removeClass(outClass);
+                        // $.scrollLock( false );
+                        //console.log('unlocked');
+                        $(document.body).removeClass('disable-scroll');
+                    }else{
+                        $(document.body).addClass('disable-scroll');
+                        // $.scrollLock( true );
+                        //console.log('locked');
+>>>>>>> FETCH_HEAD
                     }
 
                     break;
@@ -195,6 +179,7 @@ define([
 
                         /*
                         panelCurrent.next().removeClass(outClass);
+<<<<<<< HEAD
                         */
                         console.log($(panelCurrent).prev().offset().top);
 
@@ -202,6 +187,15 @@ define([
                             {scrollTop: Math.abs($(panelCurrent).prev().offset().top) },
                         1250);
 
+=======
+                        // $.scrollLock( false );
+                        // console.log('unlocked');
+                        $(document.body).removeClass('disable-scroll');
+                    }else{
+                        $(document.body).addClass('disable-scroll');
+                        // $.scrollLock( true );
+                        // console.log('locked');
+>>>>>>> FETCH_HEAD
                     }
 
                     break;
@@ -241,10 +235,18 @@ define([
         },
 
         startHome: function(){
+            setTimeout(function() {
+                $( "#loader" ).fadeOut( "slow" );
+                TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
+                TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
+                TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
+            }, 3000);
+            $(window).scroll(this.detect_scroll);
+            var offset = $("#home").offset();
+            $("html,body").animate({
+                scrollTop: offset.top
+            });
 
-            TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
-            TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
-            TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
             $({blurRadius: 10}).animate({blurRadius: 0}, {
                 duration: 3000,
                 easing: 'swing', // or "linear"
@@ -272,6 +274,56 @@ define([
 
         },
 
+        imageAnimation:function(){
+            var animate = {
+                nb:1,
+                init:function(){
+                    var flower = document.getElementsByClassName('LContentFlw')
+                    flower[0].addEventListener('mousewheel', animate.scroll, false);
+                    flower[0].addEventListener('DOMMouseScroll', animate.scroll, false);
+                }, 
+                scroll:function(e){
+                    var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+                    var i = animate.nb;       
+                    if(delta === -1){
+                        
+                        if(i > 1){
+                            i = animate.nb--;
+                            console.log(animate.nb);      
+                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                        }else{
+                            this.src = "img/masterpiece/fleurs/flower (1).png";
+                            i = animate.nb = 1;
+                           /*setTimeout(function(){
+                                $('html,body').css({'overflow':'auto'});
+
+                            }, 2000) ;*/
+                        }
+                        
+                    }else{
+                        if(i < 65){
+                            i = animate.nb++; 
+                            //console.log(image.nb);        
+                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                        }else{
+                            this.src = "img/masterpiece/fleurs/flower (65).png";
+                            i = animate.nb = 65;
+                            /*setTimeout(function(){
+                                $('html,body').css({'overflow':'auto'});
+
+                            }, 2000) ;*/
+                        }
+
+                    }
+                }
+            };
+            animate.init();
+           /*setTimeout(function(){
+                $('html,body').css({'overflow':'hidden'});
+
+            }, 2000) ;*/
+        },
+
         render: function() {
             this.$el.html(_.template(tpl, {}));
 
@@ -284,6 +336,7 @@ define([
             this.footerView.render();
             this.leftDiscoverView.render();
             this.rightDiscoverView.render();
+            this.loaderVieww.render();
 
             // Set content on view on div choose
 
@@ -295,6 +348,7 @@ define([
             this.$el.find('#footer').append(this.footerView.el);
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
+            this.$el.find('#loader').append(this.loaderVieww.el);
 
             // Dispatch all events in others views of this view
             this.delegateEvents();

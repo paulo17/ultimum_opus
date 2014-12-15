@@ -28,10 +28,9 @@ define([
 
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
-                $('html,body').animate({scrollTop: $(el).offset().top*2.5}, speed);
+                $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
 
-            console.log($('.LContentADN').offset().top*2);
             scrollToElement('.LContentADN', 600);
         },
             
