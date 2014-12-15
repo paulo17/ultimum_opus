@@ -25,7 +25,7 @@ define([
             'keydown' : 'keydown',
             'mouseenter .LContentFlw':'imageAnimation'
         },
-        
+
         initialize: function(options) {
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
@@ -73,7 +73,7 @@ define([
 
             // Go Bottom
             window.scrollTo(0,$(window).height()*$('.panel').length);
-            console.log("goBot")
+            console.log("goBot");
 
             // SVG
            // $(window).scroll(function() {
@@ -125,6 +125,20 @@ define([
 
         },
 
+        keydown: function(e){
+            switch(e.which) {
+                  case 38: // up
+                     console.log('up');
+                      //this.nextPage('up');
+                      break;
+                 case 40: // down
+                     console.log('down');
+                      //this.nextPage('down');
+                     break;
+                  default: return;
+              }
+        },
+
         nextPage: function(animation){
             var inClass = '', outClass = '';
 
@@ -141,7 +155,6 @@ define([
 
                         panelCurrent.next()
                             .removeClass()
-<<<<<<< HEAD
                             .addClass('panel panel-current');
 
                         $('html, body').animate(
@@ -149,18 +162,6 @@ define([
                             1250);
 
                         //panelCurrent.prev().removeClass(outClass);
-=======
-                            .addClass('panel panel-current ' + inClass);
-
-                        panelCurrent.prev().removeClass(outClass);
-                        // $.scrollLock( false );
-                        //console.log('unlocked');
-                        $(document.body).removeClass('disable-scroll');
-                    }else{
-                        $(document.body).addClass('disable-scroll');
-                        // $.scrollLock( true );
-                        //console.log('locked');
->>>>>>> FETCH_HEAD
                     }
 
                     break;
@@ -179,23 +180,13 @@ define([
 
                         /*
                         panelCurrent.next().removeClass(outClass);
-<<<<<<< HEAD
+
                         */
                         console.log($(panelCurrent).prev().offset().top);
 
                         $('html, body').animate(
                             {scrollTop: Math.abs($(panelCurrent).prev().offset().top) },
                         1250);
-
-=======
-                        // $.scrollLock( false );
-                        // console.log('unlocked');
-                        $(document.body).removeClass('disable-scroll');
-                    }else{
-                        $(document.body).addClass('disable-scroll');
-                        // $.scrollLock( true );
-                        // console.log('locked');
->>>>>>> FETCH_HEAD
                     }
 
                     break;
@@ -278,18 +269,18 @@ define([
             var animate = {
                 nb:1,
                 init:function(){
-                    var flower = document.getElementsByClassName('LContentFlw')
+                    var flower = document.getElementsByClassName('LContentFlw');
                     flower[0].addEventListener('mousewheel', animate.scroll, false);
                     flower[0].addEventListener('DOMMouseScroll', animate.scroll, false);
-                }, 
+                },
                 scroll:function(e){
                     var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-                    var i = animate.nb;       
+                    var i = animate.nb;
                     if(delta === -1){
-                        
+
                         if(i > 1){
                             i = animate.nb--;
-                            console.log(animate.nb);      
+                            console.log(animate.nb);
                             this.src = "img/masterpiece/fleurs/flower ("+i+").png";
                         }else{
                             this.src = "img/masterpiece/fleurs/flower (1).png";
@@ -299,11 +290,11 @@ define([
 
                             }, 2000) ;*/
                         }
-                        
+
                     }else{
                         if(i < 65){
-                            i = animate.nb++; 
-                            //console.log(image.nb);        
+                            i = animate.nb++;
+                            //console.log(image.nb);
                             this.src = "img/masterpiece/fleurs/flower ("+i+").png";
                         }else{
                             this.src = "img/masterpiece/fleurs/flower (65).png";
