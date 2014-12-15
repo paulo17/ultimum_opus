@@ -14,16 +14,18 @@ define([
     'views/rightDiscover/rightDiscover_view',
     'views/leftDiscover/leftDiscover_view',
     'views/myFlower/myFlower_view',
-    'gsap'
+    'gsap',
+    'utils/visible'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
         events: {
             'click .Sidebar':'closeSidebar',
-            'keydown' : 'keydown',
-            'mouseenter .LContentFlw':'imageAnimation'
+            'keydown':'keydown',
+            'mouseenter .LContentFlw':'imageAnimation',
+            //'scroll':'detect_scroll'
         },
 
         initialize: function(options) {
@@ -104,8 +106,50 @@ define([
         },
 
 
-        detect_scroll: function() {
+        detect_scroll: function(e) {
 
+            var st = $(document).scrollTop();
+
+            var panel = {
+                getVisible: function(){
+                  var self = this;
+                  $('.panel').each(function(){
+                    if($(this).visible(true)){
+                      self.current = $(this);
+                    }else{
+                      $(this).css({opacity:1});
+                    }
+                  });
+                  return this.current;
+                }
+
+            };
+
+            var opacity = {
+                setStart: function(){
+                    if(panel.getVisible()){
+                        panel.getVisible().css({opacity:0.4});
+                    }
+                },
+                change: function(panel){
+                    var offset = panel.offset().top;
+                    var height = panel.outerHeight();
+                    var range = 200;
+
+                    console.log(panel.css('opacity'));
+
+                    if(panel.css('opacity') <= 1 && panel.css('opacity') > 0){
+                      // panel.css({ 'opacity': 1 - (st - offset + range) / range });
+                      panel.css({ 'opacity': 1 - (st/35) });
+                    }
+
+                }
+            };
+
+            var currentPanel = panel.getVisible();
+            if(currentPanel){
+                opacity.change(currentPanel);
+            }
 
 
             //console.log(st);
