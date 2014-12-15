@@ -2,11 +2,12 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/discover/discover.html',
-    'css!templates/discover/discover.css'
+    'text!templates/leftDiscover/leftDiscover.html',
+    'css!templates/leftDiscover/leftDiscover.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
+        className: "left_Content",
         events: {},
         
         initialize: function(options) {

@@ -2,39 +2,40 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/myADN/myADN.html',
-    'css!templates/myADN/myADN.css'
+    'text!templates/myFlower/myFlower.html',
+    'css!templates/myFlower/myFlower.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentADN leftData",
+        className: "LContentFlw leftData",
         events: {
-            'click #leftDiADN':'leftSidebarADN'
+            'click #leftDiFlw':'leftSidebarFlw'
         },
         
         initialize: function(options) {
         },
 
-        leftSidebarADN: function(){
+        leftSidebarFlw: function(){
             $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
-            this.getADN();
+            TweenMax.to($(".flwTitle"), 0.75, { "left": '50%', ease: Expo.easeInOut });
+
+            // Top div
+            this.getFlw();
+            ///
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-            TweenMax.to($("#car_title"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".LContentFlw"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
         },
 
-        getADN: function(){
-
+        getFlw: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
-                $('html,body').animate({scrollTop: $(el).offset().top*2.5}, speed);
+                $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
 
-            console.log($('.LContentADN').offset().top*2);
-            scrollToElement('.LContentADN', 600);
+            scrollToElement('.LContentFlw', 600);
         },
-            
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }

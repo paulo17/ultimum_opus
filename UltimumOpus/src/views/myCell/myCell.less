@@ -1,18 +1,13 @@
-// Config
-@import 'config/config.less';
 
 // Less file for Mycell View
-#Cell{
-  background: #090b14;
-}
-
 
 #Cell{
   background: #000410;
   overflow: hidden;
 
-  .Cell_Content{
+  .RContentCell{
     width: 100%;
+    position: relative;
     height: 90%;
 
 
@@ -22,12 +17,13 @@
       position: relative;
       height: 100%;
       float: left;
+      left: 10%;
       #img{
         margin: 0;
         padding: 0;
         left: 0;
-        width: 50%;
-        top: 30%;
+        width: 70%;
+        top: 25%;
         position: relative;
         height: auto;
         z-index: 2;
@@ -45,8 +41,8 @@
         width: 40%;
         height: 20%;
         z-index: 1;
-        bottom: 10%;
-        right: 66%;
+        bottom: 7%;
+        right: 45%;
         position: absolute;
         img{
           width: 40%;
@@ -61,42 +57,13 @@
       float: left;
       height: 100%;
       .txt_content{
-        width: 80%;
-        float: right;
-        text-align: justify;
+        width: 82%;
         height: 55%;
+        left: 15%;
         position: relative;
         top: 20%;
         .title_content{
-          width: 50%;
-          #b_title{
-            color: #ffffff;
-            font-weight: 500;
-            padding: 0;
-            margin: 0;
-            font-size: 1.8vw;
-          }
-          #l_title{
-            padding: 0px;
-            margin: 0;
-            color: rgba(202, 202, 202, 0.52);
-            font-weight: 100;
-            font-size: 1.1vw;
-            font-style: italic;
-            float: right;
-
-          }
-        }
-        #txt{
-          color: #ffffff;
-          width: 85%;
-          padding: 10% 0px;
-          font-weight: 100;
-          p{
-            padding: 2.5% 0px;
-            font-size: 1vw;
-            line-height: 1.85vw;
-          }
+          width: 27%;
         }
       }
 

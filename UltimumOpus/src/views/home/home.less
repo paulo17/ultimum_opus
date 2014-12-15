@@ -1,5 +1,5 @@
 // Config
-@import 'config/config.less';
+
 
 // Less file for Home View
 #route {
@@ -10,12 +10,14 @@
 #home{
   margin:0;
   padding:0;
+  position: relative;
   background: url(/img/bg_home.jpg) no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
   .brand{
     position: absolute;
     color: #ffffff;
+    top: 45%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
@@ -24,18 +26,20 @@
       font-size: 4vw;
       text-align: center;
       .first{
-        opacity:1;
+        opacity:0;
+        letter-spacing: .6vw;
         text-transform: uppercase;
         font-weight: 500;
+        position: relative;
+        left: -100px;
 
       }
       .second{
         opacity: 0;
         font-family: "Playfair Display";
         font-style: italic;
-        font-size: 3.5vw;
-        position: relative;
-        right: -300px;
+        font-size: 3.6vw;
+        letter-spacing: .5vw;
       }
     }
   }

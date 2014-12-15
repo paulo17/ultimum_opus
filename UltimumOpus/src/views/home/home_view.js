@@ -7,96 +7,168 @@ define([
     'css!templates/home/home.css',
     'utils/fullPage',
     'views/footer/footer_view',
+    'views/myShell/myShell_view',
+    'views/myCab/myCab_view',
     'views/myADN/myADN_view',
     'views/myCell/myCell_view',
-    'views/discover/discover_view',
+    'views/rightDiscover/rightDiscover_view',
+    'views/leftDiscover/leftDiscover_view',
+    'views/myFlower/myFlower_view',
     'gsap'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage, FooterView, MyADNView, MyCellView, DiscoverView,TweenMax)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax)
 {
     return Backbone.View.extend({
         el: "#content",
         events: {
+            'click .Sidebar':'closeSidebar'
         },
         
         initialize: function(options) {
-            //detect if user scroll
             _.bindAll(this, 'detect_scroll');
             // bind to window
-            $(window).scroll(this.detect_scroll);
+            //$(window).scroll(this.detect_scroll);
 
-            //Start Anim
+            var winHeight = $(window).innerHeight();
+            $(document).ready(function () {
+                console.log(winHeight);
+                $(".panel").height(winHeight);
+
+            });
+
+            window.addEventListener('resize', function (event) {
+                $(".panel").height($(window).innerHeight());
+            });
+            $(window).on('scroll',function(){
+                $("#main").css('bottom',$(window).scrollTop()*-1);
+            });
+
+
+            $(window).on('scroll',function(){
+                $("#main").css('bottom',$(window).scrollTop()*-1);
+            });
 
 
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
+
             // Init all views on my home
             this.myADNView = new MyADNView(options);
             this.myCellView = new MyCellView(options);
-            this.discoverView = new DiscoverView(options);
+            this.myShellView = new MyShellView(options);
+            this.myCabView = new MyCabView(options);
+            this.myFlowerView = new MyFlowerView(options);
+            this.rightDiscoverView = new RightDiscoverView(options);
+            this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
 
+
+
         },
 
+        remove: function() {
+            this.myADNView.remove();
+            this.myCellView.remove();
+            this.myShellView.remove();
+            this.myCabView.remove();
+            this.myFlowerView.remove();
+            this.rightDiscoverView.remove();
+            this.leftDiscoverView.remove();
+            this.footerView.remove();
+
+            // remove signals listen Dom
+            pageDomAddedSignal.remove(this.getMyCover, this);
+            Backbone.View.prototype.remove.apply(this, arguments);
+        },
+
+        getMyCover: function(){
+            //Set Scroll
+            this.setScroll();
+
+            // Set !div in current height and width
+            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+
+
+            // SVG
+           // $(window).scroll(function() {
+             //   drawLine( $('#route'),
+               //     document.getElementById('path') );
+           // });
+
+            // init the line length
+            //drawLine( $('#route'),
+              //  document.getElementById('path') );
+
+            //draw the line
+            //function drawLine(container, line){
+
+              //  var pathLength = line.getTotalLength(),
+                //    maxScrollTop = $(document).height() - $(window).height(),
+                  //  percentDone = $(window).scrollTop() / maxScrollTop,
+                    //length = percentDone * pathLength;
+                //line.style.strokeDasharray = [ length ,pathLength].join(' ');
+            //}
+
+
+            this.startHome();
+        },
+
+
+        setScroll: function(){
+            $("body").height($(window).height()*$(".panel").length);
+        },
 
         detect_scroll: function() {
-
             this.getFooter();
         },
+
+        closeSidebar: function(){
+            $('body').css({'overflow-x':'auto','overflow-y':'auto'});
+            TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".flwTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            //Set
+
+
+            if ($(".leftActive")[0]){
+                TweenMax.to($("#leftSidebar"), 0.75, { "left": '-70%', ease: Expo.easeInOut });
+                TweenMax.to($(".leftData"), 0.75, { "right": '0', ease: Expo.easeInOut });
+                $('.leftData').removeClass('leftActive');
+            } else {
+                TweenMax.to($("#myRContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#myCabContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
+                TweenMax.to($("#Cell .RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+            }
+
+            // Set title in good position
+
+        },
+
+
 
         getFooter: function(){
             console.log('footer');
             TweenMax.to($("#footer"), 0.85, { "bottom": '0px', ease: Expo.easeInOut });
         },
 
-        getMyCover: function(){
-
-            // Set !div in current height and width
-            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
-            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-
-            $(window).scroll(function() {
-                drawLine( $('#route'),
-                    document.getElementById('path') );
-            });
-
-            // init the line length
-            drawLine( $('#route'),
-                document.getElementById('path') );
-
-            //draw the line
-            function drawLine(container, line){
-
-                var pathLength = line.getTotalLength(),
-                    maxScrollTop = $(document).height() - $(window).height(),
-                    percentDone = $(window).scrollTop() / maxScrollTop,
-                    length = percentDone * pathLength;
-                line.style.strokeDasharray = [ length ,pathLength].join(' ');
-            }
-
-
-            this.startHome();
-        },
-
         startHome: function(){
-            var getCenter = $( window ).height();
-            var centerStep = $(".brand").height();
-            var mytop;
 
-            getCenter = getCenter - centerStep;
-            mytop = (getCenter/2)-50;
-
-            $( '.brand').css( { 'top' : mytop+41} );
-
-            TweenMax.to($(".second"), 2.5, { "right": '0', ease: Expo.easeInOut });
-            TweenMax.to($(".second"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
+            TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
+            TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
+            TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
             $({blurRadius: 10}).animate({blurRadius: 0}, {
-                duration: 2600,
+                duration: 3000,
                 easing: 'swing', // or "linear"
                 // use jQuery UI or Easing plugin for more options
                 step: function() {
-                    console.log(this.blurRadius);
                     $('.second').css({
                         "-webkit-filter": "blur("+this.blurRadius+"px)",
                         "filter": "blur("+this.blurRadius+"px)"
@@ -104,16 +176,20 @@ define([
                 }
             });
 
+            //Set TextShadow on Opus
+            $.fx.step.textShadowBlur = function(fx) {
+                $(fx.elem)
+                    .prop('textShadowBlur', fx.now)
+                    .css({textShadow: '0 0 ' + Math.floor(fx.now) + 'px white'});
+            };
 
+            setInterval(function() {
+                $(".second").animate({textShadowBlur:12}, {duration: 1500, complete: function() {
+                    $(".second").animate({textShadowBlur:1}, {duration: 2500});
+                }});
+            }, 1000);
 
         },
-
-        remove: function() {
-            pageDomAddedSignal.remove(this.getMyCover, this);
-            Backbone.View.prototype.remove.apply(this, arguments);
-        },
-
-
 
         render: function() {
             this.$el.html(_.template(tpl, {}));
@@ -121,14 +197,23 @@ define([
             // Set render on other views in home view
             this.myADNView.render();
             this.myCellView.render();
+            this.myShellView.render();
+            this.myCabView.render();
+            this.myFlowerView.render();
             this.footerView.render();
-            this.discoverView.render();
+            this.leftDiscoverView.render();
+            this.rightDiscoverView.render();
 
             // Set content on view on div choose
-            this.$el.find('#discover').append(this.discoverView.el);
+
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
+            this.$el.find('#Shell').append(this.myShellView.el);
+            this.$el.find('#Cab').append(this.myCabView.el);
+            this.$el.find('#Flower').append(this.myFlowerView.el);
             this.$el.find('#footer').append(this.footerView.el);
+            this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
+            this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
 
             // Dispatch all events in others views of this view
             this.delegateEvents();

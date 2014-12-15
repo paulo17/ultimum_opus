@@ -2,39 +2,38 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/myADN/myADN.html',
-    'css!templates/myADN/myADN.css'
+    'text!templates/myShell/myShell.html',
+    'css!templates/myShell/myShell.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentADN leftData",
+        className: "LContentShell leftData",
         events: {
-            'click #leftDiADN':'leftSidebarADN'
+            'click #leftDiShell':'leftSidebarShell'
         },
         
         initialize: function(options) {
         },
 
-        leftSidebarADN: function(){
+        leftSidebarShell: function(){
             $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
-            this.getADN();
+            TweenMax.to($(".shellTitle"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
+
+            this.getShell();
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-            TweenMax.to($("#car_title"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".LContentShell"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
         },
 
-        getADN: function(){
-
+        getShell: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
-                $('html,body').animate({scrollTop: $(el).offset().top*2.5}, speed);
+                $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
 
-            console.log($('.LContentADN').offset().top*2);
-            scrollToElement('.LContentADN', 600);
+            scrollToElement('.LContentShell', 600);
         },
-            
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }
