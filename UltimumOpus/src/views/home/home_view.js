@@ -27,6 +27,9 @@ define([
         },
 
         initialize: function(options) {
+            $(window).scroll(this.detect_scroll());
+            window.setOpacity = 0;
+
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
 
@@ -105,23 +108,32 @@ define([
 
 
         detect_scroll: function() {
+            console.log($(this).scrollTop(),$(window).height()*$('.panel').length-$(window).height());
+            //  Current Div
+
+            var crtScroll = $(this).scrollTop(),
+                mySetDiv = $(window).height()*$('.panel').length;
 
 
-
-            //console.log(st);
-            //console.log(this.lastScrollTop);
-
-            //if (st > this.lastScrollTop){
-                //console.log('down');
-               // this.nextPage('down');
-            //} else {
-                //console.log('up');
-                //this.nextPage('up');
-           // }
-
-            //this.lastScrollTop = st;
+            console.log(crtScroll-(crtScroll-$(window).height()*$('.panel').length-$(window).height()))
+            console.log('currentScroll', crtScroll, 'test',mySetDiv-$(window).height()*2.5,'autre', mySetDiv-$(window).height()*2 )
+            if(crtScroll > mySetDiv-$(window).height()*2.5){
+                console.log('zzz');
+                var header = $('.LContentADN');
+                var range = 1000;
+                var st = $(this).scrollTop();
+                header.each(function () {
+                    var offset = $(this).offset().top;
+                    var height = $(this).outerHeight();
+                    offset = offset + height / 2;
+                    $(this).css({ 'opacity': (1.3 - (st - offset + range) / range)+.48 });
+                    console.log('maValeur',1.3 - (st - offset + range) / range);
+                });
+            }
+            else {
+                //$(".LContentADN").stop().fadeOut();
+            }
             //this.getFooter();
-
 
         },
 
