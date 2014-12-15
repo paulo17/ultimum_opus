@@ -14,10 +14,11 @@ define([
   'views/rightDiscover/rightDiscover_view',
   'views/leftDiscover/leftDiscover_view',
   'views/myFlower/myFlower_view',
-  'gsap'
+  'gsap',
+  'utils/scrollLock'
   ], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, fullPage,
     FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView,
-    LeftDiscoverView, MyFlowerView, TweenMax)
+    LeftDiscoverView, MyFlowerView, TweenMax, scrollLock)
     {
       return Backbone.View.extend({
         el: "#content",
@@ -127,18 +128,21 @@ define([
         },
 
         detect_scroll: function(e) {
-          var st = $(document).scrollTop();
+          var st = $(window).scrollTop();
+          console.log(st);
+          console.log(this.lastScrollTop);
 
           if (st > this.lastScrollTop){
-            this.nextPage('down');
             console.log('down');
+            this.nextPage('down');
           } else {
-            this.nextPage('up');
             console.log('up');
+            this.nextPage('up');
           }
-          this.lastScrollTop = st;
 
-          //this.getFooter();
+          this.lastScrollTop = st;
+          this.getFooter();
+
         },
 
         nextPage: function(animation){
@@ -152,15 +156,18 @@ define([
               inClass = 'pt-page-moveFromTop pt-page-ontop';
 
               if(panelCurrent.next().hasClass('panel')){
+                panelCurrent.removeClass().addClass('panel ' + outClass);
+
                 panelCurrent.next()
                 .removeClass()
                 .addClass('panel panel-current ' + inClass);
 
                 panelCurrent.prev().removeClass(outClass);
-
-                panelCurrent
-                .removeClass()
-                .addClass('panel ' + outClass);
+                // $.scrollLock( false );
+                //console.log('unlocked');
+              }else{
+                // $.scrollLock( true );
+                //console.log('locked');
               }
 
               break;
@@ -168,14 +175,19 @@ define([
 
                 outClass = 'pt-page-fade';
                 inClass = 'pt-page-moveFromBottom pt-page-ontop';
-                
                 if(panelCurrent.prev().hasClass('panel')){
+                  panelCurrent.removeClass().addClass('panel ' + outClass);
+
                   panelCurrent.prev()
                   .removeClass()
                   .addClass('panel panel-current ' + inClass);
 
                   panelCurrent.next().removeClass(outClass);
-                  panelCurrent.removeClass().addClass('panel ' + outClass);
+                  // $.scrollLock( false );
+                  // console.log('unlocked');
+                }else{
+                  // $.scrollLock( true );
+                  // console.log('locked');
                 }
 
                 break;
@@ -213,7 +225,7 @@ define([
 
 
             getFooter: function(){
-              console.log('footer');
+              //console.log('footer');
               TweenMax.to($("#footer"), 0.85, { "bottom": '0px', ease: Expo.easeInOut });
             },
 
