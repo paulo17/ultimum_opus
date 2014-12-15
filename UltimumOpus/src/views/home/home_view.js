@@ -21,13 +21,16 @@ define([
     return Backbone.View.extend({
         el: "#content",
         events: {
-            'click .Sidebar':'closeSidebar'
+            'click .Sidebar':'closeSidebar',
+            'keydown' : 'keydown'
         },
         
         initialize: function(options) {
             _.bindAll(this, 'detect_scroll');
+            _.bindAll(this, 'keydown');
             // bind to window
             //$(window).scroll(this.detect_scroll);
+            $(document).keydown(this.keydown);
 
             var winHeight = $(window).innerHeight();
             $(document).ready(function () {
@@ -121,20 +124,34 @@ define([
         },
 
         detect_scroll: function(e) {
-            var st = $(window).scrollTop();
-            console.log(st);
-            console.log(this.lastScrollTop);
-
-            if (st > this.lastScrollTop){
-                console.log('down');
-                this.nextPage('down');
-            } else {
-                console.log('up');
-                this.nextPage('up');
-            }
-
-            this.lastScrollTop = st;
+            //var st = $(window).scrollTop();
+            //console.log(st);
+            //console.log(this.lastScrollTop);
+            //
+            //if (st > this.lastScrollTop){
+            //    console.log('down');
+            //    this.nextPage('down');
+            //} else {
+            //    console.log('up');
+            //    this.nextPage('up');
+            //}
+            //
+            //this.lastScrollTop = st;
             this.getFooter();
+        },
+
+        keydown: function(e){
+            switch(e.which) {
+                case 38: // up
+                    console.log('up');
+                    //this.nextPage('up');
+                    break;
+                case 40: // down
+                    console.log('down');
+                    //this.nextPage('down');
+                    break;
+                default: return;
+            }
         },
 
         nextPage: function(animation){
@@ -152,14 +169,14 @@ define([
 
                         panelCurrent.next()
                             .removeClass()
-                            .addClass('panel panel-current ' + inClass);
+                            .addClass('panel panel-move panel-current ' + inClass);
 
                         panelCurrent.prev().removeClass(outClass);
                         // $.scrollLock( false );
                         //console.log('unlocked');
-                        $(document.body).removeClass('disable-scroll');
+                        //$(document.body).removeClass('disable-scroll');
                     }else{
-                        $(document.body).addClass('disable-scroll');
+                        //$(document.body).addClass('disable-scroll');
                         // $.scrollLock( true );
                         //console.log('locked');
                     }
@@ -179,9 +196,9 @@ define([
                         panelCurrent.next().removeClass(outClass);
                         // $.scrollLock( false );
                         // console.log('unlocked');
-                        $(document.body).removeClass('disable-scroll');
+                        //$(document.body).removeClass('disable-scroll');
                     }else{
-                        $(document.body).addClass('disable-scroll');
+                        //$(document.body).addClass('disable-scroll');
                         // $.scrollLock( true );
                         // console.log('locked');
                     }

@@ -1,4 +1,7 @@
 // Config
+::-webkit-scrollbar {
+  display: none;
+}
 
 // Less file for Home View
 #route {
@@ -51,11 +54,14 @@
 .panel{
   width: 100%;
   height: 100%;
-  //position: absolute;
-  //top: 0;
-  //left: 0;
-  //visibility: hidden;
-  //overflow: hidden;
+}
+
+.panel-move{
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  overflow: hidden;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
 }
