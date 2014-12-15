@@ -141,7 +141,7 @@ define([
           }
 
           this.lastScrollTop = st;
-          this.getFooter();
+          //this.getFooter();
 
         },
 
@@ -165,7 +165,9 @@ define([
                 panelCurrent.prev().removeClass(outClass);
                 // $.scrollLock( false );
                 //console.log('unlocked');
+                $(document.body).removeClass('disable-scroll');
               }else{
+                $(document.body).addClass('disable-scroll');
                 // $.scrollLock( true );
                 //console.log('locked');
               }
@@ -185,7 +187,9 @@ define([
                   panelCurrent.next().removeClass(outClass);
                   // $.scrollLock( false );
                   // console.log('unlocked');
+                  $(document.body).removeClass('disable-scroll');
                 }else{
+                  $(document.body).addClass('disable-scroll');
                   // $.scrollLock( true );
                   // console.log('locked');
                 }

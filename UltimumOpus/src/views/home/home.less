@@ -1,5 +1,7 @@
 // Config
-
+::-webkit-scrollbar {
+  display: none;
+}
 
 // Less file for Home View
 #route {
@@ -14,6 +16,7 @@
   background: url(/img/bg_home.jpg) no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
+  overflow: hidden;
   .brand{
     position: absolute;
     color: #ffffff;
@@ -43,6 +46,10 @@
       }
     }
   }
+}
+
+.disable-scroll{
+  overflow-y: hidden;
 }
 
 .panel{
