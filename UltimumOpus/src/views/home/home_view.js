@@ -165,20 +165,18 @@ define([
                     inClass = 'pt-page-moveFromTop pt-page-ontop';
 
                     if(panelCurrent.next().hasClass('panel')){
-                        panelCurrent.removeClass().addClass('panel ' + outClass);
+
+                        panelCurrent.removeClass().addClass('panel');
 
                         panelCurrent.next()
                             .removeClass()
-                            .addClass('panel panel-move panel-current ' + inClass);
+                            .addClass('panel panel-current');
 
-                        panelCurrent.prev().removeClass(outClass);
-                        // $.scrollLock( false );
-                        //console.log('unlocked');
-                        //$(document.body).removeClass('disable-scroll');
-                    }else{
-                        //$(document.body).addClass('disable-scroll');
-                        // $.scrollLock( true );
-                        //console.log('locked');
+                        $('html, body').animate(
+                            {scrollTop: Math.abs($(panelCurrent).next().offset().top) },
+                            1250);
+
+                        //panelCurrent.prev().removeClass(outClass);
                     }
 
                     break;
@@ -187,20 +185,23 @@ define([
                     outClass = 'pt-page-fade';
                     inClass = 'pt-page-moveFromBottom pt-page-ontop';
                     if(panelCurrent.prev().hasClass('panel')){
-                        panelCurrent.removeClass().addClass('panel ' + outClass);
+
+                        panelCurrent.removeClass().addClass('panel');
+                        /*panelCurrent.removeClass().addClass('panel ' + outClass);*/
 
                         panelCurrent.prev()
                             .removeClass()
-                            .addClass('panel panel-current ' + inClass);
+                            .addClass('panel panel-current');
 
+                        /*
                         panelCurrent.next().removeClass(outClass);
-                        // $.scrollLock( false );
-                        // console.log('unlocked');
-                        //$(document.body).removeClass('disable-scroll');
-                    }else{
-                        //$(document.body).addClass('disable-scroll');
-                        // $.scrollLock( true );
-                        // console.log('locked');
+                        */
+                        console.log($(panelCurrent).prev().offset().top);
+
+                        $('html, body').animate(
+                            {scrollTop: Math.abs($(panelCurrent).prev().offset().top) },
+                        1250);
+
                     }
 
                     break;
