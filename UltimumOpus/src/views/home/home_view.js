@@ -236,7 +236,11 @@ define([
 
         startHome: function(){
             setTimeout(function() {
-                $( "#loader" ).fadeOut( "slow" );
+                $( "#loader" ).fadeOut( "slow", function(){
+                    $('html,body').css({
+                        'overflow':'auto'
+                    });
+                } );
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
@@ -275,12 +279,27 @@ define([
         },
 
         imageAnimation:function(){
+            var overflow = {
+                auto:function(){
+                    setTimeout(function(){
+                        $('html,body').css({'overflow':'auto'});
+                    }, 100);
+                },
+                hidden:function(){
+                    setTimeout(function(){
+                        $('html,body').animate({scrollTop: $('.LContentFlw').offset().top}, 600);
+                        $('html,body').css({'overflow':'hidden'});
+                    }, 100);
+                }
+            };
+            var flower = document.getElementById('animated-flower');
             var animate = {
                 nb:1,
                 init:function(){
-                    var flower = document.getElementsByClassName('LContentFlw')
-                    flower[0].addEventListener('mousewheel', animate.scroll, false);
-                    flower[0].addEventListener('DOMMouseScroll', animate.scroll, false);
+                    var flowerContent = document.getElementsByClassName('LContentFlw');
+                    
+                    flowerContent[0].addEventListener('mousewheel', animate.scroll, false);
+                    flowerContent[0].addEventListener('DOMMouseScroll', animate.scroll, false);
                 }, 
                 scroll:function(e){
                     var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
@@ -289,39 +308,31 @@ define([
                         
                         if(i > 1){
                             i = animate.nb--;
-                            console.log(animate.nb);      
-                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                            // overflow.hidden();
+                            flower.src = "img/masterpiece/fleurs/flower ("+i+").png";
                         }else{
-                            this.src = "img/masterpiece/fleurs/flower (1).png";
+                            flower.src = "img/masterpiece/fleurs/flower (1).png";
                             i = animate.nb = 1;
-                           /*setTimeout(function(){
-                                $('html,body').css({'overflow':'auto'});
-
-                            }, 2000) ;*/
+                           overflow.auto();
                         }
                         
                     }else{
-                        if(i < 65){
-                            i = animate.nb++; 
-                            //console.log(image.nb);        
-                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                        if(i < 64){
+                            //overflow.hidden();
+                            i = animate.nb++;       
+                            flower.src = "img/masterpiece/fleurs/flower ("+i+").png";
                         }else{
-                            this.src = "img/masterpiece/fleurs/flower (65).png";
-                            i = animate.nb = 65;
-                            /*setTimeout(function(){
-                                $('html,body').css({'overflow':'auto'});
-
-                            }, 2000) ;*/
+                            //overflow.auto();
+                            flower.src = "img/masterpiece/fleurs/flower (64).png";
+                            i = animate.nb = 64;
+                            
                         }
 
                     }
                 }
             };
             animate.init();
-           /*setTimeout(function(){
-                $('html,body').css({'overflow':'hidden'});
-
-            }, 2000) ;*/
+           overflow.hidden();
         },
 
         render: function() {
