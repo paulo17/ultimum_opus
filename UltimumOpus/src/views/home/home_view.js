@@ -62,9 +62,6 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
 
-
-
-
         },
 
         remove: function() {
@@ -220,8 +217,6 @@ define([
 
         },
 
-
-
         getFooter: function(){
             console.log('footer');
             TweenMax.to($("#footer"), 0.85, { "bottom": '0px', ease: Expo.easeInOut });
@@ -288,4 +283,3 @@ define([
         }
     });
 });
-
