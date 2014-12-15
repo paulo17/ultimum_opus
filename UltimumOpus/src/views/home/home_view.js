@@ -21,7 +21,9 @@ define([
     return Backbone.View.extend({
         el: "#content",
         events: {
-            'click .Sidebar':'closeSidebar'
+            'click .Sidebar':'closeSidebar',
+            'keydown' : 'keydown',
+            'mouseenter .LContentFlw':'imageAnimation'
         },
         
         initialize: function(options) {
@@ -246,6 +248,56 @@ define([
                 }});
             }, 1000);
 
+        },
+
+        imageAnimation:function(){
+            var animate = {
+                nb:1,
+                init:function(){
+                    var flower = document.getElementsByClassName('LContentFlw')
+                    flower[0].addEventListener('mousewheel', animate.scroll, false);
+                    flower[0].addEventListener('DOMMouseScroll', animate.scroll, false);
+                }, 
+                scroll:function(e){
+                    var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+                    var i = animate.nb;       
+                    if(delta === -1){
+                        
+                        if(i > 1){
+                            i = animate.nb--;
+                            console.log(animate.nb);      
+                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                        }else{
+                            this.src = "img/masterpiece/fleurs/flower (1).png";
+                            i = animate.nb = 1;
+                           /*setTimeout(function(){
+                                $('html,body').css({'overflow':'auto'});
+
+                            }, 2000) ;*/
+                        }
+                        
+                    }else{
+                        if(i < 65){
+                            i = animate.nb++; 
+                            //console.log(image.nb);        
+                            this.src = "img/masterpiece/fleurs/flower ("+i+").png";
+                        }else{
+                            this.src = "img/masterpiece/fleurs/flower (65).png";
+                            i = animate.nb = 65;
+                            /*setTimeout(function(){
+                                $('html,body').css({'overflow':'auto'});
+
+                            }, 2000) ;*/
+                        }
+
+                    }
+                }
+            };
+            animate.init();
+           /*setTimeout(function(){
+                $('html,body').css({'overflow':'hidden'});
+
+            }, 2000) ;*/
         },
 
         render: function() {
