@@ -62,8 +62,6 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
 
-
-
         },
 
         remove: function() {
@@ -123,8 +121,76 @@ define([
             $("body").height($(window).height()*$(".panel").length);
         },
 
-        detect_scroll: function() {
+        detect_scroll: function(e) {
+            var st = $(window).scrollTop();
+            console.log(st);
+            console.log(this.lastScrollTop);
+
+            if (st > this.lastScrollTop){
+                console.log('down');
+                this.nextPage('down');
+            } else {
+                console.log('up');
+                this.nextPage('up');
+            }
+
+            this.lastScrollTop = st;
             this.getFooter();
+        },
+
+        nextPage: function(animation){
+            var inClass = '', outClass = '';
+
+            var panelCurrent = $('.panel-current');
+
+            switch(animation){
+                case 'up':
+                    outClass = 'pt-page-fade';
+                    inClass = 'pt-page-moveFromTop pt-page-ontop';
+
+                    if(panelCurrent.next().hasClass('panel')){
+                        panelCurrent.removeClass().addClass('panel ' + outClass);
+
+                        panelCurrent.next()
+                            .removeClass()
+                            .addClass('panel panel-current ' + inClass);
+
+                        panelCurrent.prev().removeClass(outClass);
+                        // $.scrollLock( false );
+                        //console.log('unlocked');
+                        $(document.body).removeClass('disable-scroll');
+                    }else{
+                        $(document.body).addClass('disable-scroll');
+                        // $.scrollLock( true );
+                        //console.log('locked');
+                    }
+
+                    break;
+                case 'down':
+
+                    outClass = 'pt-page-fade';
+                    inClass = 'pt-page-moveFromBottom pt-page-ontop';
+                    if(panelCurrent.prev().hasClass('panel')){
+                        panelCurrent.removeClass().addClass('panel ' + outClass);
+
+                        panelCurrent.prev()
+                            .removeClass()
+                            .addClass('panel panel-current ' + inClass);
+
+                        panelCurrent.next().removeClass(outClass);
+                        // $.scrollLock( false );
+                        // console.log('unlocked');
+                        $(document.body).removeClass('disable-scroll');
+                    }else{
+                        $(document.body).addClass('disable-scroll');
+                        // $.scrollLock( true );
+                        // console.log('locked');
+                    }
+
+                    break;
+            }
+
+
         },
 
         closeSidebar: function(){
@@ -151,8 +217,6 @@ define([
             // Set title in good position
 
         },
-
-
 
         getFooter: function(){
             console.log('footer');
