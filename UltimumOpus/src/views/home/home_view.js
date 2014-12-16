@@ -23,7 +23,9 @@ define([
         events: {
             'click .Sidebar':'closeSidebar',
             'keydown' : 'keydown',
-            'mouseenter .LContentFlw':'imageAnimation'
+            'mouseenter .LContentFlw':'flowerAnimation',
+            'mouseenter .LContentADN' : 'adnAnimation',
+            'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
         initialize: function(options) {
@@ -281,63 +283,89 @@ define([
 
         },
 
-        imageAnimation:function(){
-            var overflow = {
-                auto:function(){
-                    setTimeout(function(){
-                        $('html,body').css({'overflow':'auto'});
-                    }, 100);
-                },
-                hidden:function(){
-                    setTimeout(function(){
-                        $('html,body').animate({scrollTop: $('.LContentFlw').offset().top}, 600);
-                        $('html,body').css({'overflow':'hidden'});
-                    }, 100);
-                }
-            };
-            var flower = document.getElementById('animated-flower');
-            var animate = {
-                nb:1,
-                init:function(){
-                    var flowerContent = document.getElementsByClassName('LContentFlw');
-
-                    flowerContent[0].addEventListener('mousewheel', animate.scroll, false);
-                    flowerContent[0].addEventListener('DOMMouseScroll', animate.scroll, false);
-                },
-                scroll:function(e){
-                    var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-                    var i = animate.nb;
-                    if(delta === -1){
-
-                        if(i > 1){
-                            i = animate.nb--;
-                            // overflow.hidden();
-                            flower.src = "img/masterpiece/fleurs/flower ("+i+").png";
-                        }else{
-                            flower.src = "img/masterpiece/fleurs/flower (1).png";
-                            i = animate.nb = 1;
-                           overflow.auto();
-                        }
-
-                    }else{
-                        if(i < 64){
-                            //overflow.hidden();
-                            i = animate.nb++;
-                            flower.src = "img/masterpiece/fleurs/flower ("+i+").png";
-                        }else{
-                            //overflow.auto();
-                            flower.src = "img/masterpiece/fleurs/flower (64).png";
-                            i = animate.nb = 64;
-
-                        }
-
-                    }
-                }
-            };
-            animate.init();
-           overflow.hidden();
+        adnAnimation:function(){
+            var el = document.querySelector('.LContentADN'),
+            animatedObject = document.querySelector('#animated-adn'),
+            type = 'adn';
+            var self = this;
+            this.overflowHidden(function(){
+                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
+            });
+            if(el.className != 'LContentADN leftData scrollable'){
+                el.addEventListener('mousewheel', function(e){
+                    self.scrollAnimation(e, el, animatedObject, type);
+                }, false);
+                el.addEventListener('DOMMouseScroll', function(e){
+                    self.scrollAnimation(e, el, animatedObject, type);
+                }, false);
+                el.classList.add('scrollable');
+            }else{
+                return;
+            }
         },
+        flowerAnimation:function(){
+            var el = document.querySelector('.LContentFlw'),
+            animatedObject = document.querySelector('#animated-flower'),
+            type = 'flower';
+            var self = this;
+            this.overflowHidden(function(){
+                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
+            });
+            if(el.className != 'LContentFlw leftData scrollable'){
+                this.cpt = 1;
+                el.addEventListener('mousewheel', function(e){
+                    self.scrollAnimation(e, el, animatedObject, type);
+                }, false);
+                el.addEventListener('DOMMouseScroll', function(e){
+                    self.scrollAnimation(e, el, animatedObject, type);
+                }, false);
+                el.classList.add('scrollable');
+            }else{
+                return;
+            }
+        },
+        overflowAuto:function(){
+            setTimeout(function(){
+                $('html,body').css({'overflow':'auto'});
+            }, 100);
+        },
+        overflowHidden:function(callback){
+            setTimeout(function(){
+                //$('html,body').animate({scrollTop: $(el).offset().top}, 600);
+                $('html,body').css({'overflow':'hidden'});
+            }, 100);
+            callback.call(this);
+        },
+        cpt:1,
+        scrollAnimation:function(e, el, object, type){
+            var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+            
+            if(delta === -1){
+                console.log(this.cpt);
 
+                if(this.cpt > 1){
+                    this.cpt--;
+                    //overflow.hidden();
+                    object.src = "img/masterpiece/sequences/"+type+" ("+this.cpt+").png";
+                }else{
+                    object.src = "img/masterpiece/sequences/"+type+" (1).png";
+                    this.cpt = 1;
+                    this.overflowAuto();
+                };
+
+            }else{
+                console.log(this.cpt);
+                if(this.cpt < 64){
+                    this.cpt++;
+                    object.src = "img/masterpiece/sequences/"+type+" ("+this.cpt+").png";
+                }else{
+                    object.src = "img/masterpiece/sequences/"+type+" (64).png";
+                    this.cpt = 64;
+                    this.overflowAuto();
+                };
+
+            };
+        },
         render: function() {
             this.$el.html(_.template(tpl, {}));
 
