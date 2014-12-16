@@ -14,10 +14,14 @@ define([
     'views/rightDiscover/rightDiscover_view',
     'views/leftDiscover/leftDiscover_view',
     'views/myFlower/myFlower_view',
+    'views/myAurora/myAurora_view',
+    'views/myHearth/myHearth_view',
+    'views/myStory/myStory_view',
+    'views/menu/menu_view',
     'gsap',
     'utils/visible'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax, visible)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyHearthView, MyStoryView, MenuView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -46,6 +50,10 @@ define([
             this.myShellView = new MyShellView(options);
             this.myCabView = new MyCabView(options);
             this.myFlowerView = new MyFlowerView(options);
+            this.myHearthView = new MyHearthView(options);
+            this.myAuroraView = new MyAuroraView(options);
+            this.myStoryView = new MyStoryView(options);
+            this.menuView = new MenuView(options);
             this.rightDiscoverView = new RightDiscoverView(options);
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
@@ -63,6 +71,10 @@ define([
             this.leftDiscoverView.remove();
             this.footerView.remove();
             this.loaderView.remove();
+            this.menuView.remove();
+            this.myAuroraView.remove();
+            this.myHearthView.remove();
+            this.myStoryView.remove();
 
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
@@ -74,12 +86,16 @@ define([
             this.setScroll();
 
             // Set !div in current height and width
+            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Hearth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
             // Go Bot  tom
             // window.scrollTo(0,$(window).height()*$('.panel').length);
@@ -162,6 +178,7 @@ define([
 
             console.log(crtScroll-(crtScroll-$(window).height()*$('.panel').length-$(window).height()))
             console.log('currentScroll', crtScroll, 'test',mySetDiv-$(window).height()*2.5,'autre', mySetDiv-$(window).height()*2 )
+
             if(crtScroll > mySetDiv-$(window).height()*2.5){
                 console.log('zzz');
                 var header = $('.LContentADN');
@@ -440,6 +457,10 @@ define([
             this.myShellView.render();
             this.myCabView.render();
             this.myFlowerView.render();
+            this.myAuroraView.render();
+            this.myHearthView.render();
+            this.myStoryView.render();
+            this.menuView.render();
             this.footerView.render();
             this.leftDiscoverView.render();
             this.rightDiscoverView.render();
@@ -447,11 +468,15 @@ define([
 
             // Set content on view on div choose
 
+            this.$el.find('#menu').append(this.menuView.el);
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
             this.$el.find('#Shell').append(this.myShellView.el);
             this.$el.find('#Cab').append(this.myCabView.el);
             this.$el.find('#Flower').append(this.myFlowerView.el);
+            this.$el.find('#Story').append(this.myStoryView.el);
+            this.$el.find('#Hearth').append(this.myHearthView.el);
+            this.$el.find('#Aurora').append(this.myAuroraView.el);
             this.$el.find('#footer').append(this.footerView.el);
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);

@@ -3,12 +3,11 @@ H3P2017E07
 
 ==========
 
-UltimumOpus
+Ultimum Opus
 
 =======
 
-
-Ultimate Opus is a web project created by HETIC's students - P2017 during December
+It's a web project created by HETIC's students - P2017 during December
 
 ## This project is based on Framework DAN
 
