@@ -19,9 +19,10 @@ define([
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
-    'utils/visible'
+    'utils/visible',
+    'models/API_model'
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, API)
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -57,6 +58,9 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
+
+            // Init Model
+            this.API = new API();
 
         },
 
@@ -278,7 +282,6 @@ define([
         },
 
         imageAnimation:function(el){
-            console.log('animmmmm');
             var view = this,
             self = el[0],
             object,type;
@@ -352,6 +355,11 @@ define([
         },
         render: function() {
             this.$el.html(_.template(tpl, {}));
+
+            // testing model API
+            this.API.find();
+            this.API.getById(1);
+
 
             // Set render on other views in home view
             this.myADNView.render();
