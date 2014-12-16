@@ -8,7 +8,7 @@ UltimumOpus
 =======
 
 
-Ultimate Opus is a web project created by HETIC's students - P2017 during December
+Ultimum Opus is a web project created by HETIC's students - P2017 during December
 
 ## This project is based on Framework DAN
 
