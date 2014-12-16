@@ -21,7 +21,7 @@ define([
     'gsap',
     'utils/visible',
     'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax, visible, API)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyHearthView, MyStoryView, MenuView, TweenMax, visible, API)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -444,7 +444,9 @@ define([
             this.$el.html(_.template(tpl, {}));
 
             // testing model API
-            this.API.getMasterpieces();
+            this.API.find();
+            this.API.getById(1);
+
 
             // Set render on other views in home view
             this.myADNView.render();

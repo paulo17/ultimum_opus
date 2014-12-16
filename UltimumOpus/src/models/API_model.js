@@ -3,13 +3,16 @@ define([
     'config'
 ], function(Backbone, Config) {
     return Backbone.Model.extend({
-    		urlRoot: 'http://apiultimumopus.maximeberthelot.fr/masterpieces.json',
+    		apiUrl: 'http://apiultimumopus.maximeberthelot.fr/',
 
+    		// API route
     		routeUrl: {
-    			'read': 'masterpieces.json',
+    			'find': 'masterpieces.json',
+    			'get': 'masterpieces/'
     		},
 
-    		initialize: function(){},
+    		initialize: function(){
+    		},
 
     		sync: function(method, model, options){
     			options = options || {};
@@ -21,7 +24,29 @@ define([
 		    	Backbone.sync(method, model, options);
 		},
 
-		getMasterpieces: function(){
+		/**
+		*	Find all masterpieces into API
+		**/
+		find: function(){
+			var masterpieces;
+			this.urlRoot = this.apiUrl + this.routeUrl.find;
+			this.fetch({
+				success: function(data){
+					masterpieces = data.toJSON();
+				},
+				error: function(error){
+					console.log(error);
+				}
+			})
+			return masterpieces;
+		},
+
+		/**
+		*	Get specific masterpiece from API
+		*	@param int id
+		**/
+		getById: function(id){
+			this.urlRoot = this.apiUrl + this.routeUrl.get + id;
 			this.fetch({
 				success: function(data){
 					console.log(data);
@@ -30,10 +55,6 @@ define([
 					console.log(error);
 				}
 			})
-		},
-
-		getMasterpiecesById: function(id){
-
 		}
     });
 });
