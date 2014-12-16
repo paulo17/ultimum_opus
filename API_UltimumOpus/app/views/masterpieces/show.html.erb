@@ -19,7 +19,7 @@
 		<% if @masterpiece.image %>
 		<p id="data">
 			<strong>Image :</strong>
-			<%= link_to @masterpiece.image, "/uploads/#{@masterpiece.image}", :target => "_blank" %>
+			<%= link_to @masterpiece.image, "#{@masterpiece.image}", :target => "_blank" %>
 		</p>
 		<% end %>
 	</div>

@@ -18,11 +18,9 @@ class MasterpiecesController < ApplicationController
 	def create
 		@masterpiece = Masterpiece.new(params[:masterpiece].permit(:titre, :date, :text, :image, :image2, :image3, :video))
 		if params[:masterpiece][:image]
-			uploaded_io = params[:masterpiece][:image]
-			File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
-				file.write(uploaded_io.read)
-				@masterpiece.image = uploaded_io.original_filename
-			end
+			@masterpiece.image = uploadImage(params[:masterpiece][:image])
+			@masterpiece.image2 = uploadImage(params[:masterpiece][:image2])
+			@masterpiece.image3 = uploadImage(params[:masterpiece][:image3])
 		end
 		if @masterpiece.save
 			redirect_to @masterpiece
@@ -65,8 +63,18 @@ class MasterpiecesController < ApplicationController
 	end
 
 	private
+	def uploadImage(image)
+		uploaded_io = image
+		File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+			file.write(uploaded_io.read)
+			@image_path = '/uploads/' + uploaded_io.original_filename
+		end
+		return @image_path
+	end
+
+	private
 	def masterpiece_params
-		params.require(:masterpiece).permit(:titre, :date, :text, :image, :video)
+		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video)
 	end
 
 	private

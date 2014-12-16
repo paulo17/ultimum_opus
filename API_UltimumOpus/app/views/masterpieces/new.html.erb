@@ -2,7 +2,7 @@
 <%= form_for :masterpiece, url: masterpieces_path, :html=>{:class =>'form-horizontal'} do |f| %>
 <div>
   <%= f.label :titre %><br>
-  <%= f.text_field :titre, :class => "form-control" %>
+  <%= f.text_field :titre, :required => true, :class => "form-control" %>
 </div>
 <div>
   <%= f.label :date %><br>
@@ -15,10 +15,10 @@
 
 <div>
   <%= f.label :image %>
-  <%= f.file_field :image, :class => 'form-control' %>
+  <%= f.file_field :image, :required => true, :class => 'form-control' %>
 </div>
 
-<!-- <div>
+<div>
   <%= f.label :image2 %>
   <%= f.file_field :image2, :class => 'form-control' %>
 </div>
@@ -26,27 +26,11 @@
 <div>
   <%= f.label :image3 %>
   <%= f.file_field :image3, :class => 'form-control' %>
-</div> -->
-
-
-<!-- <div>
-  <%= f.label :image %><br>
-  <%= f.text_field :image, :class => "form-control" %>
 </div>
-
-<div>
-  <%= f.label :image2 %><br>
-  <%= f.text_field :image2, :class => "form-control" %>
-</div>
-
-<div>
-  <%= f.label :image3 %><br>
-  <%= f.text_field :image3, :class => "form-control" %>
-</div> -->
 
 <div>
   <%= f.label :video %><br>
-  <%= f.text_field :video, :class => "form-control" %>
+  <%= f.url_field :video, :class => "form-control" %>
 </div>
 
 <p id="myBtn">
