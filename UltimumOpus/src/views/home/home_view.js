@@ -39,7 +39,6 @@ define([
 
         initialize: function(options) {
             $(window).scroll(this.detect_scroll());
-            window.setDiv = 0;
 
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
@@ -65,6 +64,7 @@ define([
         },
 
         remove: function() {
+            // Remove view after his init
             this.myADNView.remove();
             this.myCellView.remove();
             this.myShellView.remove();
@@ -147,9 +147,9 @@ define([
                 console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
             if(percentDone<1){
                 drawLine( $('#route_home'),
-                    document.getElementById('path') );
+                    document.getElementById('path_home') );
 
-                drawLine( $('#route_home'),document.getElementById('path') );};
+                drawLine( $('#route_home'),document.getElementById('path_home') );};
 
             // init the line length
 
@@ -165,11 +165,11 @@ define([
                     if(percentDone<.86){
                         length = length +800;
                     }
-                    if(percentDone<.72){
+                    if(percentDone<.7085){
                         length = length +475;
                     }
-                    if(percentDone<.6089){
-                        length = length +775;
+                    if(percentDone<.6169){
+                        TweenMax.to($("#path_home"), .65, {"stroke-dasharray": pathLength, ease: Expo.easeInOut});
                     }
                 //
                 console.log('pathleeeen',length);
