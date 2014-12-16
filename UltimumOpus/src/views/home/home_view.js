@@ -15,9 +15,9 @@ define([
     'views/leftDiscover/leftDiscover_view',
     'views/myFlower/myFlower_view',
     'gsap',
-    'utils/visible'
-
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax, visible)
+    'utils/visible',
+    'models/API_model'
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, TweenMax, visible, API)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -50,6 +50,9 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
+
+            // Init Model
+            this.API = new API();
 
         },
 
@@ -404,7 +407,7 @@ define([
         cpt:1,
         scrollAnimation:function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-            
+
             if(delta === -1){
                 console.log(this.cpt);
 
@@ -433,6 +436,9 @@ define([
         },
         render: function() {
             this.$el.html(_.template(tpl, {}));
+
+            // testing model API
+            this.API.getMasterpieces();
 
             // Set render on other views in home view
             this.myADNView.render();
