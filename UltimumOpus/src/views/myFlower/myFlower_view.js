@@ -9,7 +9,7 @@ define([
     return Backbone.View.extend({
         className: "LContentFlw leftData",
         events: {
-            'click #leftDiFlw':'leftSidebarFlw',
+            'click #leftDiFlw':'leftSidebarFlw'
             
         },
         

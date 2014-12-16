@@ -2,12 +2,12 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/myHearth/myHearth.html',
-    'css!templates/myHearth/myHearth.css'
+    'text!templates/myEarth/myEarth.html',
+    'css!templates/myEarth/myEarth.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "RContentHearth",
+        className: "LContentEarth leftData",
         events: {},
         
         initialize: function(options) {

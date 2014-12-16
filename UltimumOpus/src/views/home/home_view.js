@@ -15,13 +15,13 @@ define([
     'views/leftDiscover/leftDiscover_view',
     'views/myFlower/myFlower_view',
     'views/myAurora/myAurora_view',
-    'views/myHearth/myHearth_view',
+    'views/myEarth/myEarth_view',
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
     'utils/visible'
 
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyHearthView, MyStoryView, MenuView, TweenMax, visible)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -31,9 +31,8 @@ define([
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
-
             'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
@@ -50,7 +49,7 @@ define([
             this.myShellView = new MyShellView(options);
             this.myCabView = new MyCabView(options);
             this.myFlowerView = new MyFlowerView(options);
-            this.myHearthView = new MyHearthView(options);
+            this.myEarthView = new MyEarthView(options);
             this.myAuroraView = new MyAuroraView(options);
             this.myStoryView = new MyStoryView(options);
             this.menuView = new MenuView(options);
@@ -73,7 +72,7 @@ define([
             this.loaderView.remove();
             this.menuView.remove();
             this.myAuroraView.remove();
-            this.myHearthView.remove();
+            this.myEarthView.remove();
             this.myStoryView.remove();
 
             // remove signals listen Dom
@@ -98,28 +97,11 @@ define([
             $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
             // Go Bot  tom
-            // window.scrollTo(0,$(window).height()*$('.panel').length);
-            // console.log("goBot");
+            window.scrollTo(0,$(window).height()*$('.panel').length);
+             console.log("goBot");
 
             // SVG
-            // $(window).scroll(function() {
-            //  drawLine( $('#route'),document.getElementById('path') );});
 
-            // init the line length
-            //    drawLine( $('#route'),
-            //      document.getElementById('path') );
-
-            //draw the line
-            //   function drawLine(container, line){
-
-            //     var pathLength = line.getTotalLength(),
-            //        maxScrollTop = $(document).height() - $(window).height(),
-            //         percentDone = $(window).scrollTop() / maxScrollTop,
-            //         length = percentDone * pathLength;
-//
-            //       console.log('pathlen',pathLength);
-            //      line.style.strokeDasharray = [ length ,pathLength].join(' ');
-            //    }
 
 
             this.startHome();
@@ -152,121 +134,57 @@ define([
 
         //
         detect_scroll:function(){
+
+
+
             var  maxScrollTop = $(document).height() - $(window).height(),
                 percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
-                console.log('myOpac',myOpac, 'percentDone', percentDone);
+                console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
+            if(percentDone<1){
+                drawLine( $('#route_home'),
+                    document.getElementById('path') );
 
-            if(percentDone<0.95 && percentDone>0.78){
-                window.setDiv = window.setDiv+.05;
-                console.log('window.setDiv',window.setDiv);
-                if(percentDone<0.92) {
-                    TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
-                    console.log('zzz');
+                drawLine( $('#route_home'),document.getElementById('path') );};
+
+            // init the line length
+
+
+            //draw the line
+            function drawLine(container, line){
+
+                var pathLength = line.getTotalLength(),
+                    maxScrollTop = $(document).height() - $(window).height(),
+                    percentDone = $(window).scrollTop() / maxScrollTop,
+                    length = (pathLength-(percentDone *pathLength))*1.3;
+
+                    if(percentDone<.86){
+                        length = length +800;
+                    }
+                    if(percentDone<.72){
+                        length = length +475;
+                    }
+                    if(percentDone<.6089){
+                        length = length +775;
+                    }
+                //
+                console.log('pathleeeen',length);
+                line.style.strokeDasharray = [ length ,pathLength].join(' ');
+
+                if(percentDone<0.95 && percentDone>0.78){
+                    window.setDiv = window.setDiv+.05;
+                  //  console.log('window.setDiv',window.setDiv);
+                    if(percentDone<0.92) {
+                        TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
+
+                        //Get footer on scroll
+                        TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
+                    }
+                    $('.LContentADN').css({'opacity':myOpac});
+
+
                 }
-                $('.LContentADN').css({'opacity':myOpac});
             }
-        },
-
-        out_scroll: function() {
-            console.log($(this).scrollTop(),$(window).height()*$('.panel').length-$(window).height());
-            //  Current Div
-
-            var crtScroll = $(this).scrollTop(),
-                mySetDiv = $(window).height()*$('.panel').length;
-
-
-            console.log(crtScroll-(crtScroll-$(window).height()*$('.panel').length-$(window).height()))
-            console.log('currentScroll', crtScroll, 'test',mySetDiv-$(window).height()*2.5,'autre', mySetDiv-$(window).height()*2 )
-
-            if(crtScroll > mySetDiv-$(window).height()*2.5){
-                console.log('zzz');
-                var header = $('.LContentADN');
-                var range = 1000;
-                var st = $(this).scrollTop();
-                header.each(function () {
-                    var offset = $(this).offset().top;
-                    var height = $(this).outerHeight();
-                    offset = offset + height / 2;
-                    $(this).css({ 'opacity': (1.3 - (st - offset + range) / range)+.48 });
-                    console.log('maValeur',1.3 - (st - offset + range) / range);
-                });
-            }
-            else {
-                //$(".LContentADN").stop().fadeOut();
-            }
-
-
-        },
-
-        keydown: function(e){
-            switch(e.which) {
-                  case 38: // up
-                     console.log('up');
-                      //this.nextPage('up');
-                      break;
-                 case 40: // down
-                     console.log('down');
-                      //this.nextPage('down');
-                     break;
-                  default: return;
-              }
-        },
-
-        nextPage: function(animation){
-            var inClass = '', outClass = '';
-
-            var panelCurrent = $('.panel-current');
-
-            switch(animation){
-                case 'up':
-                    outClass = 'pt-page-fade';
-                    inClass = 'pt-page-moveFromTop pt-page-ontop';
-
-                    if(panelCurrent.next().hasClass('panel')){
-
-                        panelCurrent.removeClass().addClass('panel');
-
-                        panelCurrent.next()
-                            .removeClass()
-                            .addClass('panel panel-current');
-
-                        $('html, body').animate(
-                            {scrollTop: Math.abs($(panelCurrent).next().offset().top) },
-                            1250);
-
-                        //panelCurrent.prev().removeClass(outClass);
-                    }
-
-                    break;
-                case 'down':
-
-                    outClass = 'pt-page-fade';
-                    inClass = 'pt-page-moveFromBottom pt-page-ontop';
-                    if(panelCurrent.prev().hasClass('panel')){
-
-                        panelCurrent.removeClass().addClass('panel');
-                        /*panelCurrent.removeClass().addClass('panel ' + outClass);*/
-
-                        panelCurrent.prev()
-                            .removeClass()
-                            .addClass('panel panel-current');
-
-                        /*
-                        panelCurrent.next().removeClass(outClass);
-
-                        */
-                        console.log($(panelCurrent).prev().offset().top);
-
-                        $('html, body').animate(
-                            {scrollTop: Math.abs($(panelCurrent).prev().offset().top) },
-                        1250);
-                    }
-
-                    break;
-            }
-
-
         },
 
         closeSidebar: function(){
@@ -317,31 +235,25 @@ define([
         },
 
         startHome: function(){
-            //setSound to 60%
+            //setSound to 10%
             var mySound = $('#mySound');
             mySound.animate({volume:.1}, 1);
 
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
-                    $('html,body').css({
-                        'overflow':'auto'
-                    });
-                } );
+                $('html,body').css({'overflow':'auto'});} );
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
-                TweenMax.to($("#footer"), 4.85, { "top": '0px', ease: Expo.easeInOut });
+                $('body').scrollTop($(window).height()*$('.panel').length);
             }, 3000);
             $(window).scroll(this.detect_scroll);
-            var offset = $("#home").offset();
-            $("html,body").animate({
-                scrollTop: offset.top
-            });
 
+
+            // Make shine on title
             $({blurRadius: 10}).animate({blurRadius: 0}, {
                 duration: 3000,
-                easing: 'swing', // or "linear"
-                // use jQuery UI or Easing plugin for more options
+                easing: 'swing',
                 step: function() {
                     $('.second').css({
                         "-webkit-filter": "blur("+this.blurRadius+"px)",
@@ -366,7 +278,8 @@ define([
         },
 
         imageAnimation:function(el){
-            var view = this, 
+            console.log('animmmmm');
+            var view = this,
             self = el[0],
             object,type;
             this.overflowHidden(function(){
@@ -410,7 +323,7 @@ define([
         cpt:1,
         scrollAnimation:function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-            
+
             if(delta === -1){
                 console.log(this.cpt);
 
@@ -447,7 +360,7 @@ define([
             this.myCabView.render();
             this.myFlowerView.render();
             this.myAuroraView.render();
-            this.myHearthView.render();
+            this.myEarthView.render();
             this.myStoryView.render();
             this.menuView.render();
             this.footerView.render();
@@ -464,7 +377,7 @@ define([
             this.$el.find('#Cab').append(this.myCabView.el);
             this.$el.find('#Flower').append(this.myFlowerView.el);
             this.$el.find('#Story').append(this.myStoryView.el);
-            this.$el.find('#Hearth').append(this.myHearthView.el);
+            this.$el.find('#Earth').append(this.myEarthView.el);
             this.$el.find('#Aurora').append(this.myAuroraView.el);
             this.$el.find('#footer').append(this.footerView.el);
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
