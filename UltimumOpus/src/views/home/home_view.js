@@ -247,7 +247,9 @@ define([
 
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
-                $('html,body').css({'overflow':'auto'});} );
+                    $('html,body').css({'overflow':'auto'});
+                    
+                });
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
