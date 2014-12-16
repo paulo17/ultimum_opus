@@ -4,8 +4,44 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  background: #baff00;
+  /*background: #baff00;*/
   top: 0;
   z-index: 100;
-  left: 0;display: none;
+  left: 0;
+  display: block;
+}
+
+aside{
+	height: 100%;
+	width: 2%;
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	nav{
+		height: 50%;
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		transform:translateY(-50%);
+		div{
+			height: 10%;
+			width: 100%;
+			background-color: white;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			transition: box-shadow 0.5s;
+		}
+	}
+}
+
+section{
+	width: 98%;
+	height: 100%;
+	background-color: rgba(0, 4, 16, 0.8);
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
 }
