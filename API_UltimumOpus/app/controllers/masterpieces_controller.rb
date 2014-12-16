@@ -82,14 +82,14 @@ class MasterpiecesController < ApplicationController
 		@request = request.fullpath
 		if @request.match(".json")
   		# access token
-  		authenticate_or_request_with_http_token do |token, options|
-  			ApiKey.exists?(access_token: token)
-  		end
+  		#authenticate_or_request_with_http_token do |token, options|
+  			#ApiKey.exists?(access_token: token)
+  		#end
   	else
   		# basic authenticate
-  		#authenticate_or_request_with_http_basic do |username, password|
-  			#username == "admin" && password == "adminopus"
-  		#end if Rails.env.production?
+  		authenticate_or_request_with_http_basic do |username, password|
+  			username == "admin" && password == "adminopus"
+  		end if Rails.env.production?
   	end
   end
 
