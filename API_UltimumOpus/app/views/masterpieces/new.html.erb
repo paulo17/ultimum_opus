@@ -30,8 +30,14 @@
 
 <div>
   <%= f.label :video %><br>
-  <%= f.url_field :video, :class => "form-control" %>
+  <%= f.text_field :video, :class => "form-control" %>
 </div>
+
+<div>
+  <%= f.label :legend %><br>
+  <%= f.text_field :legend, :class => "form-control" %>
+</div>
+
 
 <p id="myBtn">
   <%= f.submit :class => "btn btn-success" %>

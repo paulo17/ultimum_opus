@@ -16,7 +16,7 @@ class MasterpiecesController < ApplicationController
 	end
 
 	def create
-		@masterpiece = Masterpiece.new(params[:masterpiece].permit(:titre, :date, :text, :image, :image2, :image3, :video))
+		@masterpiece = Masterpiece.new(params[:masterpiece].permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend))
 		if params[:masterpiece][:image]
 			@masterpiece.image = uploadImage(params[:masterpiece][:image])
 			@masterpiece.image2 = uploadImage(params[:masterpiece][:image2])
@@ -74,7 +74,7 @@ class MasterpiecesController < ApplicationController
 
 	private
 	def masterpiece_params
-		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video)
+		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend)
 	end
 
 	private
@@ -82,14 +82,14 @@ class MasterpiecesController < ApplicationController
 		@request = request.fullpath
 		if @request.match(".json")
   		# access token
-  		#authenticate_or_request_with_http_token do |token, options|
-  			#ApiKey.exists?(access_token: token)
-  		#end
+  		authenticate_or_request_with_http_token do |token, options|
+  			ApiKey.exists?(access_token: token)
+  		end
   	else
   		# basic authenticate
-  		authenticate_or_request_with_http_basic do |username, password|
-  			username == "admin" && password == "adminopus"
-  		end if Rails.env.production?
+  		#authenticate_or_request_with_http_basic do |username, password|
+  			#username == "admin" && password == "adminopus"
+  		#end if Rails.env.production?
   	end
   end
 
