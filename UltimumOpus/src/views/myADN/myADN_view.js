@@ -16,12 +16,13 @@ define([
         },
 
         leftSidebarADN: function(){
-            $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
+            $('html,body').css({'overflow':'hidden'});
+
             this.getADN();
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
             TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-            TweenMax.to($("#car_title"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_ADN"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
         },
 
         getADN: function(){

@@ -16,7 +16,7 @@ define([
         },
 
         leftSidebarShell: function(){
-            $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
+            $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".shellTitle"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
 
             this.getShell();

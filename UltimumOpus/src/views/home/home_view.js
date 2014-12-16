@@ -23,12 +23,18 @@ define([
         el: "#content",
         events: {
             'click .Sidebar':'closeSidebar',
+            'click .btnDiscover':'lowerSound',
+            'click .leftBtn':'leftBtn',
+            'click .rightBtn':'rightBtn',
             'keydown':'keydown',
-            'mouseenter .LContentFlw':'imageAnimation',
+            'mouseenter .LContentFlw':'imageAnimation'
             //'scroll':'detect_scroll'
         },
 
         initialize: function(options) {
+            $(window).scroll(this.detect_scroll());
+            window.setDiv = 0;
+
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
 
@@ -73,29 +79,29 @@ define([
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
-            // Go Bottom
-            window.scrollTo(0,$(window).height()*$('.panel').length);
-            console.log("goBot");
+            // Go Bot  tom
+            // window.scrollTo(0,$(window).height()*$('.panel').length);
+            // console.log("goBot");
 
             // SVG
-           // $(window).scroll(function() {
-             //   drawLine( $('#route'),
-               //     document.getElementById('path') );
-           // });
+            // $(window).scroll(function() {
+            //  drawLine( $('#route'),document.getElementById('path') );});
 
             // init the line length
-            //drawLine( $('#route'),
-              //  document.getElementById('path') );
+            //    drawLine( $('#route'),
+            //      document.getElementById('path') );
 
             //draw the line
-            //function drawLine(container, line){
+            //   function drawLine(container, line){
 
-              //  var pathLength = line.getTotalLength(),
-                //    maxScrollTop = $(document).height() - $(window).height(),
-                  //  percentDone = $(window).scrollTop() / maxScrollTop,
-                    //length = percentDone * pathLength;
-                //line.style.strokeDasharray = [ length ,pathLength].join(' ');
-            //}
+            //     var pathLength = line.getTotalLength(),
+            //        maxScrollTop = $(document).height() - $(window).height(),
+            //         percentDone = $(window).scrollTop() / maxScrollTop,
+            //         length = percentDone * pathLength;
+//
+            //       console.log('pathlen',pathLength);
+            //      line.style.strokeDasharray = [ length ,pathLength].join(' ');
+            //    }
 
 
             this.startHome();
@@ -105,66 +111,71 @@ define([
 
         },
 
+        // setVolum on click btn Discover
+        lowerSound: function(){
+            //Lower sound
+            var mySound = $('#mySound');
+            mySound.animate({volume:.02}, 750);
 
-        detect_scroll: function(e) {
+            $('#footer').addClass('bgFooter');
 
-            var st = $(document).scrollTop();
+        },
 
-            var panel = {
-                getVisible: function(){
-                  var self = this;
-                  $('.panel').each(function(){
-                    if($(this).visible(true)){
-                      self.current = $(this);
-                    }else{
-                      $(this).css({opacity:1});
-                    }
-                  });
-                  return this.current;
+        //set css on click btn left discvoer
+
+        leftBtn: function(){
+            $('#logo').css({'color':'black'});
+        },
+
+        rightBtn: function(){
+            $('#player').css({'color':'black'});
+            $('.volumn').css({'fill':'black'});
+        },
+
+        //
+        detect_scroll:function(){
+            var  maxScrollTop = $(document).height() - $(window).height(),
+                percentDone = $(window).scrollTop() / maxScrollTop;
+            var myOpac = (1-percentDone)*5;
+                console.log('myOpac',myOpac, 'percentDone', percentDone);
+
+            if(percentDone<0.95 && percentDone>0.78){
+                window.setDiv = window.setDiv+.05;
+                console.log('window.setDiv',window.setDiv);
+                if(percentDone<0.92) {
+                    TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
+                    console.log('zzz');
                 }
-
-            };
-
-            var opacity = {
-                setStart: function(){
-                    if(panel.getVisible()){
-                        panel.getVisible().css({opacity:0.4});
-                    }
-                },
-                change: function(panel){
-                    var offset = panel.offset().top;
-                    var height = panel.outerHeight();
-                    var range = 200;
-
-                    console.log(panel.css('opacity'));
-
-                    if(panel.css('opacity') <= 1 && panel.css('opacity') > 0){
-                      // panel.css({ 'opacity': 1 - (st - offset + range) / range });
-                      panel.css({ 'opacity': 1 - (st/35) });
-                    }
-
-                }
-            };
-
-            var currentPanel = panel.getVisible();
-            if(currentPanel){
-                opacity.change(currentPanel);
+                $('.LContentADN').css({'opacity':myOpac});
             }
+        },
+
+        out_scroll: function() {
+            console.log($(this).scrollTop(),$(window).height()*$('.panel').length-$(window).height());
+            //  Current Div
+
+            var crtScroll = $(this).scrollTop(),
+                mySetDiv = $(window).height()*$('.panel').length;
 
 
-            //console.log(st);
-            //console.log(this.lastScrollTop);
-
-            //if (st > this.lastScrollTop){
-                //console.log('down');
-               // this.nextPage('down');
-            //} else {
-                //console.log('up');
-                //this.nextPage('up');
-           // }
-
-            //this.lastScrollTop = st;
-            //this.getFooter();
+            console.log(crtScroll-(crtScroll-$(window).height()*$('.panel').length-$(window).height()))
+            console.log('currentScroll', crtScroll, 'test',mySetDiv-$(window).height()*2.5,'autre', mySetDiv-$(window).height()*2 )
+            if(crtScroll > mySetDiv-$(window).height()*2.5){
+                console.log('zzz');
+                var header = $('.LContentADN');
+                var range = 1000;
+                var st = $(this).scrollTop();
+                header.each(function () {
+                    var offset = $(this).offset().top;
+                    var height = $(this).outerHeight();
+                    offset = offset + height / 2;
+                    $(this).css({ 'opacity': (1.3 - (st - offset + range) / range)+.48 });
+                    console.log('maValeur',1.3 - (st - offset + range) / range);
+                });
+            }
+            else {
+                //$(".LContentADN").stop().fadeOut();
+            }
 
 
         },
@@ -240,13 +251,30 @@ define([
         },
 
         closeSidebar: function(){
-            $('body').css({'overflow-x':'auto','overflow-y':'auto'});
+            $('html,body').css({'overflow':'auto'});
+
+            //Set footer color
+
+
+
+            // Set Sound to 60%
+            var mySound = $('#mySound');
+            mySound.animate({volume:.1}, 750);
+
             TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".flwTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            //Set
-
+            setTimeout(function() {
+                $('#footer').removeClass('bgFooter');
+                $('#player').css({'color':'white'});
+                $('#logo').css({'color':'white'});
+                $('.volumn').css({'fill':'white'});
+            }, 400);
+            //Set sound to volume 100%
+            var mySound = $('#mySound');
+            mySound.animate({volume:.1}, 750);
+            ///
 
             if ($(".leftActive")[0]){
                 TweenMax.to($("#leftSidebar"), 0.75, { "left": '-70%', ease: Expo.easeInOut });
@@ -266,10 +294,14 @@ define([
 
         getFooter: function(){
             console.log('footer');
-            TweenMax.to($("#footer"), 0.85, { "bottom": '0px', ease: Expo.easeInOut });
+
         },
 
         startHome: function(){
+            //setSound to 60%
+            var mySound = $('#mySound');
+            mySound.animate({volume:.1}, 1);
+
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
                     $('html,body').css({
@@ -279,6 +311,7 @@ define([
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
+                TweenMax.to($("#footer"), 4.85, { "top": '0px', ease: Expo.easeInOut });
             }, 3000);
             $(window).scroll(this.detect_scroll);
             var offset = $("#home").offset();
@@ -306,7 +339,7 @@ define([
             };
 
             setInterval(function() {
-                $(".second").animate({textShadowBlur:12}, {duration: 1500, complete: function() {
+                $(".second").animate({textShadowBlur:20}, {duration: 1500, complete: function() {
                     $(".second").animate({textShadowBlur:1}, {duration: 2500});
                 }});
             }, 1000);

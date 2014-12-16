@@ -18,7 +18,7 @@ define([
 
         rightSidebarCell: function(){
             //Block Scroll
-            $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
+            $('html,body').css({'overflow':'hidden'});
 
             this.getCell();
 

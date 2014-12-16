@@ -16,13 +16,18 @@ define([
         initialize: function(options) {
         },
 
+
         myPlayer: function(){
             var mySound = $('#mySound');
 
             if (mySound.prop("volume") == 0) {
-                mySound.animate({volume: 1}, 750);
+                $('#Off').css({'display':'none'});
+                $('#On').css({'display':'block'});
+                mySound.animate({volume:.1}, 750);
             }
             else {
+                $('#On').css({'display':'none'});
+                $('#Off').css({'display':'block'});
                 mySound.animate({volume: 0}, 750);
             }
         },

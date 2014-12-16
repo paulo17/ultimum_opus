@@ -17,13 +17,14 @@ define([
 
         rightSidebarCab: function(){
             //Block Scroll
-            $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
+            $('html,body').css({'overflow':'hidden'});
+
 
             this.getCab();
 
             TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
             TweenMax.to($("#myCabContent"), 0.75, { "left": '-100%', ease: Expo.easeInOut });
-            TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '-32%', ease: Expo.easeInOut });
+            TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '-42%', ease: Expo.easeInOut });
         },
 
         getCab: function(){

@@ -17,7 +17,7 @@ define([
         },
 
         leftSidebarFlw: function(){
-            $('body').css({'overflow-x':'hidden','overflow-y':'hidden'});
+            $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".flwTitle"), 0.75, { "left": '50%', ease: Expo.easeInOut });
 
             // Top div
