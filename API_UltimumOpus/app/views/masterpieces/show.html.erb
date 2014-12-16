@@ -1,29 +1,35 @@
 <div id="myPiece">
-  <div class="img">
-    <div id="bg" style="background: url('http://maximeberthelot.fr/UltimateOpus/API/img/img_mpiece/<%= @masterpiece.image %>') 50% 50%;"></div>
-  </div>
-  <div class="datas">
-    <p id="title"><%= @masterpiece.titre %></p>
-    <p id="data">
-      <strong>Date de création:</strong>
-      <%= @masterpiece.date %>
-    </p>
-    <p id="data">
-      <strong>Video :</strong>
-      <%= @masterpiece.video %>
-    </p>
-    <p id="data">
-      <strong>Contenu :</strong>
-      <%= @masterpiece.text %>
-    </p>
-  </div>
+	<div class="img">
+		<div id="bg" style="background: url('http://maximeberthelot.fr/UltimateOpus/API/img/img_mpiece/<%= @masterpiece.image %>') 50% 50%;"></div>
+	</div>
+	<div class="datas">
+		<p id="title"><%= @masterpiece.titre %></p>
+		<p id="data">
+			<strong>Date de création:</strong>
+			<%= @masterpiece.date %>
+		</p>
+		<p id="data">
+			<strong>Video :</strong>
+			<%= @masterpiece.video %>
+		</p>
+		<p id="data">
+			<strong>Contenu :</strong>
+			<%= @masterpiece.text %>
+		</p>
+		<% if @masterpiece.image %>
+		<p id="data">
+			<strong>Image :</strong>
+			<%= link_to @masterpiece.image, "/uploads/#{@masterpiece.image}", :target => "_blank" %>
+		</p>
+		<% end %>
+	</div>
 </div>
 
 <div id="btnPiece">
-    <div id="myBtn">
-    <%= link_to 'Retour', masterpieces_path, :class => "btn btn-success" %>
-    </div>
-    <div id="myBtn">
-      <%= link_to "Editer l'oeuvre", edit_masterpiece_path(@masterpiece), :class => "btn btn-success" %>
-    </div>
+	<div id="myBtn">
+		<%= link_to 'Retour', masterpieces_path, :class => "btn btn-success" %>
+	</div>
+	<div id="myBtn">
+		<%= link_to "Editer l'oeuvre", edit_masterpiece_path(@masterpiece), :class => "btn btn-success" %>
+	</div>
 </div>

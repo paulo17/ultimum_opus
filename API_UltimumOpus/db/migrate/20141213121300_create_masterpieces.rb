@@ -4,7 +4,7 @@ class CreateMasterpieces < ActiveRecord::Migration
       t.string :titre
       t.string :date
       t.text :text
-      t.string :image
+      t.string :image1
       t.string :video
 
       t.timestamps
