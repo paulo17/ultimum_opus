@@ -20,8 +20,9 @@ define([
     'views/menu/menu_view',
     'gsap',
     'utils/visible',
+    'utils/jquery-ui',
     'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, API)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible,UI, API)
 
 {
     return Backbone.View.extend({
@@ -102,11 +103,6 @@ define([
 
             // Go Bot  tom
             window.scrollTo(0,$(window).height()*$('.panel').length);
-             console.log("goBot");
-
-            // SVG
-
-
 
             this.startHome();
         },
@@ -139,29 +135,21 @@ define([
         //
         detect_scroll:function(){
 
-
-
             var  maxScrollTop = $(document).height() - $(window).height(),
                 percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
-                console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
+               // console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
+
+            // set Anim Scroll with good SVG
             if(percentDone<1){
-                drawLine( $('#route_home'),
-                    document.getElementById('path_home') );
+                drawLine( $('#route_home'),document.getElementById('path_home') );
+                function drawLine(container, line){
 
-                drawLine( $('#route_home'),document.getElementById('path_home') );};
-
-            // init the line length
-
-
-            //draw the line
-            function drawLine(container, line){
-
-                var pathLength = line.getTotalLength(),
-                    maxScrollTop = $(document).height() - $(window).height(),
-                    percentDone = $(window).scrollTop() / maxScrollTop,
-                    length = (pathLength-(percentDone *pathLength))*1.3;
-
+                    var pathLength = line.getTotalLength(),
+                        maxScrollTop = $(document).height() - $(window).height(),
+                        percentDone = $(window).scrollTop() / maxScrollTop,
+                        length = (pathLength-(percentDone *pathLength))*1.3;
+                   // console.log('original',length);
                     if(percentDone<.86){
                         length = length +800;
                     }
@@ -171,9 +159,24 @@ define([
                     if(percentDone<.6169){
                         TweenMax.to($("#path_home"), .65, {"stroke-dasharray": pathLength, ease: Expo.easeInOut});
                     }
-                //
-                console.log('pathleeeen',length);
-                line.style.strokeDasharray = [ length ,pathLength].join(' ');
+                    if(percentDone<.603){
+                        length = length-600;
+                    }
+
+                    line.style.strokeDasharray = [ length ,pathLength].join(' ');
+
+                    console.log('pathleeeen',length,'pathLeeen', pathLength);
+                }
+            }
+            if(percentDone<.703) {
+                TweenMax.to($("#path_flw"), .65, {"stroke-dasharray": '1044.1 687.1 ', ease: Expo.easeInOut});
+            }
+
+            // init the line length
+
+
+            //draw the line
+
 
                 if(percentDone<0.95 && percentDone>0.78){
                     window.setDiv = window.setDiv+.05;
@@ -188,7 +191,6 @@ define([
 
 
                 }
-            }
         },
 
         closeSidebar: function(){
