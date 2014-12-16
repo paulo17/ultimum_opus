@@ -2,12 +2,12 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/menu/menu.html',
-    'css!templates/menu/menu.css'
+    'text!templates/myAurora/myAurora.html',
+    'css!templates/myAurora/myAurora.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "aside-menu",
+        className: "RContentAur",
         events: {},
         
         initialize: function(options) {

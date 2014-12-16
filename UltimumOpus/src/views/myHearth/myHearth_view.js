@@ -2,12 +2,12 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/menu/menu.html',
-    'css!templates/menu/menu.css'
+    'text!templates/myHearth/myHearth.html',
+    'css!templates/myHearth/myHearth.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "aside-menu",
+        className: "RContentHearth",
         events: {},
         
         initialize: function(options) {

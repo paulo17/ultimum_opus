@@ -2,12 +2,11 @@ define([
     'backbone',
     'underscore',
     'config',
-    'text!templates/menu/menu.html',
-    'css!templates/menu/menu.css'
+    'text!templates/myStory/myStory.html',
+    'css!templates/myStory/myStory.css'
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "aside-menu",
         events: {},
         
         initialize: function(options) {

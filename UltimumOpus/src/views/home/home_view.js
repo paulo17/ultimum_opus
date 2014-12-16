@@ -14,6 +14,10 @@ define([
     'views/rightDiscover/rightDiscover_view',
     'views/leftDiscover/leftDiscover_view',
     'views/myFlower/myFlower_view',
+    'views/myAurora/myAurora_view',
+    'views/myHearth/myHearth_view',
+    'views/myStory/myStory_view',
+    'views/menu/menu_view',
     'gsap',
     'utils/visible',
     'models/API_model'
@@ -28,9 +32,9 @@ define([
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
 
-            'mouseenter .LContentFlw':'flowerAnimation',
-            'mouseenter .LContentADN' : 'adnAnimation',
-            'mouseleave .LContentADN' : 'killAdnAnimation'
+            'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
+            //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
         initialize: function(options) {
@@ -46,6 +50,10 @@ define([
             this.myShellView = new MyShellView(options);
             this.myCabView = new MyCabView(options);
             this.myFlowerView = new MyFlowerView(options);
+            this.myHearthView = new MyHearthView(options);
+            this.myAuroraView = new MyAuroraView(options);
+            this.myStoryView = new MyStoryView(options);
+            this.menuView = new MenuView(options);
             this.rightDiscoverView = new RightDiscoverView(options);
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
@@ -66,6 +74,10 @@ define([
             this.leftDiscoverView.remove();
             this.footerView.remove();
             this.loaderView.remove();
+            this.menuView.remove();
+            this.myAuroraView.remove();
+            this.myHearthView.remove();
+            this.myStoryView.remove();
 
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
@@ -77,12 +89,16 @@ define([
             this.setScroll();
 
             // Set !div in current height and width
+            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Hearth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
             // Go Bot  tom
             // window.scrollTo(0,$(window).height()*$('.panel').length);
@@ -165,6 +181,7 @@ define([
 
             console.log(crtScroll-(crtScroll-$(window).height()*$('.panel').length-$(window).height()))
             console.log('currentScroll', crtScroll, 'test',mySetDiv-$(window).height()*2.5,'autre', mySetDiv-$(window).height()*2 )
+
             if(crtScroll > mySetDiv-$(window).height()*2.5){
                 console.log('zzz');
                 var header = $('.LContentADN');
@@ -351,46 +368,35 @@ define([
 
         },
 
-        adnAnimation:function(){
-            var el = document.querySelector('.LContentADN'),
-            animatedObject = document.querySelector('#animated-adn'),
-            type = 'adn';
-            var self = this;
+        imageAnimation:function(el){
+            var view = this,
+            self = el[0],
+            object,type;
             this.overflowHidden(function(){
-                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
+                 $('html,body').animate({scrollTop: $(self).offset().top}, 600);
             });
-            if(el.className != 'LContentADN leftData scrollable'){
-                el.addEventListener('mousewheel', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
-                }, false);
-                el.addEventListener('DOMMouseScroll', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
-                }, false);
-                el.classList.add('scrollable');
-            }else{
+            if(self.classList.contains('scrollable')){
                 return;
-            }
-        },
-        flowerAnimation:function(){
-            var el = document.querySelector('.LContentFlw'),
-            animatedObject = document.querySelector('#animated-flower'),
-            type = 'flower';
-            var self = this;
-            this.overflowHidden(function(){
-                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
-            });
-            if(el.className != 'LContentFlw leftData scrollable'){
+            }else{
                 this.cpt = 1;
-                el.addEventListener('mousewheel', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
+                if(self.classList.contains('LContentADN')){
+                    object = document.querySelector('#animated-adn');
+                    type = 'adn';
+                }else if(self.classList.contains('LContentFlw')){
+                    object = document.querySelector('#animated-flower');
+                    type = 'flower';
+                }else{
+                    console.log('ca marche pas')
+                }
+
+                el[0].addEventListener('mousewheel', function(e){
+                    view.scrollAnimation(e, self, object, type);
                 }, false);
-                el.addEventListener('DOMMouseScroll', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
+                el[0].addEventListener('DOMMouseScroll', function(e){
+                    view.scrollAnimation(e, self, object, type);
                 }, false);
-                el.classList.add('scrollable');
-            }else{
-                return;
-            }
+                el[0].classList.add('scrollable');
+            };
         },
         overflowAuto:function(){
             setTimeout(function(){
@@ -446,6 +452,10 @@ define([
             this.myShellView.render();
             this.myCabView.render();
             this.myFlowerView.render();
+            this.myAuroraView.render();
+            this.myHearthView.render();
+            this.myStoryView.render();
+            this.menuView.render();
             this.footerView.render();
             this.leftDiscoverView.render();
             this.rightDiscoverView.render();
@@ -453,11 +463,15 @@ define([
 
             // Set content on view on div choose
 
+            this.$el.find('#menu').append(this.menuView.el);
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
             this.$el.find('#Shell').append(this.myShellView.el);
             this.$el.find('#Cab').append(this.myCabView.el);
             this.$el.find('#Flower').append(this.myFlowerView.el);
+            this.$el.find('#Story').append(this.myStoryView.el);
+            this.$el.find('#Hearth').append(this.myHearthView.el);
+            this.$el.find('#Aurora').append(this.myAuroraView.el);
             this.$el.find('#footer').append(this.footerView.el);
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);

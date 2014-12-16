@@ -1,0 +1,112 @@
+// Config
+
+
+#Aurora{
+  background: #000410;
+  overflow: hidden;
+
+  .RContentAur{
+    width: 100%;
+    position: relative;
+    height: 90%;
+
+
+    #rightBlock{
+      width: 50%;
+      padding: 3.5% 0px;
+      position: relative;
+      height: 100%;
+      float: left;
+      left: 10%;
+      #img{
+        margin: 0;
+        padding: 0;
+        left: 0;
+        width: 50%;
+        top: 30%;
+        position: relative;
+        height: auto;
+        z-index: 2;
+        text-align: center;
+        img{
+          padding-right: 8%;
+          width: 100%;
+          height: auto;
+          -webkit-blend-mode: screen;
+          background-blend-mode: color-dodge, normal;
+        }
+      }
+      #img_name{
+        text-align: center;
+        width: 40%;
+        height: 20%;
+        z-index: 1;
+        bottom: 10%;
+        right: 66%;
+        position: absolute;
+        img{
+          width: 40%;
+        }
+      }
+    }
+
+    #leftBlock{
+      padding: 3.5% 0px;
+      position: relative;
+      width: 50%;
+      float: left;
+      height: 100%;
+      .txt_content{
+        width: 82%;
+        height: 55%;
+        left: 15%;
+        position: relative;
+        top: 20%;
+        .title_content{
+          width: 53%;
+        }
+      }
+      .svg-wrapper {
+        transform: translateY(-50%);
+        margin: 0 auto;
+        cursor: pointer;
+        width: 40%;
+        height: 25px;
+        float: left;
+      }
+
+      .btnDiscover{
+        position: absolute;
+        left: 18%;
+        font-style: italic;
+        font-family: "Playfair Display";
+        bottom: 0px;
+        width: 35%;
+        height: 7.5%;
+        margin-top: 10px;
+        /*padding: 2% 0px 2% 0px;*/
+        cursor: pointer;
+        text-align: center;
+        font-size: .6vw;
+      }
+
+      .btn-svg{
+        /*height: 20px;
+        width: 200px;*/
+        transform:translate(-50%,-50%);
+        h2{
+          width: 100%;
+          position: absolute;
+          color: #696a70;
+          margin: 0px;
+          padding: 1px 1px 3px 1px;
+          top: 50%;
+          left:50%;
+          transform: translate(-50%,-50%);
+          transition: all 1s;
+        }
+      }
+    }
+  }
+}
+
