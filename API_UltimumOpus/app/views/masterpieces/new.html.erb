@@ -1,30 +1,41 @@
 <div class="container">
 <%= form_for :masterpiece, url: masterpieces_path, :html=>{:class =>'form-horizontal'} do |f| %>
-<p>
+<div>
   <%= f.label :titre %><br>
-  <%= f.text_field :titre, :class => "form-control" %>
-</p>
-<p>
+  <%= f.text_field :titre, :required => true, :class => "form-control" %>
+</div>
+<div>
   <%= f.label :date %><br>
   <%= f.text_field :date, :class => "form-control" %>
-</p>
-<p>
+</div>
+<div>
   <%= f.label :text %><br>
   <%= f.text_area :text, :class => "form-control" %>
-</p>
-<p>
-  <%= f.label :image %><br>
-  <%= f.text_field :image, :class => "form-control" %>
-</p>
+</div>
 
-<p>
+<div>
+  <%= f.label :image %>
+  <%= f.file_field :image, :required => true, :class => 'form-control' %>
+</div>
+
+<div>
+  <%= f.label :image2 %>
+  <%= f.file_field :image2, :class => 'form-control' %>
+</div>
+
+<div>
+  <%= f.label :image3 %>
+  <%= f.file_field :image3, :class => 'form-control' %>
+</div>
+
+<div>
   <%= f.label :video %><br>
-  <%= f.text_field :video, :class => "form-control" %>
-</p>
+  <%= f.url_field :video, :class => "form-control" %>
+</div>
 
 <p id="myBtn">
   <%= f.submit :class => "btn btn-success" %>
-</p>
+</div>
 <% end %>
 </div>
 

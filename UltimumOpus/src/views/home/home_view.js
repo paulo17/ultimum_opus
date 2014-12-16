@@ -32,9 +32,9 @@ define([
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
 
-            'mouseenter .LContentFlw':'flowerAnimation',
-            'mouseenter .LContentADN' : 'adnAnimation',
-            'mouseleave .LContentADN' : 'killAdnAnimation'
+            'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
+            //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
         initialize: function(options) {
@@ -365,46 +365,35 @@ define([
 
         },
 
-        adnAnimation:function(){
-            var el = document.querySelector('.LContentADN'),
-            animatedObject = document.querySelector('#animated-adn'),
-            type = 'adn';
-            var self = this;
+        imageAnimation:function(el){
+            var view = this, 
+            self = el[0],
+            object,type;
             this.overflowHidden(function(){
-                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
+                 $('html,body').animate({scrollTop: $(self).offset().top}, 600);
             });
-            if(el.className != 'LContentADN leftData scrollable'){
-                el.addEventListener('mousewheel', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
-                }, false);
-                el.addEventListener('DOMMouseScroll', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
-                }, false);
-                el.classList.add('scrollable');
-            }else{
+            if(self.classList.contains('scrollable')){
                 return;
-            }
-        },
-        flowerAnimation:function(){
-            var el = document.querySelector('.LContentFlw'),
-            animatedObject = document.querySelector('#animated-flower'),
-            type = 'flower';
-            var self = this;
-            this.overflowHidden(function(){
-                 $('html,body').animate({scrollTop: $(el).offset().top}, 600);
-            });
-            if(el.className != 'LContentFlw leftData scrollable'){
+            }else{
                 this.cpt = 1;
-                el.addEventListener('mousewheel', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
+                if(self.classList.contains('LContentADN')){
+                    object = document.querySelector('#animated-adn');
+                    type = 'adn';
+                }else if(self.classList.contains('LContentFlw')){
+                    object = document.querySelector('#animated-flower');
+                    type = 'flower';
+                }else{
+                    console.log('ca marche pas')
+                }
+
+                el[0].addEventListener('mousewheel', function(e){
+                    view.scrollAnimation(e, self, object, type);
                 }, false);
-                el.addEventListener('DOMMouseScroll', function(e){
-                    self.scrollAnimation(e, el, animatedObject, type);
+                el[0].addEventListener('DOMMouseScroll', function(e){
+                    view.scrollAnimation(e, self, object, type);
                 }, false);
-                el.classList.add('scrollable');
-            }else{
-                return;
-            }
+                el[0].classList.add('scrollable');
+            };
         },
         overflowAuto:function(){
             setTimeout(function(){
