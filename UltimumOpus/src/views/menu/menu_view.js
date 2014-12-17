@@ -24,9 +24,11 @@ define([
         ratio: null,
         comparing:function(win, pos){
             if(win.scrollTop() > pos[1].position){
-                console.log(pos[0].element)
+                console.log(pos[0].element);
+                document.querySelector('#menu-'+pos[0].element).classList.add('viewing');
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
-                console.log(pos[1].element)
+                console.log(pos[1].element);
+                document.querySelector('#menu-'+pos[1].element).classList.add('viewing');
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 console.log(pos[2].element)
             }else if(win.scrollTop() > pos[4].position && win.scrollTop() < pos[2].position){
@@ -81,14 +83,6 @@ define([
 
                     move = Math.floor(top/ratio);
                     $(window).scrollTop(move);
-                    /*win = $(window),
-                    pos = self.positions;
-                    if(top < grid){
-                        win.animate({scrollTop: pos[8].position}, 600);
-                        
-                    }else if(top > grid && top < 3*grid){
-                        win.scrollTop(pos[7].position);
-                    }*/
                 }
 
             })
@@ -99,13 +93,11 @@ define([
             $('aside').css({'position':'fixed'});
         },
         panel:function(){
-            
             var panels = document.getElementsByClassName('panel');
             var positions = [];
             for(var i=panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
             };
-         //   console.log(this.positions);
             
         },
         scroll:function(){
