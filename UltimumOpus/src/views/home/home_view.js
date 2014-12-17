@@ -149,32 +149,31 @@ define([
 
                     var pathLength = line.getTotalLength(),
                         maxScrollTop = $(document).height() - $(window).height(),
-                        percentDone = $(window).scrollTop() / maxScrollTop,
-                        length = (pathLength-(percentDone *pathLength));
-                        length = pathLength-length;
-                        length = pathLength-length;
+                        percentDone = $(window).scrollTop() / maxScrollTop;
+                        window.length = (pathLength-(percentDone *pathLength));
+                        window.length = pathLength-length;
+                        window.length = pathLength-length;
 
-                    if(percentDone<0.362){
-                        length = length + 160;
+                    if(percentDone<0.32602){
+                        window.length = window.length + 140;
                     }
-
-                    if(percentDone<0.357){
-                        length = length + 100;
+                    if(percentDone<0.3633){
+                        window.length = window.length + 210;
                     }
                     if(percentDone<0.325){
-                        length = length + 600;
+                        window.length = window.length + 600;
                     }
                     if(percentDone<0.275){
-                        length = length + 240;
+                        window.length = window.length + 240;
                     }
                     if(percentDone<0.270){
-                        length = length + 180;
+                        window.length = window.length + 180;
                     }
                     if(percentDone<0.208){
-                        length = length + 500;
+                        window.length = window.length + 500;
                     }
-                    console.log('original',length, 'percentDone', percentDone);
-                    line.style.strokeDasharray = [ length ,pathLength].join(' ');
+                    console.log('original',window.length, 'percentDone', percentDone);
+                    line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
 
                     //console.log('pathleeeen',length,'pathLeeen', pathLength);
                 }

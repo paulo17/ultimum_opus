@@ -13,6 +13,7 @@ define([
         },
         
         initialize: function(options) {
+            $(window).scroll(this.animLineShell);
         },
 
         leftSidebarShell: function(){
@@ -32,6 +33,16 @@ define([
             }
 
             scrollToElement('.LContentShell', 600);
+        },
+
+        animLineShell: function(){
+            if(window.length > 6298.35){
+                console.log('rjrjrjr');
+                TweenMax.to($("#anim-shell path"), .01, { "stroke-dasharray": "400.8, 409", ease: Expo.easeInOut });
+            }
+            if(window.length < 6298.35){
+                TweenMax.to($("#anim-shell path"),.01, { "stroke-dasharray": "0, 409", ease: Expo.easeInOut });
+            }
         },
 
         render: function(){
