@@ -19,8 +19,9 @@ define([
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
-    'utils/visible'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
+    'utils/visible',
+    'utils/jquery.scrollmagic.min'
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, ScrollScene)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -78,6 +79,25 @@ define([
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
             Backbone.View.prototype.remove.apply(this, arguments);
+
+            var controller;
+            $(document).ready(function($) {
+                // init controller
+                controller = new ScrollMagic();
+            });
+
+            $(document).ready(function($) {
+                // build tween
+                var tween = TweenMax.to("#animate1", 0.5, {backgroundColor: "green", scale: 2.5});
+
+                // build scene
+                var scene = new ScrollScene({triggerElement: "#trigger1"})
+                    .setTween(tween)
+                    .addTo(controller);
+
+                // show indicators (requires debug extension)
+                scene.addIndicators();
+            });
         },
 
         startHome: function(){
