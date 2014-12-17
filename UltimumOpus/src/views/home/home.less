@@ -101,6 +101,33 @@
   animation: fade .7s ease both;
 }
 
+/*paralax*/
+#paralax{
+  position: absolute;
+  top:0;
+  overflow: hidden;
+
+  #filter1{
+    height: 100%;
+    width: 150%;
+    background-image: url('/img/filtre.png');
+    position: absolute;
+    opacity: 0.1;
+    margin-left: -25%;
+  }
+
+  #filter2{
+    height: 200%;
+    width: 150%;
+    background-image: url('/img/filtre.png');
+    position: absolute;
+    opacity: 0.1;
+    margin-left: -25%;
+  }
+}
+
+
+
 /* KeyFrame */
 @-webkit-keyframes fade {
   from { }

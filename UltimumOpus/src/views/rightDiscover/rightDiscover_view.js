@@ -4,10 +4,8 @@ define([
     'config',
     'text!templates/rightDiscover/rightDiscover.html',
     'css!templates/rightDiscover/rightDiscover.css',
-    'models/API_model',
-    'signals/page_dom_added_signal'
-
-], function(Backbone, _, Config, tpl, css, APIModel, pageDomAddedSignal)
+    'models/API_model'
+], function(Backbone, _, Config, tpl, css, APIModel)
 {
     return Backbone.View.extend({
         className: "content_right",
@@ -42,6 +40,7 @@ define([
                 this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
                 this.Masterpiece.fetch({
                     success: function(model, response, options){
+                        console.log(response);
                         self.tplData = response[0];
                         callback.call(this);
                     },
@@ -67,9 +66,13 @@ define([
         *    Render the view and put parameter for template
         **/
         render: function(){
+            console.log('render template');
+            console.log(this.tplData);
             if (typeof this.tplData == 'undefined'){
                 this.$el.html(_.template( tpl ) );
             }else{
+                console.log('new template');
+
                 this.$el.html(_.template( tpl, {
                         titre: this.tplData.titre,
                         legend: this.tplData.legend,
