@@ -88,9 +88,9 @@ define([
                     //moveUl=(((topL/self.ratioMenu)*100)/self.height);
                     //console.log(moveUl);
                     $(window).scrollTop(move);
-                    $('section ul').css({
+                    /*$('section ul').css({
                         'bottom': 50 - percent+'%'
-                    });
+                    });*/
                 }
 
             })
@@ -119,16 +119,21 @@ define([
         scroll:function(){
             this.ratio = $('#limitation').height()/$('html').height();
             this.ratioMenu = $('#limitation').height()/(this.height);
-            console.log(this.height);
-            console.log(this.ratioMenu);
+            
 
             var self = this,
             pos = this.positions;
             win = $(window);
+            
 
             win.scroll(function(){
+                var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
+                console.log(percent);
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
+                });
+                $('section ul').css({
+                    'bottom': 50 - percent+'%'
                 });
 
                 self.comparing(win, pos);
