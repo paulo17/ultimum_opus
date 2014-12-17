@@ -389,15 +389,20 @@ define([
             rate2 = 0.1;
             $(window).mousemove(function(e){
                 var x = e.clientX - width;
-                
-                console.log(x);
                 $('#filter1').css({
                     'left': Math.floor(x*rate1)+'px',
                 });
-
                 $('#filter2').css({
                     'left': Math.floor(x*rate2)+'px',
                 });
+            });
+
+            $(window).scroll(function(){
+                var percent = (($('html').height()-win.scrollTop())*50)/($('html').height());
+
+                $('#filter2').css({
+                    'bottom': -percent + '%'
+                })
             });
         },
         render: function() {
