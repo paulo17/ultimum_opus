@@ -11,12 +11,14 @@ p{
 #myPiece{
   width: 100%;
   background: rgba(0,0,0, .5);
-  height: 330px;
+  height: auto;
 
   .img{
     float: left;
     width: 30%;
     height: 100%;
+    top: 45%;
+    position: absolute;
     background: #000000;
   }
   .datas{
@@ -96,7 +98,8 @@ strong{
 }
 
 #bg{
-  height: 100%;
+  height: 320px;
+  width: auto;
   background-size: cover;
 }
 
