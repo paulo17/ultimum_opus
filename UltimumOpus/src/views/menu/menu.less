@@ -1,22 +1,25 @@
 // Config
 
 #menu{
-  position: fixed;
+  /*position: fixed;
   height: 100%;
   width: 100%;
-  /*background: #baff00;*/
+  background: #baff00;
   top: 0;
   z-index: 100;
   left: 0;
-  display: block;
+  display: block;*/
+
 }
 
 aside{
+	position: fixed;
 	height: 100%;
 	width: 2%;
 	position: absolute;
 	left: 0;
 	top: 0;
+	z-index: 19000;
 
 	nav{
 		height: 50%;
@@ -46,6 +49,8 @@ section{
 	display: none;
 	transition: opacity 0.5s;
 	color: white;
+	position: fixed;
+	z-index: 19000;
 
 	ul{
 		width: 95%;

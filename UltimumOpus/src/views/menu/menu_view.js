@@ -17,6 +17,7 @@ define([
             pageDomAddedSignal.add(this.panel, this);
             pageDomAddedSignal.add(this.scroll, this);
             pageDomAddedSignal.add(this.drag, this);
+            pageDomAddedSignal.add(this.css, this);
             
            
         },
@@ -47,12 +48,13 @@ define([
             ratio = $('#limitation').height()/$('html').height(),
             move =0,
             self = this;
-            console.log(ratio);
+
             $('.draggable').draggable({
                 axis:'y',
                 containment:'#limitation',
                 //grid:[0, grid],
                 start:function(){
+                    $('html').css({'overflow':'auto'});
                     $('section').css({
                         'display':'block',
                     });
@@ -63,6 +65,7 @@ define([
                     },200)
                 },
                 stop:function(){
+
                     $('section').css({
                         'opacity':'0'
                     });
@@ -73,10 +76,10 @@ define([
                     },500)
                 },
                 drag:function(){
+                    $('body').css({'overflow':'auto'});
                     var top = this.offsetTop;
 
                     move = Math.floor(top/ratio);
-                    console.log(move);
                     $(window).scrollTop(move);
                     /*win = $(window),
                     pos = self.positions;
@@ -91,7 +94,12 @@ define([
             })
         },
         positions:[],
+        css:function(){
+            $('#menu').css({'height':'0','width':'0'});
+            $('aside').css({'position':'fixed'});
+        },
         panel:function(){
+            
             var panels = document.getElementsByClassName('panel');
             var positions = [];
             for(var i=panels.length - 1; i >= 0; i--){
