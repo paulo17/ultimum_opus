@@ -101,12 +101,12 @@ define([
             $('aside').css({'position':'fixed'});
 
             this.height = $('#ul-menu').height();
-            /*setTimeout(function(){
+            setTimeout(function(){
                 $('section').css({
                     'opacity':0,
                     'display':'none'
                 })
-            },100);*/
+            },100);
         },
         panel:function(){
             var panels = document.getElementsByClassName('panel');
