@@ -40,8 +40,9 @@ define([
 	                this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
 	                this.Masterpiece.fetch({
 	                    success: function(model, response, options){
-	                        self.tplData = response[0];
-	                        callback.call(this);
+	                   	console.log(response);
+	                        	self.tplData = response[0];
+	                        	callback.call(this);
 	                    },
 	                    error: function(error){
 	                        console.log(error);
@@ -65,10 +66,13 @@ define([
 	        *    Render the view and put parameter for template
 	        **/
 	        render: function(){
-	        	   console.log(this.tplData);
+	        	   console.log('render template');
+            	   console.log(this.tplData);
 	        	   if (typeof this.tplData == 'undefined'){
 	        	   	this.$el.html(_.template( tpl ) );
 	        	   }else{
+			console.log('new template');
+
 	        	   	this.$el.html(_.template( tpl, {
 		                titre: this.tplData.titre,
 		                legend: this.tplData.legend,

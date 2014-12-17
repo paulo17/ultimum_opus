@@ -339,8 +339,6 @@ define([
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
 
             if(delta === -1){
-                console.log(this.cpt);
-
                 if(this.cpt > 1){
                     this.cpt--;
                     //overflow.hidden();
@@ -352,7 +350,6 @@ define([
                 };
 
             }else{
-                console.log(this.cpt);
                 if(this.cpt < 64){
                     this.cpt++;
                     object.src = "img/masterpiece/sequences/"+type+" ("+this.cpt+").png";
