@@ -33,7 +33,7 @@ define([
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
@@ -62,8 +62,9 @@ define([
             this.loaderVieww = new LoaderView(options);
 
             // Init Model
-            this.API = new API();
-
+            var model = new API();
+            var test = model.find();
+            console.log(test);
         },
 
         remove: function() {
@@ -364,11 +365,6 @@ define([
         },
         render: function() {
             this.$el.html(_.template(tpl, {}));
-
-            // testing model API
-            this.API.find();
-            this.API.getById(1);
-
 
             // Set render on other views in home view
             this.myADNView.render();

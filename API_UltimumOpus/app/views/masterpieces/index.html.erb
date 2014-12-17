@@ -6,6 +6,7 @@
   <thead>
     <tr >
       <th>Titre</th>
+      <th>Caracteristique</th>
       <th>Admin</th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
   <% @masterpieces.each do |masterpiece| %>
       <tr>
         <td><%= masterpiece.titre %></td>
+        <td><%= masterpiece.feature %></td>
         <td><%= link_to edit_masterpiece_path(masterpiece) do %>
               <%= image_tag('http://maximeberthelot.fr/H3data/img/edit.png')%>
           <% end %>

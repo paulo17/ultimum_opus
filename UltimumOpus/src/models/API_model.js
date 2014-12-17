@@ -1,14 +1,15 @@
 define([
-	'backbone',
-	'config'
-	], function(Backbone, Config) {
-		return Backbone.Model.extend({
-			apiUrl: 'http://apiultimumopus.maximeberthelot.fr/',
+'backbone',
+'config'
+], function(Backbone, Config) {
+	return Backbone.Model.extend({
+		apiUrl: 'http://apiultimumopus.maximeberthelot.fr/',
 
     		// API route
     		routeUrl: {
     			'find': 'masterpieces.json',
-    			'get': 'masterpieces/'
+    			'get': 'masterpieces/',
+    			'feature': 'masterpieces/feature/'
     		},
 
     		initialize: function(){
@@ -31,15 +32,20 @@ define([
 		*	Find all masterpieces into API
 		**/
 		find: function(){
+			var self = this;
 			this.urlRoot = this.apiUrl + this.routeUrl.find;
 			this.fetch({
-				success: function(data){
-					return data.toJSON();
+				success: function(model, response, options){
+					self.masterpiece = response;
 				},
 				error: function(error){
 					console.log(error);
 				}
 			})
+			console.log(self);
+			console.log(self.masterpiece);
+			console.log(self);
+			return self;
 		},
 
 		/**
@@ -48,6 +54,22 @@ define([
 		**/
 		getById: function(id){
 			this.urlRoot = this.apiUrl + this.routeUrl.get + id + '.json';
+			this.fetch({
+				success: function(data){
+					data.toJSON();
+				},
+				error: function(error){
+					console.log(error);
+				}
+			})
+		},
+
+		/**
+		*	Get specific masterpiece by feature from API
+		*	@param string feature
+		**/
+		getByFeature: function(feature){
+			this.urlRoot = this.apiUrl + this.routeUrl.feature + feature
 			this.fetch({
 				success: function(data){
 					return data.toJSON();
