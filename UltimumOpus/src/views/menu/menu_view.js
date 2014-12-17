@@ -13,14 +13,13 @@ define([
         events: {},
         
         initialize: function(options) {
-
+            pageDomAddedSignal.add(this.css, this);
             pageDomAddedSignal.add(this.panel, this);
             pageDomAddedSignal.add(this.scroll, this);
-            pageDomAddedSignal.add(this.drag, this);
-            pageDomAddedSignal.add(this.css, this);
-            
+            pageDomAddedSignal.add(this.drag, this); 
            
         },
+        height:null,
         ratio: null,
         ratioMenu:null,
         comparing:function(win, pos){
@@ -83,13 +82,14 @@ define([
                     $('body').css({'overflow':'auto'});
                     
                     var top = this.offsetTop;
-
+                    var percent =  ((($('#limitation').height() - top)-$('.draggable').height())*150)/($('#limitation').height()-$('.draggable').height()); //création du poin 0
+                    console.log(percent);
                     move = Math.floor(top/ratio);
-                    moveUl=(top/self.ratioMenu)-($(window).height()/4);
-                    console.log(moveUl);
+                    //moveUl=(((topL/self.ratioMenu)*100)/self.height);
+                    //console.log(moveUl);
                     $(window).scrollTop(move);
                     $('section ul').css({
-                        'bottom': moveUl+'px'
+                        'bottom': 50 - percent+'%'
                     });
                 }
 
@@ -99,6 +99,14 @@ define([
         css:function(){
             $('#menu').css({'height':'0','width':'0'});
             $('aside').css({'position':'fixed'});
+
+            this.height = $('#ul-menu').height();
+            /*setTimeout(function(){
+                $('section').css({
+                    'opacity':0,
+                    'display':'none'
+                })
+            },100);*/
         },
         panel:function(){
             var panels = document.getElementsByClassName('panel');
@@ -110,7 +118,9 @@ define([
         },
         scroll:function(){
             this.ratio = $('#limitation').height()/$('html').height();
-            this.ratioMenu = $('#limitation').height()/$(window).height();
+            this.ratioMenu = $('#limitation').height()/(this.height);
+            console.log(this.height);
+            console.log(this.ratioMenu);
 
             var self = this,
             pos = this.positions;
