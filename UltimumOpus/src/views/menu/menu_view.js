@@ -22,12 +22,13 @@ define([
            
         },
         ratio: null,
+        ratioMenu:null,
         comparing:function(win, pos){
             if(win.scrollTop() > pos[1].position){
-                console.log(pos[0].element);
+                //console.log(pos[0].element);
                 document.querySelector('#menu-'+pos[0].element).classList.add('viewing');
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
-                console.log(pos[1].element);
+                //console.log(pos[1].element);
                 document.querySelector('#menu-'+pos[1].element).classList.add('viewing');
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 console.log(pos[2].element)
@@ -49,6 +50,7 @@ define([
             var grid = Math.floor(document.querySelector('#limitation').clientHeight/9),
             ratio = $('#limitation').height()/$('html').height(),
             move =0,
+            moveUl=0,
             self = this;
 
             $('.draggable').draggable({
@@ -79,10 +81,16 @@ define([
                 },
                 drag:function(){
                     $('body').css({'overflow':'auto'});
+                    
                     var top = this.offsetTop;
 
                     move = Math.floor(top/ratio);
+                    moveUl=((top/self.ratioMenu)/10)-25;
+                    console.log(moveUl);
                     $(window).scrollTop(move);
+                    $('section ul').css({
+                        'bottom': moveUl+'%'
+                    });
                 }
 
             })
@@ -102,6 +110,8 @@ define([
         },
         scroll:function(){
             this.ratio = $('#limitation').height()/$('html').height();
+            this.ratioMenu = $('#limitation').height()/$(window).height();
+
             var self = this,
             pos = this.positions;
             win = $(window);
@@ -110,6 +120,7 @@ define([
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });
+                
                 self.comparing(win, pos);
             });
         },
