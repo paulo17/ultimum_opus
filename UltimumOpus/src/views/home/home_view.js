@@ -137,6 +137,7 @@ define([
         //
         detect_scroll:function(){
 
+
             var  maxScrollTop = $(document).height() - $(window).height(),
                 percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
@@ -163,20 +164,21 @@ define([
 
             //draw the line
 
-
-                if(percentDone<0.95 && percentDone>0.78){
-                    window.setDiv = window.setDiv+.05;
+            if(percentDone<0.99){
+                TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+            }
+            if(percentDone<0.95 && percentDone>0.78){
+               TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+               window.setDiv = window.setDiv+.05;
                   //  console.log('window.setDiv',window.setDiv);
-                    if(percentDone<0.92) {
-                        TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
+               if(percentDone<0.92) {
+                   TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
 
                         //Get footer on scroll
-                        TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
-                    }
-                    $('.LContentADN').css({'opacity':myOpac});
-
-
-                }
+                     TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
+               }
+              $('.LContentADN').css({'opacity':myOpac});
+            }
         },
 
         closeSidebar: function(){
@@ -195,6 +197,8 @@ define([
             TweenMax.to($(".title_flw"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_Aur"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cabTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
 
             setTimeout(function() {
                 $('#footer').removeClass('bgFooter');
@@ -213,12 +217,14 @@ define([
                 $('.leftData').removeClass('leftActive');
             } else {
                 TweenMax.to($("#myRContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#myAurContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
                 TweenMax.to($("#myCabContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
                 TweenMax.to($("#Flower .RContentFlw #leftBlock .txt_content"), 0.75, { "left": '15%', ease: Expo.easeInOut });
                 TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
                 TweenMax.to($(".RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
                 TweenMax.to($(".RContentFlw #rightBlock"), 0.75, { "left": '4.3%', ease: Expo.easeInOut });
-                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
+                TweenMax.to($(".RContentAur #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
             }
 
             // Set title in good position

@@ -22,6 +22,7 @@ define([
             this.getCab();
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '50%', ease: Expo.easeInOut });
             TweenMax.to($(".LContentCab"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
         },
 
