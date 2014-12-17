@@ -21,7 +21,7 @@ define([
     'gsap',
     'utils/visible',
     'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, API)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, APIModel)
 
 {
     return Backbone.View.extend({
@@ -62,9 +62,19 @@ define([
             this.loaderVieww = new LoaderView(options);
 
             // Init Model
-            var model = new API();
-            var test = model.find();
-            console.log(test);
+            var self = this;
+
+            var aPIModel = new APIModel();
+
+            aPIModel.fetch({
+                success: function (model, response) {
+                    self.getMydata(response);
+                }
+            });
+        },
+
+        getMydata: function(response){
+            console.log(response);
         },
 
         remove: function() {
@@ -234,7 +244,7 @@ define([
                    TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
 
                         //Get footer on scroll
-                     TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
+                   TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
                }
               $('.LContentADN').css({'opacity':myOpac});
             }
