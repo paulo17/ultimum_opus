@@ -99,7 +99,7 @@ define([
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Hearth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
 
             // Go Bot  tom
@@ -154,6 +154,25 @@ define([
                         length = pathLength-length;
                         length = pathLength-length;
 
+                    if(percentDone<0.362){
+                        length = length + 160;
+                    }
+
+                    if(percentDone<0.357){
+                        length = length + 100;
+                    }
+                    if(percentDone<0.325){
+                        length = length + 600;
+                    }
+                    if(percentDone<0.275){
+                        length = length + 240;
+                    }
+                    if(percentDone<0.270){
+                        length = length + 180;
+                    }
+                    if(percentDone<0.208){
+                        length = length + 500;
+                    }
                     console.log('original',length, 'percentDone', percentDone);
                     line.style.strokeDasharray = [ length ,pathLength].join(' ');
 
