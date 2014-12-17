@@ -105,7 +105,7 @@ define([
             for(var i=panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
             };
-            console.log(this.positions);
+         //   console.log(this.positions);
             
         },
         scroll:function(){

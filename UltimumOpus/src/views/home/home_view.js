@@ -20,9 +20,8 @@ define([
     'views/menu/menu_view',
     'gsap',
     'utils/visible',
-    'utils/jquery-ui',
     'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible,UI, API)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, API)
 
 {
     return Backbone.View.extend({
@@ -33,7 +32,7 @@ define([
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
-            'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
+            'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
             'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
@@ -85,175 +84,6 @@ define([
             Backbone.View.prototype.remove.apply(this, arguments);
         },
 
-        getMyCover: function(){
-            //Set Scroll
-            this.setScroll();
-           // $(window).scroll(this.detect_scroll());
-
-            // Set !div in current height and width
-            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
-            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
-            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-
-            // Go Bot  tom
-            window.scrollTo(0,$(window).height()*$('.panel').length);
-
-            this.startHome();
-            $(window).scroll(this.detect_scroll);
-        },
-
-        setScroll: function(){
-
-        },
-
-        // setVolum on click btn Discover
-        lowerSound: function(){
-            //Lower sound
-            var mySound = $('#mySound');
-            mySound.animate({volume:.02}, 750);
-
-            $('#footer').addClass('bgFooter');
-
-        },
-
-        //set css on click btn left discvoer
-
-        leftBtn: function(){
-            $('#logo').css({'color':'black'});
-        },
-
-        rightBtn: function(){
-            $('#player').css({'color':'black'});
-            $('.volumn').css({'fill':'black'});
-        },
-
-        //
-        detect_scroll:function(){
-
-
-            var  maxScrollTop = $(document).height() - $(window).height(),
-                percentDone = $(window).scrollTop() / maxScrollTop;
-            var myOpac = (1-percentDone)*5;
-               // console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
-
-            // set Anim Scroll with good SVG
-                drawLine( $('#route_home'),document.getElementById('path_home') );
-                function drawLine(container, line){
-
-                    var pathLength = line.getTotalLength(),
-                        maxScrollTop = $(document).height() - $(window).height(),
-                        percentDone = $(window).scrollTop() / maxScrollTop;
-                        window.length = (pathLength-(percentDone *pathLength));
-                        window.length = pathLength-length;
-                        window.length = pathLength-length;
-
-                    if(percentDone<0.32602){
-                        window.length = window.length + 140;
-                    }
-                    if(percentDone<0.3633){
-                        window.length = window.length + 210;
-                    }
-                    if(percentDone<0.325){
-                        window.length = window.length + 600;
-                    }
-                    if(percentDone<0.275){
-                        window.length = window.length + 240;
-                    }
-                    if(percentDone<0.270){
-                        window.length = window.length + 180;
-                    }
-                    if(percentDone<0.208){
-                        window.length = window.length + 500;
-                    }
-                    console.log('original',window.length, 'percentDone', percentDone);
-                    line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
-
-                    //console.log('pathleeeen',length,'pathLeeen', pathLength);
-                }
-            // init the line length
-
-
-            //draw the line
-
-            if(percentDone<0.99){
-                TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
-            }
-            if(percentDone<0.95 && percentDone>0.78){
-               TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
-               window.setDiv = window.setDiv+.05;
-                  //  console.log('window.setDiv',window.setDiv);
-               if(percentDone<0.92) {
-                   TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
-
-                        //Get footer on scroll
-                     TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
-               }
-              $('.LContentADN').css({'opacity':myOpac});
-            }
-        },
-
-        closeSidebar: function(){
-            $('html,body').css({'overflow':'auto'});
-
-            //Set footer color
-
-
-
-            // Set Sound to 60%
-            var mySound = $('#mySound');
-            mySound.animate({volume:.1}, 750);
-
-            TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($("#route_home"), 0.75, { "left": '0%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_flw"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_Aur"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cabTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-
-            setTimeout(function() {
-                $('#footer').removeClass('bgFooter');
-                $('#player').css({'color':'white'});
-                $('#logo').css({'color':'white'});
-                $('.volumn').css({'fill':'white'});
-            }, 400);
-            //Set sound to volume 100%
-            var mySound = $('#mySound');
-            mySound.animate({volume:.1}, 750);
-            ///
-
-            if ($(".leftActive")[0]){
-                TweenMax.to($("#leftSidebar"), 0.75, { "left": '-70%', ease: Expo.easeInOut });
-                TweenMax.to($(".leftData"), 0.75, { "right": '0', ease: Expo.easeInOut });
-                $('.leftData').removeClass('leftActive');
-            } else {
-                TweenMax.to($("#myRContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
-                TweenMax.to($("#myAurContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
-                TweenMax.to($("#myCabContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
-                TweenMax.to($("#Flower .RContentFlw #leftBlock .txt_content"), 0.75, { "left": '15%', ease: Expo.easeInOut });
-                TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
-                TweenMax.to($(".RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
-                TweenMax.to($(".RContentFlw #rightBlock"), 0.75, { "left": '4.3%', ease: Expo.easeInOut });
-                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
-                TweenMax.to($(".RContentAur #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
-            }
-
-            // Set title in good position
-
-        },
-
-        getFooter: function(){
-            console.log('footer');
-
-        },
-
         startHome: function(){
             //setSound to 10%
             var mySound = $('#mySound');
@@ -262,13 +92,13 @@ define([
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
                     $('html,body').css({'overflow':'auto'});
-                    
+
                 });
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
-            }, 3000);
+            }, 5000);
             //$(window).scroll(this.detect_scroll);
 
 
@@ -299,7 +129,165 @@ define([
 
         },
 
+        // Set DOM in current Window
+        getMyCover: function(){
+
+            // Set !div in current height and width
+            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+
+            // Go Bot  tom
+            window.scrollTo(0,$(window).height()*$('.panel').length);
+
+            this.startHome();
+            $(window).scroll(this.detect_scroll);
+        },
+
+        // setVolum on click btn Discover
+        lowerSound: function(){
+            //Lower sound
+            var mySound = $('#mySound');
+            mySound.animate({volume:.02}, 750);
+
+            $('#footer').addClass('bgFooter');
+
+        },
+
+        //set css on click btn left discvoer
+
+        leftBtn: function(){
+            $('#logo').css({'color':'black'});
+        },
+
+        rightBtn: function(){
+            $('#player').css({'color':'black'});
+            $('.volumn').css({'fill':'black'});
+        },
+
+        detect_scroll:function(){
+
+            var  maxScrollTop = $(document).height() - $(window).height(),
+                percentDone = $(window).scrollTop() / maxScrollTop;
+            var myOpac = (1-percentDone)*5;
+               // console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
+
+            // set Anim Scroll with SVG % render
+                drawLine( $('#route_home'),document.getElementById('path_home') );
+                function drawLine(container, line){
+
+                    var pathLength = line.getTotalLength(),
+                        maxScrollTop = $(document).height() - $(window).height(),
+                        percentDone = $(window).scrollTop() / maxScrollTop;
+                        window.length = (pathLength-(percentDone *pathLength));
+                        window.length = pathLength-length;
+                        window.length = pathLength-length;
+
+                    // Set anim with % done on DOM
+                    if(percentDone<0.32602){
+                        window.length = window.length + 140;
+                    }
+                    if(percentDone<0.3633){
+                        window.length = window.length + 210;
+                    }
+                    if(percentDone<0.325){
+                        window.length = window.length + 600;
+                    }
+                    if(percentDone<0.275){
+                        window.length = window.length + 240;
+                    }
+                    if(percentDone<0.270){
+                        window.length = window.length + 180;
+                    }
+                    if(percentDone<0.208){
+                        window.length = window.length + 500;
+                    }
+
+                    //draw the line
+
+                //    console.log('original',window.length, 'percentDone', percentDone);
+                    line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
+
+                }
+
+
+
+            if(percentDone<0.99){
+                TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+            }
+            if(percentDone<0.95 && percentDone>0.78){
+               TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+               window.setDiv = window.setDiv+.05;
+                  //  console.log('window.setDiv',window.setDiv);
+               if(percentDone<0.92) {
+                   TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
+
+                        //Get footer on scroll
+                     TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
+               }
+              $('.LContentADN').css({'opacity':myOpac});
+            }
+        },
+
+        closeSidebar: function(){
+            $('html,body').css({'overflow':'auto'});
+
+            //Set footer color
+
+
+            // Set Sound to 60%
+            var mySound = $('#mySound');
+            mySound.animate({volume:.1}, 750);
+
+            TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '0%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_Aur"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cabTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+
+            setTimeout(function() {
+                $('#footer').removeClass('bgFooter');
+                $('#player').css({'color':'white'});
+                $('#logo').css({'color':'white'});
+                $('.volumn').css({'fill':'white'});
+            }, 400);
+            //Set sound to volume 100%
+            var mySound = $('#mySound');
+            mySound.animate({volume:.1}, 750);
+
+            //---- Come back -----//
+            if ($(".leftActive")[0]){
+                TweenMax.to($("#leftSidebar"), 0.75, { "left": '-70%', ease: Expo.easeInOut });
+                TweenMax.to($(".leftData"), 0.75, { "right": '0', ease: Expo.easeInOut });
+                $('.leftData').removeClass('leftActive');
+            } else {
+                TweenMax.to($("#myRContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#myAurContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#myCabContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#Flower .RContentFlw #leftBlock .txt_content"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
+                TweenMax.to($(".RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($(".RContentFlw #rightBlock"), 0.75, { "left": '4.3%', ease: Expo.easeInOut });
+                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
+                TweenMax.to($(".RContentAur #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
+            }
+
+        },
+
+
+
         imageAnimation:function(el){
+
+            console.log('myAnimation')
             var view = this,
             self = el[0],
             object,type;
@@ -313,7 +301,7 @@ define([
                 if(self.classList.contains('LContentADN')){
                     object = document.querySelector('#animated-adn');
                     type = 'adn';
-                }else if(self.classList.contains('LContentFlw')){
+                }else if(self.classList.contains('RContentFlw')){
                     object = document.querySelector('#animated-flower');
                     type = 'flower';
                 }else{
