@@ -23,26 +23,27 @@ define([
         ratio: null,
         ratioMenu:null,
         comparing:function(win, pos){
+            $('.panel-menu').removeClass('viewing');
             if(win.scrollTop() > pos[1].position){
                 //console.log(pos[0].element);
-                document.querySelector('#menu-'+pos[0].element).classList.add('viewing');
+                $('#menu-'+pos[0].element).addClass('viewing');
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
                 //console.log(pos[1].element);
-                document.querySelector('#menu-'+pos[1].element).classList.add('viewing');
+                $('#menu-'+pos[1].element).addClass('viewing');
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
-                console.log(pos[2].element)
+                $('#menu-'+pos[2].element).addClass('viewing');
             }else if(win.scrollTop() > pos[4].position && win.scrollTop() < pos[2].position){
-                console.log(pos[3].element)
+                 $('#menu-'+pos[3].element).addClass('viewing');
             }else if(win.scrollTop() > pos[5].position && win.scrollTop() < pos[3].position){
-                console.log(pos[4].element)
+                 $('#menu-'+pos[4].element).addClass('viewing');
             }else if(win.scrollTop() > pos[6].position && win.scrollTop() < pos[4].position){
-                console.log(pos[5].element)
+                $('#menu-'+pos[5].element).addClass('viewing');
             }else if(win.scrollTop() > pos[7].position && win.scrollTop() < pos[5].position){
-                console.log(pos[6].element)
+                $('#menu-'+pos[6].element).addClass('viewing');
             }else if(win.scrollTop() > pos[8].position && win.scrollTop() < pos[6].position){
-                console.log(pos[7].element)
+                $('#menu-'+pos[7].element).addClass('viewing');
             }else if(win.scrollTop() < pos[7].position){
-                console.log(pos[7].element)
+                $('#menu-'+pos[8].element).addClass('viewing');
             };
         },
         drag:function(){
