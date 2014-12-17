@@ -20,8 +20,7 @@ define([
     'views/menu/menu_view',
     'gsap',
     'utils/visible',
-    'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, API)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
 
 {
     return Backbone.View.extend({
@@ -56,8 +55,6 @@ define([
             this.myAuroraView = new MyAuroraView(options);
             this.myStoryView = new MyStoryView(options);
             this.menuView = new MenuView(options);
-            this.rightDiscoverView = new RightDiscoverView(options);
-            this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
         },
@@ -162,11 +159,21 @@ define([
 
         //set css on click btn left discvoer
 
-        leftBtn: function(){
+        leftBtn: function(e){
+            var feature = $(e.target.parentNode.parentNode).attr('data-feature');
+            this.leftDiscoverView = new LeftDiscoverView({'feature': feature});
+            this.leftDiscoverView.render();
+            this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
+
             $('#logo').css({'color':'black'});
         },
 
-        rightBtn: function(){
+        rightBtn: function(e){
+            var feature = $(e.target.parentNode.parentNode).attr('data-feature');
+            this.rightDiscoverView = new RightDiscoverView({'feature': feature});
+            this.rightDiscoverView.render();
+            this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
+
             $('#player').css({'color':'black'});
             $('.volumn').css({'fill':'black'});
         },
@@ -372,8 +379,8 @@ define([
             this.myStoryView.render();
             this.menuView.render();
             this.footerView.render();
-            this.leftDiscoverView.render();
-            this.rightDiscoverView.render();
+            // this.leftDiscoverView.render();
+            // this.rightDiscoverView.render();
             this.loaderVieww.render();
 
             // Set content on view on div choose
@@ -388,8 +395,8 @@ define([
             this.$el.find('#Earth').append(this.myEarthView.el);
             this.$el.find('#Aurora').append(this.myAuroraView.el);
             this.$el.find('#footer').append(this.footerView.el);
-            this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
-            this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
+            // this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
+            // this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
             this.$el.find('#loader').append(this.loaderVieww.el);
 
             // Dispatch all events in others views of this view
