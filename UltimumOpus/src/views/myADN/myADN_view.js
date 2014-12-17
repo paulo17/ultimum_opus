@@ -13,6 +13,10 @@ define([
         },
         
         initialize: function(options) {
+            $(window).scroll(this.animateADN);
+        },
+
+        animateADN: function(){
         },
 
         leftSidebarADN: function(){

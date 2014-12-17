@@ -31,7 +31,7 @@ define([
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
@@ -189,35 +189,35 @@ define([
                 function drawLine(container, line){
 
                     var pathLength = line.getTotalLength(),
-                        maxScrollTop = $(document).height() - $(window).height(),
-                        percentDone = $(window).scrollTop() / maxScrollTop;
-                        window.length = (pathLength-(percentDone *pathLength));
+                        maxScrollTop = $(document).height() - $(window).height();
+                        window.percentDone = $(window).scrollTop() / maxScrollTop;
+                        window.length = (pathLength-(window.percentDone *pathLength));
                         window.length = pathLength-length;
                         window.length = pathLength-length;
 
                     // Set anim with % done on DOM
-                    if(percentDone<0.32602){
-                        window.length = window.length + 140;
+                    if(window.percentDone<0.4876){
+                        window.length = window.length + 750;
                     }
-                    if(percentDone<0.3633){
-                        window.length = window.length + 210;
+                    if(window.percentDone<0.3735){
+                        window.length = window.length + 1050;
                     }
-                    if(percentDone<0.325){
-                        window.length = window.length + 600;
+                    if(window.percentDone<0.3633){
+                        window.length = window.length + 310;
                     }
-                    if(percentDone<0.275){
+                    if( window.percentDone<0.275){
                         window.length = window.length + 240;
                     }
-                    if(percentDone<0.270){
+                    if( window.percentDone<0.270){
                         window.length = window.length + 180;
                     }
-                    if(percentDone<0.208){
+                    if( window.percentDone<0.208){
                         window.length = window.length + 500;
                     }
 
                     //draw the line
 
-                //    console.log('original',window.length, 'percentDone', percentDone);
+                console.log('original',window.length, 'percentDone',window.percentDone);
                     line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
 
                 }
