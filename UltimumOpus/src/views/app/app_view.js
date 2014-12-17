@@ -4,17 +4,27 @@ define([
     'config',
     'text!templates/app/app.html',
     'css!templates/app/app.css',
-    'signals/page_dom_added_signal'
+    'signals/page_dom_added_signal',
 ], function(Backbone, _, Config, tpl, css, pageDomAddedSignal)
 {
     var AppView = Backbone.View.extend({
         el: "#main",
 
-        events: {}, 
-        
-        initialize: function(options) {
+        events: {
+        	'scroll': 'animationParallax'
         },
 
+        initialize: function(options) {
+        	pageDomAddedSignal.add(this.resize, this);
+        },
+
+        animationParallax: function(){
+
+        },
+
+        resize: function(){
+        	$('#background').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+        },
 
         remove: function() {
             if(this.content) {
@@ -33,6 +43,8 @@ define([
         },
 
         render: function(){
+        	this.animationParallax();
+
             this.$el.html(_.template( tpl, {  } ));
             this.$content = this.$el.find('#content');
             if(this.content) {

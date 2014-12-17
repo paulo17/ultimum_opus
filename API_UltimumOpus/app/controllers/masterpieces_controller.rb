@@ -19,7 +19,11 @@ class MasterpiecesController < ApplicationController
 		@masterpiece = Masterpiece.new(params[:masterpiece].permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend))
 		if params[:masterpiece][:image]
 			@masterpiece.image = uploadImage(params[:masterpiece][:image])
+		end
+		if params[:masterpiece][:image2]
 			@masterpiece.image2 = uploadImage(params[:masterpiece][:image2])
+		end
+		if params[:masterpiece][:image3]
 			@masterpiece.image3 = uploadImage(params[:masterpiece][:image3])
 		end
 		if @masterpiece.save
@@ -81,16 +85,16 @@ class MasterpiecesController < ApplicationController
 	def restrict_access
 		@request = request.fullpath
 		if @request.match(".json")
-  		# access token
-  		#authenticate_or_request_with_http_token do |token, options|
-  			#ApiKey.exists?(access_token: token)
-  		#end
-  	else
-  		# basic authenticate
-  		authenticate_or_request_with_http_basic do |username, password|
-  			username == "admin" && password == "adminopus"
-  		end if Rails.env.production?
+	  		# access token
+	  		#authenticate_or_request_with_http_token do |token, options|
+	  			#ApiKey.exists?(access_token: token)
+	  		#end
+  		else
+	  		# basic authenticate
+	  		authenticate_or_request_with_http_basic do |username, password|
+	  			username == "admin" && password == "adminopus"
+	  		end if Rails.env.production?
+  		end
   	end
-  end
 
 end
