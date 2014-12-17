@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216150032) do
+ActiveRecord::Schema.define(version: 20141217100932) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141216150032) do
     t.string   "image2"
     t.string   "image3"
     t.string   "legend"
+    t.string   "feature"
   end
 
 end

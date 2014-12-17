@@ -9,21 +9,22 @@ define([
 {
     var AppView = Backbone.View.extend({
         el: "#main",
-
+        percent: 0,
         events: {
-        	'scroll': 'animationParallax'
+
         },
 
         initialize: function(options) {
-        	pageDomAddedSignal.add(this.resize, this);
+            // $(window).scroll(this.animationParallax);
         },
 
         animationParallax: function(){
-
+            var filtre = $('.filtre');
+            var scrollPercent = 100 - (100 * $(window).scrollTop() / ($(document).height() - $(window).height()));
+            filtre.css({top: scrollPercent + '%'});
         },
 
         resize: function(){
-        	$('#background').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
         },
 
         remove: function() {

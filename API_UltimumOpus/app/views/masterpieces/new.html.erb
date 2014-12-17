@@ -13,6 +13,17 @@
   <%= f.text_area :text, :class => "form-control" %>
 </div>
 
+<div style="margin-top:15px;">
+<%= f.select(:feature, [
+    ['Perfection', 'perfection'],
+    ['Beaute', 'beaute'],
+    ['Abouti', 'abouti'],
+    ['Merveille', 'merveille'],
+    ['Savant', 'savant'],
+    ['Terre', 'terre'],
+  ], {}, :class => "form-control") %>
+</div>
+
 <div>
   <%= f.label :image %>
   <%= f.file_field :image, :required => true, :class => 'form-control' %>

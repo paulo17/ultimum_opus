@@ -16,7 +16,8 @@ class MasterpiecesController < ApplicationController
 	end
 
 	def create
-		@masterpiece = Masterpiece.new(params[:masterpiece].permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend))
+		@masterpiece = Masterpiece.new(params[:masterpiece]
+			.permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend, :feature))
 		if params[:masterpiece][:image]
 			@masterpiece.image = uploadImage(params[:masterpiece][:image])
 		end
@@ -59,6 +60,15 @@ class MasterpiecesController < ApplicationController
 		end
 	end
 
+	def feature
+		@masterpiece = Masterpiece.where('feature' => params[:feature])
+		if !@masterpiece.empty?
+			render json: @masterpiece
+		else
+			self.send_error
+		end
+	end
+
 	def destroy
 		@masterpiece = Masterpiece.find(params[:id])
 		@masterpiece.destroy
@@ -78,7 +88,7 @@ class MasterpiecesController < ApplicationController
 
 	private
 	def masterpiece_params
-		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend)
+		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend, :feature)
 	end
 
 	private
