@@ -8,55 +8,80 @@ define([
 ], function(Backbone, _, Config, tpl, css, APIModel)
 {
 	return Backbone.View.extend({
-		className: "left_Content",
-		events: {},
+	        className: "content_left",
+	        events: {},
 
-			initialize: function(options) {
-				this.Masterpiece = new APIModel();
-				this.getByFeature(options.feature);
-			},
+	        initialize: function(options) {
+	            _.bindAll(this, 'render');
 
-			find: function(){
-				var self = this;
-				this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces.json";
-				this.Masterpiece.fetch({
-					success: function(model, response, options){
-						console.log(response);
-					},
-					error: function(error){
-						console.log(error);
-					}
-				});
-			},
+	            // init model
+	            this.Masterpiece = new APIModel();
 
-			getById: function(id){
-				var self = this;
-				this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/" + id + ".json";
-				this.Masterpiece.fetch({
-					success: function(model, response, options){
-						data.toJSON();
-					},
-					error: function(error){
-						console.log(error);
-					}
-				})
-			},
+	            var _this = this;
+	            var feature = options.feature;
 
-			getByFeature: function(feature){
-				var self = this;
-				this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
-				this.Masterpiece.fetch({
-					success: function(model, response, options){
-						console.log(response);
-					},
-					error: function(error){
-						console.log(error);
-					}
-				})
-			},
+	            this.render = _.wrap(this.render, function(render) {
+	                // get data before render
+	                _this.beforeRender(feature, function(){
+	                    render();
+	                });
+	                return _this;
+	            });
 
-			render: function(){
-				this.$el.html(_.template( tpl ));
-			}
-		});
+	        },
+
+	        /**
+	        *    Get Data using model Masterpiece
+	        *    @param string feature
+	        *    @param function callback
+	        **/
+	        getByFeature: function(feature, callback){
+	                var self = this;
+	                this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
+	                this.Masterpiece.fetch({
+	                    success: function(model, response, options){
+	                        self.tplData = response[0];
+	                        callback.call(this);
+	                    },
+	                    error: function(error){
+	                        console.log(error);
+	                    }
+	                })
+	        },
+
+	        /**
+	        *    Call getByFeature before render the view
+	        *    @param string feature
+	        *    @param function callback
+	        **/
+	        beforeRender: function(feature, callback) {
+	            this.getByFeature(feature, function(){
+	                console.log('data request done');
+	                callback.call(this);
+	            });
+	        },
+
+	        /**
+	        *    Render the view and put parameter for template
+	        **/
+	        render: function(){
+	        	   console.log(this.tplData);
+	        	   if (typeof this.tplData == 'undefined'){
+	        	   	this.$el.html(_.template( tpl ) );
+	        	   }else{
+	        	   	this.$el.html(_.template( tpl, {
+		                titre: this.tplData.titre,
+		                legend: this.tplData.legend,
+		                text: this.tplData.text,
+		                feature: this.tplData.feature,
+		                image: this.tplData.image,
+		                image2: this.tplData.image3,
+		                image2: this.tplData.image3,
+		                date: this.tplData.date,
+		                video: this.tplData.video,
+	            	}));
+	        	   }
+	            return this;
+	        }
+	});
 });
