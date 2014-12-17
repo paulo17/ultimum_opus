@@ -39,7 +39,10 @@ define([
 
         initialize: function(options) {
 
+            $(window).load(function () {
+               console.log('page loaded');
 
+            });
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
 
