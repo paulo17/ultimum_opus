@@ -8,7 +8,7 @@ define([
 ], function(Backbone, _, Config, tpl, css, APIModel)
 {
     return Backbone.View.extend({
-        className: "right_Content",
+        className: "content_right",
         events: {},
 
         initialize: function(options) {
@@ -21,12 +21,16 @@ define([
                 this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
                 this.Masterpiece.fetch({
                     success: function(model, response, options){
-                        console.log(response);
+                        self.renderMasterpiece(response);
                     },
                     error: function(error){
                         console.log(error);
                     }
                 })
+        },
+
+        renderMasterpiece: function(masterpiece){
+            console.log(masterpiece[0]);
         },
 
         render: function(){
