@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentEarth leftData",
+        className: "LContentEarth leftData myPanel",
         events: {
             'click #leftDiEarth':'leftSidebarEarth'
         },

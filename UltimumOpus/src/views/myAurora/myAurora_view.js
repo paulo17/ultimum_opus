@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "RContentAur",
+        className: "RContentAur myPanel",
         events: {
             'click #rightDiAur':'rightSidebarAur'
         },

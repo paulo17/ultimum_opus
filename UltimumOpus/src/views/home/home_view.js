@@ -237,7 +237,7 @@ define([
                         //Get footer on scroll
                    TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
                }
-              $('.LContentADN').css({'opacity':myOpac});
+              //$('.LContentADN').css({'opacity':myOpac});
             }
         },
 

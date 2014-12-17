@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentCab leftData",
+        className: "LContentCab leftData myPanel",
         events: {
             'click #leftDiCab':'leftSidebarCab'
         },

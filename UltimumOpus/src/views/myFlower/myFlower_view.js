@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "RContentFlw",
+        className: "RContentFlw myPanel",
         events: {
             'click #rightDiFlw':'rightSidebarFlw'
         },

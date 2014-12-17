@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentShell leftData",
+        className: "LContentShell leftData myPanel",
         events: {
             'click #leftDiShell':'leftSidebarShell'
         },

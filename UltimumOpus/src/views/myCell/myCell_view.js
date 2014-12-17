@@ -7,7 +7,7 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "RContentCell",
+        className: "RContentCell myPanel",
         events: {
             'click #rightDiCell':'rightSidebarCell'
         },
