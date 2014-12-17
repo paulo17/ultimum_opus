@@ -33,13 +33,13 @@ define([
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
-            'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
+            //'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
+            //'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
         initialize: function(options) {
-            $(window).scroll(this.detect_scroll());
+
 
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
@@ -88,6 +88,7 @@ define([
         getMyCover: function(){
             //Set Scroll
             this.setScroll();
+           // $(window).scroll(this.detect_scroll());
 
             // Set !div in current height and width
             $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
@@ -105,6 +106,7 @@ define([
             window.scrollTo(0,$(window).height()*$('.panel').length);
 
             this.startHome();
+            $(window).scroll(this.detect_scroll);
         },
 
         setScroll: function(){
@@ -141,37 +143,21 @@ define([
                // console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
 
             // set Anim Scroll with good SVG
-            if(percentDone<1){
                 drawLine( $('#route_home'),document.getElementById('path_home') );
                 function drawLine(container, line){
 
                     var pathLength = line.getTotalLength(),
                         maxScrollTop = $(document).height() - $(window).height(),
                         percentDone = $(window).scrollTop() / maxScrollTop,
-                        length = (pathLength-(percentDone *pathLength))*1.3;
-                   // console.log('original',length);
-                    if(percentDone<.86){
-                        length = length +800;
-                    }
-                    if(percentDone<.7085){
-                        length = length +475;
-                    }
-                    if(percentDone<.6169){
-                        TweenMax.to($("#path_home"), .65, {"stroke-dasharray": pathLength, ease: Expo.easeInOut});
-                    }
-                    if(percentDone<.603){
-                        length = length-600;
-                    }
+                        length = (pathLength-(percentDone *pathLength));
+                        length = pathLength-length;
+                        length = pathLength-length;
 
+                    console.log('original',length, 'percentDone', percentDone);
                     line.style.strokeDasharray = [ length ,pathLength].join(' ');
 
-                    console.log('pathleeeen',length,'pathLeeen', pathLength);
+                    //console.log('pathleeeen',length,'pathLeeen', pathLength);
                 }
-            }
-            if(percentDone<.703) {
-                TweenMax.to($("#path_flw"), .65, {"stroke-dasharray": '1044.1 687.1 ', ease: Expo.easeInOut});
-            }
-
             // init the line length
 
 
@@ -253,7 +239,7 @@ define([
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
             }, 3000);
-            $(window).scroll(this.detect_scroll);
+            //$(window).scroll(this.detect_scroll);
 
 
             // Make shine on title
