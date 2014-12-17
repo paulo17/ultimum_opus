@@ -19,9 +19,8 @@ define([
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
-    'utils/visible',
-    'models/API_model'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, APIModel)
+    'utils/visible'
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
 
 {
     return Backbone.View.extend({
@@ -60,21 +59,6 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
-
-            // Init Model
-            var self = this;
-
-            var aPIModel = new APIModel();
-
-            aPIModel.fetch({
-                success: function (model, response) {
-                    self.getMydata(response);
-                }
-            });
-        },
-
-        getMydata: function(response){
-            console.log(response);
         },
 
         remove: function() {
