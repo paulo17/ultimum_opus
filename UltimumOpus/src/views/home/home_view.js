@@ -132,8 +132,6 @@ define([
             $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
             $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#bgSVG').css( {'height' : $(window).height()*$('.panel').length,'width' : $(window).width()*$('.panel').length  } );
-            $('#BGSVG').css( {'height' : ($(window).height()*$('.panel').length)-$(window).height()/2} );
             $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
