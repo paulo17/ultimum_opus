@@ -33,8 +33,8 @@ define([
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
-            //'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
-            //'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
+            'mouseenter .LContentFlw': function(){this.imageAnimation($('.LContentFlw'))},
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
             //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 

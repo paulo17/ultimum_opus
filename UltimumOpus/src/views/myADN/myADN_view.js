@@ -22,7 +22,7 @@ define([
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
             TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_ADN"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_ADN"), 0.75, { "left": '48.5%', ease: Expo.easeInOut });
         },
 
         getADN: function(){

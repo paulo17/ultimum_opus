@@ -1,35 +1,37 @@
+// Config
 
-// Less file for Mycell View
+// Less file for Myshell View
 
 #Cab{
   overflow: hidden;
 
   .RContentCab{
     width: 100%;
-    position: relative;
     height: 90%;
+    position: relative;
 
-
-    #rightBlock{
+    #leftBlock{
       width: 50%;
-      padding: 3.5% 0px;
+      padding: 5.5% 0px;
       position: relative;
       height: 100%;
       float: left;
-      left: 10%;
       #img{
         margin: 0;
         padding: 0;
-        left: 0;
+        left: 37%;
         width: 50%;
-        top: 30%;
+        top: 21.6%;
+        opacity: .7;
         position: relative;
         height: auto;
         z-index: 2;
-        text-align: center;
         img{
           padding-right: 8%;
           width: 100%;
+          -ms-transform: rotate(50deg); /* IE 9 */
+          -webkit-transform: rotate(50deg); /* Chrome, Safari, Opera */
+          transform: rotate(50deg);
           height: auto;
           -webkit-blend-mode: screen;
           background-blend-mode: color-dodge, normal;
@@ -40,8 +42,8 @@
         width: 40%;
         height: 20%;
         z-index: 1;
-        bottom: 10%;
-        right: 66%;
+        bottom: 30%;
+        right: 46%;
         position: absolute;
         img{
           width: 40%;
@@ -49,31 +51,32 @@
       }
     }
 
-    #leftBlock{
+    #rightBlock{
       padding: 3.5% 0px;
       position: relative;
       width: 50%;
       float: left;
+      right: 10%;
       height: 100%;
       .txt_content{
-        width: 82%;
+        width: 80%;
+        text-align: justify;
         height: 55%;
-        left: 15%;
         position: relative;
-        top: 20%;
+        top: 40%;
         .title_content{
-          width: 53%;
+          width: 52%;
         }
 
         .btnDiscover{
           width: 42%;
-          left: 22%;
+          bottom: 3%;
+          left: 21.5%;
           .svg-draw{
 
           }
         }
       }
-
     }
   }
 }

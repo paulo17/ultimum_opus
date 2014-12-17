@@ -9,7 +9,7 @@ define([
     return Backbone.View.extend({
         className: "RContentFlw",
         events: {
-            'click #leftDiFlw':'leftSidebarFlw'
+            'click #leftSidebarFlw':'leftSidebarFlw'
             
         },
         
@@ -17,6 +17,7 @@ define([
         },
 
         leftSidebarFlw: function(){
+            console.log('coucou');
             $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".flwTitle"), 0.75, { "left": '50%', ease: Expo.easeInOut });
 
@@ -25,7 +26,9 @@ define([
             ///
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".LContentFlw"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.75, { "left": '148%', ease: Expo.easeInOut });
+            TweenMax.to($("#rightBlock"), 0.75, { "left": '12.3%', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '8%', ease: Expo.easeInOut });
         },
 
         getFlw: function(){
@@ -34,7 +37,7 @@ define([
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
 
-            scrollToElement('.LContentFlw', 600);
+            scrollToElement('.RContentFlw', 600);
         },
 
         render: function(){
