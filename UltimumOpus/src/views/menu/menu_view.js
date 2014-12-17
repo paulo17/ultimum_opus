@@ -58,7 +58,7 @@ define([
                     });
                     setTimeout(function(){
                         $('section').css({
-                            'opacity':'0.8'
+                            'opacity':'1'
                         });
                     },200)
                 },
