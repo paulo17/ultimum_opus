@@ -1,9 +1,5 @@
-define([
-'backbone',
-'config'
-], function(Backbone, Config) {
-	return Backbone.Model.extend({
-		apiUrl: 'http://apiultimumopus.maximeberthelot.fr/',
+var modelHelper = {
+	apiUrl: 'http://apiultimumopus.maximeberthelot.fr/masterpieces',
 
     		// API route
     		routeUrl: {
@@ -41,10 +37,10 @@ define([
 				error: function(error){
 					console.log(error);
 				}
-			})
-			console.log(self);
-			console.log(self.masterpiece);
-			console.log(self);
+			});
+			console.log(this);
+			console.log(this.masterpiece);
+			console.log(this);
 			return self;
 		},
 
@@ -79,5 +75,4 @@ define([
 				}
 			})
 		}
-	});
-});
+}

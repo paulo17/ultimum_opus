@@ -60,11 +60,6 @@ define([
             this.leftDiscoverView = new LeftDiscoverView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
-
-            // Init Model
-            var model = new API();
-            var test = model.find();
-            console.log(test);
         },
 
         remove: function() {
