@@ -7,9 +7,9 @@ define([
 'models/API_model'
 ], function(Backbone, _, Config, tpl, css, APIModel)
 {
-		return Backbone.View.extend({
-			className: "left_Content",
-			events: {},
+	return Backbone.View.extend({
+		className: "left_Content",
+		events: {},
 
 			initialize: function(options) {
 				this.Masterpiece = new APIModel();
