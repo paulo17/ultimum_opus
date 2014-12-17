@@ -85,11 +85,11 @@ define([
                     var top = this.offsetTop;
 
                     move = Math.floor(top/ratio);
-                    moveUl=((top/self.ratioMenu)/10)-25;
+                    moveUl=(top/self.ratioMenu)-($(window).height()/4);
                     console.log(moveUl);
                     $(window).scrollTop(move);
                     $('section ul').css({
-                        'bottom': moveUl+'%'
+                        'bottom': moveUl+'px'
                     });
                 }
 
@@ -120,7 +120,7 @@ define([
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });
-                
+
                 self.comparing(win, pos);
             });
         },

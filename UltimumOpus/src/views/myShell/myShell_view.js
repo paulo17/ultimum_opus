@@ -37,11 +37,10 @@ define([
 
         animLineShell: function(){
             if(window.length > 6298.35){
-                console.log('rjrjrjr');
-                TweenMax.to($("#anim-shell path"), .01, { "stroke-dasharray": "400.8, 409", ease: Expo.easeInOut });
+                //TweenMax.to($("#anim-shell path"), .01, { "stroke-dasharray": "412.9, 424.8", ease: Expo.easeInOut });
             }
             if(window.length < 6298.35){
-                TweenMax.to($("#anim-shell path"),.01, { "stroke-dasharray": "0, 409", ease: Expo.easeInOut });
+               // TweenMax.to($("#anim-shell path"),.01, { "stroke-dasharray": "0, 424.8", ease: Expo.easeInOut });
             }
         },
 

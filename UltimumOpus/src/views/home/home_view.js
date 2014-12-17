@@ -19,9 +19,8 @@ define([
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
-    'utils/visible',
+    'utils/visible'
 ], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
-
 {
     return Backbone.View.extend({
         el: "#content",
@@ -236,7 +235,7 @@ define([
                    TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
 
                         //Get footer on scroll
-                     TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
+                   TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
                }
               $('.LContentADN').css({'opacity':myOpac});
             }
