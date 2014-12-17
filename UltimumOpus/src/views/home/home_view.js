@@ -43,6 +43,7 @@ define([
             });
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
+            pageDomAddedSignal.add(this.paralax, this);
 
             // Init all views on my home
             this.myADNView = new MyADNView(options);
@@ -138,6 +139,7 @@ define([
             $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()})
 
             // Go Bot  tom
             window.scrollTo(0,$(window).height()*$('.panel').length);
@@ -360,6 +362,23 @@ define([
                 };
 
             };
+        },
+        paralax:function(){
+            var width = $(window).width()/2,
+            rate1 = 0.02;
+            rate2 = 0.1;
+            $(window).mousemove(function(e){
+                var x = e.clientX - width;
+                
+                console.log(x);
+                $('#filter1').css({
+                    'left': Math.floor(x*rate1)+'px',
+                });
+
+                $('#filter2').css({
+                    'left': Math.floor(x*rate2)+'px',
+                });
+            });
         },
         render: function() {
             this.$el.html(_.template(tpl, {}));
