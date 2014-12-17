@@ -9,26 +9,24 @@ define([
     return Backbone.View.extend({
         className: "RContentFlw",
         events: {
-            'click #leftSidebarFlw':'leftSidebarFlw'
-            
+            'click #rightDiFlw':'rightSidebarFlw'
         },
-        
+
+
         initialize: function(options) {
         },
 
-        leftSidebarFlw: function(){
-            console.log('coucou');
+        rightSidebarFlw: function(){
+            //Block Scroll
             $('html,body').css({'overflow':'hidden'});
-            TweenMax.to($(".flwTitle"), 0.75, { "left": '50%', ease: Expo.easeInOut });
 
-            // Top div
             this.getFlw();
-            ///
-            $('.leftData').addClass('leftActive');
-            TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".title_flw"), 0.75, { "left": '148%', ease: Expo.easeInOut });
-            TweenMax.to($("#rightBlock"), 0.75, { "left": '12.3%', ease: Expo.easeInOut });
-            TweenMax.to($("#route_home"), 0.75, { "left": '8%', ease: Expo.easeInOut });
+
+            TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.85, { "left": '28.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#myFlwContent"), 0.75, { "left": '-100%', ease: Expo.easeInOut });
+            TweenMax.to($("#Flower .RContentFlw #rightBlock"), 0.75, { "left": '-46%', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '-50.2%', ease: Expo.easeInOut });
         },
 
         getFlw: function(){
@@ -36,7 +34,6 @@ define([
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
-
             scrollToElement('.RContentFlw', 600);
         },
 

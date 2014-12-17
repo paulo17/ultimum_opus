@@ -11,7 +11,6 @@
         { "name": "views/myShell/myShell_view", "exclude": ["config", "app", "vendors", "normalize"] },
         { "name": "views/myAurora/myAurora_view", "exclude": ["config", "app", "vendors", "normalize"] },
         { "name": "views/myStory/myStory_view", "exclude": ["config", "app", "vendors", "normalize"] },
-        { "name": "views/myHearth/myHearth_view", "exclude": ["config", "app", "vendors", "normalize"] },
         { "name": "views/myEarth/myEarth_view", "exclude": ["config", "app", "vendors", "normalize"] },
     { "name": "vendors", "exclude": ["normalize", "css-builder"] },
     { "name": "config", "exclude": ["vendors"] },

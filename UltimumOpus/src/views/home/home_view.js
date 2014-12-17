@@ -191,9 +191,11 @@ define([
             mySound.animate({volume:.1}, 750);
 
             TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".flwTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '0%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
             TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+
             setTimeout(function() {
                 $('#footer').removeClass('bgFooter');
                 $('#player').css({'color':'white'});
@@ -212,8 +214,10 @@ define([
             } else {
                 TweenMax.to($("#myRContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
                 TweenMax.to($("#myCabContent"), 0.75, { "left": '15%', ease: Expo.easeInOut });
+                TweenMax.to($("#Flower .RContentFlw #leftBlock .txt_content"), 0.75, { "left": '15%', ease: Expo.easeInOut });
                 TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
-                TweenMax.to($("#Cell .RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($(".RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($(".RContentFlw #rightBlock"), 0.75, { "left": '4.3%', ease: Expo.easeInOut });
                 TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
             }
 

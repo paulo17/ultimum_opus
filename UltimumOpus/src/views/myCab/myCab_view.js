@@ -7,24 +7,22 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "RContentCab",
+        className: "LContentCab leftData",
         events: {
-            'click #rightDiCell':'rightSidebarCab'
+            'click #leftDiCab':'leftSidebarCab'
         },
-        
+
         initialize: function(options) {
         },
 
-        rightSidebarCab: function(){
-            //Block Scroll
+        leftSidebarCab: function(){
             $('html,body').css({'overflow':'hidden'});
-
+            TweenMax.to($(".cabTitle"), 0.75, { "left": '49.5%', ease: Expo.easeInOut });
 
             this.getCab();
-
-            TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
-            TweenMax.to($("#myCabContent"), 0.75, { "left": '-100%', ease: Expo.easeInOut });
-            TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '-42%', ease: Expo.easeInOut });
+            $('.leftData').addClass('leftActive');
+            TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
+            TweenMax.to($(".LContentCab"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
         },
 
         getCab: function(){
@@ -32,7 +30,8 @@ define([
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
-            scrollToElement('.RContentCab', 600);
+
+            scrollToElement('.LContentCab', 600);
         },
 
         render: function(){
