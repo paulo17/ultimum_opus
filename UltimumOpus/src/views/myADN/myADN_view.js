@@ -43,7 +43,9 @@ define([
         leftSidebarADN: function(){
             $('html,body').css({'overflow':'hidden'});
 
+            // get ADN
             this.getADN();
+
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
             TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
@@ -52,18 +54,17 @@ define([
         },
 
         getADN: function(){
-
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
-
             scrollToElement('.LContentADN', 600);
         },
 
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

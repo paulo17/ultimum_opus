@@ -38,10 +38,8 @@ define([
             $('.panel-menu').removeClass('viewing');
 
             if(win.scrollTop() > pos[1].position){
-                //console.log(pos[0].element);
                 $('#menu-'+pos[0].element).addClass('viewing');
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
-                //console.log(pos[1].element);
                 $('#menu-'+pos[1].element).addClass('viewing');
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 $('#menu-'+pos[2].element).addClass('viewing');
@@ -105,10 +103,10 @@ define([
 
                     var top = this.offsetTop;
                     var percent =  ((($('#limitation').height() - top)-$('.draggable').height())*150)/($('#limitation').height()-$('.draggable').height()); //création du poin 0
-                    console.log(percent);
+
                     move = Math.floor(top/ratio);
                     //moveUl=(((topL/self.ratioMenu)*100)/self.height);
-                    //console.log(moveUl);
+
                     $(window).scrollTop(move);
                     /*$('section ul').css({
                         'bottom': 50 - percent+'%'
@@ -139,29 +137,24 @@ define([
             for(var i=panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop});
             };
-
         },
 
         scroll:function(){
             this.ratio = $('#limitation').height()/$('html').height();
             this.ratioMenu = $('#limitation').height()/(this.height);
 
-
             var self = this,
             pos = this.positions;
             win = $(window);
 
-
             win.scroll(function(){
                 var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
-             //   console.log(percent);
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });
                 $('section ul').css({
                     'bottom': 50 - percent+'%'
                 });
-
                 self.comparing(win, pos);
             });
         },

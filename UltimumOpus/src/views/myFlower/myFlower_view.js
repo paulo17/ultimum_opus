@@ -26,7 +26,6 @@ define([
         *    Animate Flower title and content using transition
         **/
         animateFlw: function(){
-            console.log(window.percentDone);
             if(window.percentDone<0.525){
                 $(".RContentFlw").fadeIn(1000);
             }

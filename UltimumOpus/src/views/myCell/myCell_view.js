@@ -64,10 +64,10 @@ define([
             scrollToElement('.RContentCell', 600);
         },
 
-
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

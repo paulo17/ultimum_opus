@@ -88,6 +88,7 @@ define([
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

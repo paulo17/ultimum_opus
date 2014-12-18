@@ -23,7 +23,6 @@ define([
             $(document).ready(function($){
                 $('#Parallax').mousemove(
                     function(e){
-                        console.log("ddddd");
                         /* Work out mouse position */
                         var offset = $(this).offset();
                         var xPos = e.pageX - offset.left;

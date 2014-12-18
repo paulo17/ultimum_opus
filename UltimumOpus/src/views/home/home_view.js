@@ -192,7 +192,6 @@ define([
             $('.content_left').remove();
             // get feature data
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
-            console.log('leftBtn click feature = ' + feature);
             // init LeftView and pass feature parameter
             this.leftDiscoverView = new LeftDiscoverView({'feature': feature});
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
@@ -208,7 +207,6 @@ define([
             $('.content_right').remove();
             // get feature data
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
-            console.log('rightBtn click feature = ' + feature);
             // init RightView and pass feature parameter
             this.rightDiscoverView = new RightDiscoverView({'feature': feature});
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);

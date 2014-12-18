@@ -43,9 +43,10 @@ define([
         *    Print right sidebar
         **/
         rightSidebarAur: function(){
-            //Block Scroll
+            // block scroll
             $('html,body').css({'overflow':'hidden'});
 
+            // get Aurore
             this.getAur();
 
             TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
@@ -66,6 +67,7 @@ define([
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });
