@@ -18,7 +18,7 @@ define([
         },
 
         animateFlw: function(){
-            console.log(window.percentDone);
+            console.log(window.percentDone)
             if(window.percentDone<0.525){
                 $(".RContentFlw").fadeIn(1000);
             }

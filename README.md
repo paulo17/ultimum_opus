@@ -60,7 +60,7 @@ Have fun ! :)
 
 ## Demo
 
-Coming soon
+http://ultimumopus.maximeberthelot.fr/
 
 ## API RoR - Backend
 

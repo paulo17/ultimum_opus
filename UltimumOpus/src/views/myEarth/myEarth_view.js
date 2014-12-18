@@ -34,7 +34,7 @@ define([
 
         leftSidebarEarth: function(){
             $('html,body').css({'overflow':'hidden'});
-            TweenMax.to($(".earthTitle"), 1.25, { "left": '73%', ease: Expo.easeInOut });
+            TweenMax.to($(".earthTitle"), .75, { "left": '73%', ease: Expo.easeInOut });
 
             this.getEarth();
             $('.leftData').addClass('leftActive');

@@ -3,7 +3,7 @@ define([
 'underscore',
 'config',
 'text!templates/leftDiscover/leftDiscover.html',
-'css!templates/leftDiscover/leftDiscover.css',
+'css!templates/rightDiscover/rightDiscover.css',
 'models/API_model'
 ], function(Backbone, _, Config, tpl, css, APIModel)
 {
@@ -72,9 +72,12 @@ define([
 	        	   if (typeof this.tplData == 'undefined'){
 	        	   	this.$el.html(_.template( tpl ) );
 	        	   }else{
-			console.log('new template');
 
-	        	   	this.$el.html(_.template( tpl, {
+					   $('#img').on('load', function(){
+						   $('.masterpiece').fadeIn(200);
+					   });
+
+					   this.$el.html(_.template( tpl, {
 		                titre: this.tplData.titre,
 		                legend: this.tplData.legend,
 		                text: this.tplData.text,
