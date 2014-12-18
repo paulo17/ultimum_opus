@@ -32,7 +32,9 @@ define([
             'mouseover #home':'test',
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
+            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
+            'mouseenter .RContentAur' : function(){this.imageAnimation($('.RContentAur'))}
+            
         },
 
         initialize: function(options) {
@@ -306,9 +308,10 @@ define([
                 }else if(self.classList.contains('RContentFlw')){
                     object = document.querySelector('#animated-flower');
                     type = 'flower';
-                }else{
-                    console.log('ca marche pas')
-                }
+                }else if(self.classList.contains('RContentAur')){
+                    object = document.querySelector('#animated-aurore');
+                    type = 'aurore';
+                };
 
                 el[0].addEventListener('mousewheel', function(e){
                     view.scrollAnimation(e, self, object, type);
