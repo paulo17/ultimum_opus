@@ -29,6 +29,7 @@ define([
             'click .btnDiscover':'lowerSound',
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
+            'mouseover #home':'test',
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
             'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
@@ -39,7 +40,6 @@ define([
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
             pageDomAddedSignal.add(this.paralax, this);
-            $(window).scroll(this.myAnimScroll);
 
             // Init all views on my home
             this.myADNView = new MyADNView(options);
@@ -54,6 +54,8 @@ define([
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
         },
+
+
 
         remove: function() {
             // Remove view after his init
@@ -73,7 +75,35 @@ define([
 
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
+            pageDomAddedSignal.remove(this.paralax, this);
             Backbone.View.prototype.remove.apply(this, arguments);
+        },
+
+
+
+        // Set DOM in current Window
+        getMyCover: function(){
+
+            // Set !div in current height and width
+            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()})
+
+            // Go Bot  tom
+            window.scrollTo(0,$(window).height()*$('.panel').length);
+
+            this.startHome();
+
+            $(window).scroll(this.myAnimScroll);
+            $(window).scroll(this.detect_scroll);
         },
 
         startHome: function(){
@@ -91,7 +121,6 @@ define([
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
             }, 5000);
-            //$(window).scroll(this.detect_scroll);
 
 
             // Make shine on title
@@ -119,29 +148,6 @@ define([
                 }});
             }, 1000);
 
-        },
-
-        // Set DOM in current Window
-        getMyCover: function(){
-
-            // Set !div in current height and width
-            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
-            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
-            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()})
-
-            // Go Bot  tom
-            window.scrollTo(0,$(window).height()*$('.panel').length);
-
-            this.startHome();
-            $(window).scroll(this.detect_scroll);
         },
 
         // setVolum on click btn Discover
@@ -176,7 +182,7 @@ define([
         detect_scroll:function(){
 
             var  maxScrollTop = $(document).height() - $(window).height(),
-                percentDone = $(window).scrollTop() / maxScrollTop;
+                 percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
 
             // set Anim Scroll with SVG % render
@@ -241,13 +247,14 @@ define([
             var mySound = $('#mySound');
             mySound.animate({volume:.1}, 750);
 
-            TweenMax.to($("#car_title"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#car_title"), 0.75, { "left": '16%', ease: Expo.easeInOut });
             TweenMax.to($("#route_home"), 0.75, { "left": '0%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_flw"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cellTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".shellTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_Aur"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cabTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.75, { "left": '16%', ease: Expo.easeInOut });
+            TweenMax.to($(".cellTitle"), 0.75, { "left": '16%', ease: Expo.easeInOut });
+            TweenMax.to($(".shellTitle"), 0.75, { "left": '16%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_Aur"), 0.75, { "left": '16%', ease: Expo.easeInOut });
+            TweenMax.to($(".cabTitle"), 0.75, { "left": '16%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_ADN"), 0.75, { "left": '16%', ease: Expo.easeInOut });
 
             setTimeout(function() {
                 $('#footer').removeClass('bgFooter');
@@ -272,8 +279,8 @@ define([
                 TweenMax.to($("#rightSidebar"), 0.75, { "right": '-70%', ease: Expo.easeInOut });
                 TweenMax.to($(".RContentCell #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
                 TweenMax.to($(".RContentFlw #rightBlock"), 0.75, { "left": '4.3%', ease: Expo.easeInOut });
-                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
-                TweenMax.to($(".RContentAur #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });;
+                TweenMax.to($("#Cab .RContentCab #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
+                TweenMax.to($(".RContentAur #rightBlock"), 0.75, { "left": '10%', ease: Expo.easeInOut });
             }
 
         },
@@ -368,6 +375,7 @@ define([
                 })
             });
         },
+
         render: function() {
             this.$el.html(_.template(tpl, {}));
 

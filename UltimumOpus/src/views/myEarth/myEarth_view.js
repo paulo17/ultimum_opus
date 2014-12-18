@@ -22,19 +22,19 @@ define([
                 $(".LContentEarth").fadeIn(1000);
             }
 
-            if(window.percentDone<.15){
-                TweenMax.to($(".earthTitle"), 0.65, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.15 && window.percentDone>.13){
+                TweenMax.to($(".earthTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
             }
 
             if(window.percentDone>.165 && $('.earthTitle').position().left > 0){
-                $('.earthTitle').css({'left':'-23.5%'});
+                $('.earthTitle').css({'left':'-30.5%'});
                 $(".LContentEarth").fadeOut(700);
             }
         },
 
         leftSidebarEarth: function(){
             $('html,body').css({'overflow':'hidden'});
-            TweenMax.to($(".earthTitle"), 0.75, { "left": '49.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".earthTitle"), 1.25, { "left": '73%', ease: Expo.easeInOut });
 
             this.getEarth();
             $('.leftData').addClass('leftActive');

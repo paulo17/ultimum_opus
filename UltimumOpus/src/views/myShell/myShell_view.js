@@ -17,23 +17,25 @@ define([
         },
 
         leftSidebarShell: function(){
+
             $('html,body').css({'overflow':'hidden'});
-            TweenMax.to($(".shellTitle"), 0.75, { "left": '42.5%', ease: Expo.easeInOut });
-
-            this.getShell();
-            $('.leftData').addClass('leftActive');
-            TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".LContentShell"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-        },
-
-        getShell: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
+                TweenMax.to($(".shellTitle"), 1.25, { "left": '70%', ease: Expo.easeInOut });
+
+                $('.leftData').addClass('leftActive');
+
+
+                TweenMax.to($("#route_home"), 0.75, { "left": '50%', ease: Expo.easeInOut });
+                TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
+                TweenMax.to($(".LContentShell"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
             }
 
             scrollToElement('.LContentShell', 600);
+
         },
+
 
         animLineShell: function(){
             if(window.length > 6298.35){
@@ -44,10 +46,13 @@ define([
             }
             if(window.percentDone<0.66){
                 $(".LContentShell").fadeIn(1000);
-                console.log(window.percentDone);
             }
-            if(window.percentDone<.63){
-                TweenMax.to($(".shellTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.63 && window.percentDone<.61){
+                TweenMax.to($(".shellTitle"), 0.35, { "left": '16%', ease: Expo.easeInOut });
+            }
+            if(window.percentDone>.70 && $('.shellTitle').position().left > 0){
+                $('.shellTitle').css({'left':'-30.5%'});
+                $(".LContentShell").fadeOut(700);
             }
         },
 

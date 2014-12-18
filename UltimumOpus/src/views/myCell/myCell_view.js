@@ -21,15 +21,14 @@ define([
             if(window.percentDone<0.831){
                 $(".RContentCell").fadeIn(1000);
             }
-            if(window.percentDone<.78){
-                TweenMax.to($(".cellTitle"), 0.65, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.78 && window.percentDone>.77){
+                TweenMax.to($(".cellTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
             }
 
             if(window.percentDone>.84 &&  $('.cellTitle').position().left > 0){
-                $('.cellTitle').css({'left':'-23.5%'});
+                $('.cellTitle').css({'left':'-30.5%'});
                 $(".RContentCell").fadeOut(700);
             }
-            console.log(window.percentDone)
         },
 
         rightSidebarCell: function(){
@@ -38,8 +37,10 @@ define([
 
             this.getCell();
 
+
+            TweenMax.to($("#route_home"), 0.75, { "left": '-40%', ease: Expo.easeInOut });
             TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".cellTitle"), 0.85, { "left": '12.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cellTitle"), 1.25, { "left": '11%', ease: Expo.easeInOut });
             TweenMax.to($("#myRContent"), 0.75, { "left": '-100%', ease: Expo.easeInOut });
             TweenMax.to($("#Cell .RContentCell #rightBlock"), 0.75, { "left": '-46%', ease: Expo.easeInOut });
         },

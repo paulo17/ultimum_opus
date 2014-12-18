@@ -18,7 +18,7 @@ define([
 
         leftSidebarCab: function(){
             $('html,body').css({'overflow':'hidden'});
-            TweenMax.to($(".cabTitle"), 0.75, { "left": '49.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cabTitle"), 1.25, { "left": '74%', ease: Expo.easeInOut });
 
             this.getCab();
             $('.leftData').addClass('leftActive');
@@ -65,8 +65,8 @@ define([
             if(window.percentDone<.403){
                 $(".LContentCab").fadeIn(1000);
             }
-            if(window.percentDone<.38){
-                TweenMax.to($(".cabTitle"), 0.65, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.38 && window.percentDone>.37){
+                TweenMax.to($(".cabTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
             }
         },
 

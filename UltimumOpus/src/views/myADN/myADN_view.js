@@ -13,21 +13,20 @@ define([
         },
 
         initialize: function(options) {
-            if(window.percentDone<.96 && window.percentDone<.89 ){
                 $(window).scroll(this.animateADN);
-            }
         },
+
 
         animateADN: function(){
             if(window.percentDone<.92){
                 $(".LContentADN").fadeIn(1000);
             }
-            if(window.percentDone<.89){
-                TweenMax.to($(".title_ADN"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.89 && window.percentDone>.87){
+                TweenMax.to($(".title_ADN"), 0.45, { "left": '16%', ease: Expo.easeInOut });
             }
             // Hide block
             if(window.percentDone>.95 &&  $('.title_ADN').position().left > 0){
-                $('.title_ADN').css({'left':'-23.5%'});
+                $('.title_ADN').css({'left':'-30.5%'});
                 $(".LContentADN").fadeOut(700);
             }
         },
@@ -40,7 +39,8 @@ define([
             $('.leftData').addClass('leftActive');
             TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
             TweenMax.to($(".LContentADN"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_ADN"), 0.75, { "left": '48.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_ADN"), 1.25, { "left": '73.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#route_home"), 0.75, { "left": '50%', ease: Expo.easeInOut });
         },
 
         getADN: function(){

@@ -7,11 +7,19 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
+        className: "myEnd",
         events: {},
         
         initialize: function(options) {
+            $(window).scroll(this.myEndAnim);
         },
-            
+
+        myEndAnim: function(){
+          console.log(window.percentDone);
+            if(window.percentDone<0.05){
+                TweenMax.to($("#paralax"), .85, { "opacity": '0', ease: Expo.easeInOut });
+            }
+        },
         render: function(){
             this.$el.html(_.template( tpl ));
         }
