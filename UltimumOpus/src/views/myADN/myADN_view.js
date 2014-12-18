@@ -17,6 +17,15 @@ define([
         },
 
         animateADN: function(){
+            //console.log(1-$(window).scrollTop()/($(document).height()-$(window).height()));
+           // var myScroll =(((1-$(window).scrollTop()/($(document).height()-$(window).height()))*2)*10)-.6;
+           // var myTitle =((((1-$(window).scrollTop()/($(document).height()-$(window).height()))*2)*10)*100)-120;
+
+         //   console.log(myTitle);
+           // $('.LContentADN').css({'opacity':myScroll})
+            //$('.title_ADN').css({'right':''+myTitle+'%'});
+
+
         },
 
         leftSidebarADN: function(){

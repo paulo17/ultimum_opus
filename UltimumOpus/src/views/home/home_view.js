@@ -19,9 +19,8 @@ define([
     'views/myStory/myStory_view',
     'views/menu/menu_view',
     'gsap',
-    'utils/visible',
-    'utils/jquery.scrollmagic.min'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible, ScrollScene)
+    'utils/visible'
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -80,24 +79,7 @@ define([
             pageDomAddedSignal.remove(this.getMyCover, this);
             Backbone.View.prototype.remove.apply(this, arguments);
 
-            var controller;
-            $(document).ready(function($) {
-                // init controller
-                controller = new ScrollMagic();
-            });
 
-            $(document).ready(function($) {
-                // build tween
-                var tween = TweenMax.to("#animate1", 0.5, {backgroundColor: "green", scale: 2.5});
-
-                // build scene
-                var scene = new ScrollScene({triggerElement: "#trigger1"})
-                    .setTween(tween)
-                    .addTo(controller);
-
-                // show indicators (requires debug extension)
-                scene.addIndicators();
-            });
         },
 
         startHome: function(){
@@ -115,7 +97,6 @@ define([
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
             }, 5000);
-            //$(window).scroll(this.detect_scroll);
 
 
             // Make shine on title
@@ -239,7 +220,7 @@ define([
 
                     //draw the line
 
-                console.log('original',window.length, 'percentDone',window.percentDone);
+                //console.log('original',window.length, 'percentDone',window.percentDone);
                     line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
 
                 }
@@ -314,7 +295,6 @@ define([
 
         imageAnimation:function(el){
 
-            console.log('myAnimation')
             var view = this,
             self = el[0],
             object,type;

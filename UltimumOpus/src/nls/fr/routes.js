@@ -1,3 +1,4 @@
 define({
-    "": "home"
+    "": "home",
+    "scroll": "myScroll"
 });

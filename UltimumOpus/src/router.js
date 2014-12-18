@@ -23,7 +23,8 @@ define([
         home: function() {
             this.goto('views/home/home_view');
         },
-        
+
+
         goto: function(view, options, callback) {
             this.loadView(view, function(View) {
                 var view = new View(options);
