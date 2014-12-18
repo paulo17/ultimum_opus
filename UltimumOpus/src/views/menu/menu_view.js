@@ -24,35 +24,48 @@ define([
         ratio: null,
         ratioMenu:null,
         comparing:function(win, pos){
+            var stepClass,
+            oldClass;
+            if($('.draggable').hasClass('up')){
+                oldClass = 'hidden'
+                stepClass ='visible';
+            }else{
+                oldClass = 'visible'
+                stepClass = 'hidden';
+            }
             $('.panel-menu').removeClass('viewing');
             if(win.scrollTop() > pos[1].position){
                 //console.log(pos[0].element);
                 $('#menu-'+pos[0].element).addClass('viewing');
+                //$('#step-'+pos[0].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
                 //console.log(pos[1].element);
                 $('#menu-'+pos[1].element).addClass('viewing');
+                $('#step-'+pos[1].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 $('#menu-'+pos[2].element).addClass('viewing');
-                console.log(pos[2].element);
+                $('#step-'+pos[2].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[4].position && win.scrollTop() < pos[2].position){
                  $('#menu-'+pos[3].element).addClass('viewing');
-                 console.log(pos[3].element);
+                $('#step-'+pos[3].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[5].position && win.scrollTop() < pos[3].position){
                  $('#menu-'+pos[4].element).addClass('viewing');
-                 console.log(pos[4].element);
+                $('#step-'+pos[4].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[6].position && win.scrollTop() < pos[4].position){
                 $('#menu-'+pos[5].element).addClass('viewing');
-                console.log(pos[5].element);
+                $('#step-'+pos[5].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[7].position && win.scrollTop() < pos[5].position){
                 $('#menu-'+pos[6].element).addClass('viewing');
-                console.log(pos[6].element);
+                $('#step-'+pos[6].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > 0 && win.scrollTop() < pos[6].position){
                 $('#menu-'+pos[7].element).addClass('viewing');
-                console.log(win.scrollTop());
-                console.log(pos[8].position);
+                $('#step-'+pos[7].element).switchClass( oldClass, stepClass);
+                if(!($('.draggable').hasClass('up'))){
+                    $('#step-'+pos[8].element).switchClass( oldClass, stepClass);
+                }
             }else if(win.scrollTop() == 0){
                 $('#menu-'+pos[8].element).addClass('viewing');
-                console.log(pos[8].element);
+                $('#step-'+pos[8].element).switchClass( oldClass, stepClass);
             };
         },
         drag:function(){
@@ -124,17 +137,28 @@ define([
             
         },
         scroll:function(){
+
             this.ratio = $('#limitation').height()/$('html').height();
             this.ratioMenu = $('#limitation').height()/(this.height);
             
 
             var self = this,
-            pos = this.positions;
-            win = $(window);
+            pos = this.positions,
+            win = $(window),
+            previousScroll = 0;
             
 
             win.scroll(function(){
+                var currentScroll = $(this).scrollTop()
                 var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
+
+                if (currentScroll > previousScroll){
+                   $('.draggable').removeClass('up');
+                } else {
+                   $('.draggable').addClass('up');
+                }
+                previousScroll = currentScroll;
+
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });

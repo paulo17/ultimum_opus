@@ -368,6 +368,7 @@ define([
                 };
 
             }else{
+                
                 if(cpt < 64){
                     cpt++;
                     object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
@@ -402,7 +403,7 @@ define([
             });
 
             $(window).scroll(function(){
-                var percent = (($('html').height()-win.scrollTop())*10)/($('html').height());
+                var percent = (($('html').height()-$(window).scrollTop())*10)/($('html').height());
 
                 $('#filter2').css({
                     'bottom': -percent + '%'

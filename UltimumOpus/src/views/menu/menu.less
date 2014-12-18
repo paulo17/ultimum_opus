@@ -16,6 +16,12 @@
 	text-shadow: #FFF 0px 0px 10px;
 	opacity: 1;
 }
+.visible{
+	opacity: 0.2 !important;
+}
+.hidden{
+	opacity: 0 !important;
+}
 aside{
 	position: fixed;
 	height: 100%;
@@ -69,7 +75,9 @@ aside{
 				position: relative;
 				left: 50%;
 				transform: translateX(-50%);
+				transition:opacity 0.5s;
 			}
+			
 		}
 	}
 }
