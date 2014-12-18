@@ -31,7 +31,7 @@ define([
             'click .rightBtn':'rightBtn',
             'mouseover #home':'test',
             'keydown':'keydown',
-            'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
+            'mouseenter .RContentFlw': function(){ this.imageAnimation($('.RContentFlw'))},
             'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
             'mouseenter .RContentAur' : function(){this.imageAnimation($('.RContentAur'))}
             
@@ -42,7 +42,8 @@ define([
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
             pageDomAddedSignal.add(this.paralax, this);
-            
+            pageDomAddedSignal.add(this.settingData, this);
+
             // Init all views on my home
             this.myADNView = new MyADNView(options);
             this.myCellView = new MyCellView(options);
@@ -108,7 +109,11 @@ define([
             $(window).scroll(this.myAnimScroll);
             $(window).scroll(this.detect_scroll);
         },
-
+        settingData:function(){
+            $('.LContentADN').data('value', 1);
+            $('.RContentAur').data('value', 1);
+            $('.RContentFlw').data('value', 1);
+        },
         startHome: function(){
             //setSound to 10%
             var mySound = $('#mySound');
@@ -301,16 +306,22 @@ define([
             if(self.classList.contains('scrollable')){
                 return;
             }else{
-                this.cpt = 1;
+                
                 if(self.classList.contains('LContentADN')){
                     object = document.querySelector('#animated-adn');
-                    type = 'adn';
+                    type = 'adn',
+                    self= $('.LContentADN');
+                    
                 }else if(self.classList.contains('RContentFlw')){
                     object = document.querySelector('#animated-flower');
-                    type = 'flower';
+                    type = 'flower',
+                    self= $('.RContentFlw');
+                    
                 }else if(self.classList.contains('RContentAur')){
                     object = document.querySelector('#animated-aurore');
-                    type = 'aurore';
+                    type = 'aurore',
+                    self= $('.RContentAur');
+                    
                 };
 
                 el[0].addEventListener('mousewheel', function(e){
@@ -333,28 +344,35 @@ define([
             }, 100);
             callback.call(this);
         },
-        cpt:1,
         scrollAnimation:function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+            console.log(el.data());
+            var data = el.data();
 
+            console.log(data);
+            var cpt = data.value;
             if(delta === -1){
-                if(this.cpt > 1){
-                    this.cpt--;
+                if(cpt > 1){
+                    cpt--;
                     //overflow.hidden();
-                    object.src = "img/masterpiece/sequences/"+type+" ("+this.cpt+").png";
+                    object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
+                    el.data('value', cpt);
                 }else{
-                    object.src = "img/masterpiece/sequences/"+type+" (1).png";
-                    this.cpt = 1;
+                    cpt = 1;
+                    object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
+                    el.data('value', cpt);
                     this.overflowAuto();
                 };
 
             }else{
-                if(this.cpt < 64){
-                    this.cpt++;
-                    object.src = "img/masterpiece/sequences/"+type+" ("+this.cpt+").png";
+                if(cpt < 64){
+                    cpt++;
+                    object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
+                    el.data('value', cpt);
                 }else{
                     object.src = "img/masterpiece/sequences/"+type+" (64).png";
-                    this.cpt = 64;
+                    cpt = 64;
+                    el.data('value', cpt);
                     this.overflowAuto();
                 };
             };
