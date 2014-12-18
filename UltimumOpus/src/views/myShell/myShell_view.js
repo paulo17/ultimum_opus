@@ -42,6 +42,13 @@ define([
             if(window.length < 6298.35){
                TweenMax.to($("#anim-shell path"),.20, { "stroke-dasharray": "0, 424.8", ease: Expo.easeInOut });
             }
+            if(window.percentDone<0.66){
+                $(".LContentShell").fadeIn(1000);
+                console.log(window.percentDone);
+            }
+            if(window.percentDone<.63){
+                TweenMax.to($(".shellTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            }
         },
 
         render: function(){

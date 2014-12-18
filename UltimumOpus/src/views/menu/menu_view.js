@@ -129,7 +129,7 @@ define([
 
             win.scroll(function(){
                 var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
-                //console.log(percent);
+             //   console.log(percent);
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });

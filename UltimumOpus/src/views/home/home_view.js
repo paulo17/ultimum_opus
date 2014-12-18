@@ -32,18 +32,14 @@ define([
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){this.imageAnimation($('.RContentFlw'))},
             'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))}
-            //'mouseleave .LContentADN' : 'killAdnAnimation'
         },
 
         initialize: function(options) {
 
-            $(window).load(function () {
-               console.log('page loaded');
-
-            });
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
             pageDomAddedSignal.add(this.paralax, this);
+            $(window).scroll(this.myAnimScroll);
 
             // Init all views on my home
             this.myADNView = new MyADNView(options);
@@ -78,8 +74,6 @@ define([
             // remove signals listen Dom
             pageDomAddedSignal.remove(this.getMyCover, this);
             Backbone.View.prototype.remove.apply(this, arguments);
-
-
         },
 
         startHome: function(){
@@ -97,6 +91,7 @@ define([
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
             }, 5000);
+            //$(window).scroll(this.detect_scroll);
 
 
             // Make shine on title
@@ -154,9 +149,7 @@ define([
             //Lower sound
             var mySound = $('#mySound');
             mySound.animate({volume:.02}, 750);
-
             $('#footer').addClass('bgFooter');
-
         },
 
         //set css on click btn left discvoer
@@ -185,7 +178,6 @@ define([
             var  maxScrollTop = $(document).height() - $(window).height(),
                 percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
-               // console.log('myOpac',myOpac, 'percentDone', percentDone,'$(window).scrollTop()', $(document).scrollTop());
 
             // set Anim Scroll with SVG % render
                 drawLine( $('#route_home'),document.getElementById('path_home') );
@@ -199,48 +191,43 @@ define([
                         window.length = pathLength-length;
 
                     // Set anim with % done on DOM
-                    if(window.percentDone<0.4876){
-                        window.length = window.length + 750;
+
+                    if(window.percentDone<0.488){
+                        window.length = window.length + 510;
                     }
-                    if(window.percentDone<0.3735){
-                        window.length = window.length + 1050;
+
+                    if(window.percentDone<0.32602){
+                        window.length = window.length + 140;
                     }
                     if(window.percentDone<0.3633){
-                        window.length = window.length + 310;
+                        window.length = window.length + 210;
                     }
-                    if( window.percentDone<0.275){
+                    if(window.percentDone<0.325){
+                        window.length = window.length + 600;
+                    }
+                    if(window.percentDone<0.275){
                         window.length = window.length + 240;
                     }
-                    if( window.percentDone<0.270){
+                    if(window.percentDone<0.270){
                         window.length = window.length + 180;
                     }
-                    if( window.percentDone<0.208){
+                    if(window.percentDone<0.208){
                         window.length = window.length + 500;
                     }
-
                     //draw the line
-
-                //console.log('original',window.length, 'percentDone',window.percentDone);
                     line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
-
                 }
-
-
-
             if(percentDone<0.99){
+                //Show line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
             }
-            if(percentDone<0.95 && percentDone>0.78){
-               TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
-               window.setDiv = window.setDiv+.05;
-                  //  console.log('window.setDiv',window.setDiv);
-               if(percentDone<0.92) {
-                   TweenMax.to($(".LContentADN #leftBlock"), 1.75, {"opacity": '1', ease: Expo.easeInOut});
-
-                        //Get footer on scroll
-                   TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
-               }
-              //$('.LContentADN').css({'opacity':myOpac});
+            if(percentDone>0.985){
+                //Hide line
+                TweenMax.to($("#route_home"), 0.75, { "opacity": '0', ease: Expo.easeInOut });
+            }
+            if(percentDone<0.92) {
+                //Get footer on scroll
+                TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
             }
         },
 
@@ -254,13 +241,13 @@ define([
             var mySound = $('#mySound');
             mySound.animate({volume:.1}, 750);
 
-            TweenMax.to($("#car_title"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($("#car_title"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
             TweenMax.to($("#route_home"), 0.75, { "left": '0%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_flw"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".shellTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".title_Aur"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
-            TweenMax.to($(".cabTitle"), 0.75, { "left": '32.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_flw"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cellTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".shellTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_Aur"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
+            TweenMax.to($(".cabTitle"), 0.75, { "left": '16.5%', ease: Expo.easeInOut });
 
             setTimeout(function() {
                 $('#footer').removeClass('bgFooter');
@@ -291,10 +278,8 @@ define([
 
         },
 
-
-
+        //---Image view on scroll ADN & Flower ----//
         imageAnimation:function(el){
-
             var view = this,
             self = el[0],
             object,type;
@@ -331,7 +316,6 @@ define([
         },
         overflowHidden:function(callback){
             setTimeout(function(){
-                //$('html,body').animate({scrollTop: $(el).offset().top}, 600);
                 $('html,body').css({'overflow':'hidden'});
             }, 100);
             callback.call(this);
@@ -360,7 +344,6 @@ define([
                     this.cpt = 64;
                     this.overflowAuto();
                 };
-
             };
         },
         paralax:function(){
@@ -399,8 +382,6 @@ define([
             this.myStoryView.render();
             this.menuView.render();
             this.footerView.render();
-            // this.leftDiscoverView.render();
-            // this.rightDiscoverView.render();
             this.loaderVieww.render();
 
             // Set content on view on div choose
@@ -415,8 +396,6 @@ define([
             this.$el.find('#Earth').append(this.myEarthView.el);
             this.$el.find('#Aurora').append(this.myAuroraView.el);
             this.$el.find('#footer').append(this.footerView.el);
-            // this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
-            // this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
             this.$el.find('#loader').append(this.loaderVieww.el);
 
             // Dispatch all events in others views of this view

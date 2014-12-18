@@ -56,6 +56,17 @@ define([
                 TweenMax.to($(".line_6"), .45, { "stroke-dasharray": "0, 713.8", ease: Expo.easeInOut });
                 TweenMax.to($(".line_7"), .25, { "stroke-dasharray": "0, 713.8", ease: Expo.easeInOut });
                 TweenMax.to($(".line_8"),1.25, { "stroke-dasharray": "0, 713.8", ease: Expo.easeInOut });
+
+            }
+            if(window.percentDone>.417 &&  $('.cabTitle').position().left > 0){
+                $('.cabTitle').css({'left':'-23.5%'});
+                $(".LContentCab").fadeOut(700);
+            }
+            if(window.percentDone<.403){
+                $(".LContentCab").fadeIn(1000);
+            }
+            if(window.percentDone<.38){
+                TweenMax.to($(".cabTitle"), 0.65, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
             }
         },
 

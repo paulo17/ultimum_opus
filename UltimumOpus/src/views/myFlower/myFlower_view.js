@@ -14,8 +14,22 @@ define([
 
 
         initialize: function(options) {
+            $(window).scroll(this.animateFlw);
         },
 
+        animateFlw: function(){
+            if(window.percentDone<0.525){
+                $(".RContentFlw").fadeIn(1000);
+            }
+            if(window.percentDone<.498){
+                TweenMax.to($(".title_flw"), 0.65, { "left": '16%', ease: Expo.easeInOut });
+            }
+            // Hide block
+            if(window.percentDone>.542 &&  $('.title_flw').position().left > 0){
+                $('.title_flw').css({'left':'-23.5%'});
+                $(".RContentFlw").fadeOut(700);
+            }
+        },
         rightSidebarFlw: function(){
             //Block Scroll
             $('html,body').css({'overflow':'hidden'});

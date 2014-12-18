@@ -10,7 +10,7 @@ define([
     return Backbone.View.extend({
         className: "Footer_Content",
         events: {
-            'mouseenter #player':'myPlayer'
+            'click #player':'myPlayer'
         },
         
         initialize: function(options) {

@@ -14,6 +14,21 @@ define([
 
 
         initialize: function(options) {
+            $(window).scroll(this.animateAur);
+        },
+
+        animateAur: function(){
+            if(window.percentDone<.2709){
+                $(".RContentAur").fadeIn(1000);
+            }
+            if(window.percentDone<.2609) {
+                TweenMax.to($(".title_Aur"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            }
+
+            if(window.percentDone>.2709 && $('.title_Aur').position().left > 0){
+                $('.title_Aur').css({'left':'-23.5%'});
+                $(".RContentAur").fadeOut(700);
+            }
         },
 
         rightSidebarAur: function(){

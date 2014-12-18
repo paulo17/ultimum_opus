@@ -13,6 +13,23 @@ define([
         },
 
         initialize: function(options) {
+            $(window).scroll(this.animLineEarth);
+
+        },
+
+        animLineEarth: function(){
+            if(window.percentDone<.164){
+                $(".LContentEarth").fadeIn(1000);
+            }
+
+            if(window.percentDone<.15){
+                TweenMax.to($(".earthTitle"), 0.65, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            }
+
+            if(window.percentDone>.165 && $('.earthTitle').position().left > 0){
+                $('.earthTitle').css({'left':'-23.5%'});
+                $(".LContentEarth").fadeOut(700);
+            }
         },
 
         leftSidebarEarth: function(){

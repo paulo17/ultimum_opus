@@ -7,26 +7,31 @@ define([
 ], function(Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
-        className: "LContentADN leftData myPanel",
+        className: "LContentADN leftData",
         events: {
             'click #leftDiADN':'leftSidebarADN'
         },
-        
+
         initialize: function(options) {
-            $(window).scroll(this.animateADN);
+            if(window.percentDone<.96 && window.percentDone<.89 ){
+                $(window).scroll(this.animateADN);
+            }
         },
 
         animateADN: function(){
-            //console.log(1-$(window).scrollTop()/($(document).height()-$(window).height()));
-           // var myScroll =(((1-$(window).scrollTop()/($(document).height()-$(window).height()))*2)*10)-.6;
-           // var myTitle =((((1-$(window).scrollTop()/($(document).height()-$(window).height()))*2)*10)*100)-120;
-
-         //   console.log(myTitle);
-           // $('.LContentADN').css({'opacity':myScroll})
-            //$('.title_ADN').css({'right':''+myTitle+'%'});
-
-
+            if(window.percentDone<.92){
+                $(".LContentADN").fadeIn(1000);
+            }
+            if(window.percentDone<.89){
+                TweenMax.to($(".title_ADN"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            }
+            // Hide block
+            if(window.percentDone>.95 &&  $('.title_ADN').position().left > 0){
+                $('.title_ADN').css({'left':'-23.5%'});
+                $(".LContentADN").fadeOut(700);
+            }
         },
+
 
         leftSidebarADN: function(){
             $('html,body').css({'overflow':'hidden'});
