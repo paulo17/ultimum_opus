@@ -121,7 +121,11 @@ define([
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
                     $('html,body').css({'overflow':'auto'});
+                    var li = document.getElementsByClassName('step-animation');
 
+                    for(var i = 0; i < li.length; i++){
+                        $('#limitation ul li:nth-child('+i+')').animate({'opacity':'0'}, i*500);
+                    };
                 });
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
@@ -363,6 +367,7 @@ define([
                 };
 
             }else{
+                
                 if(cpt < 64){
                     cpt++;
                     object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
@@ -397,7 +402,7 @@ define([
             });
 
             $(window).scroll(function(){
-                var percent = (($('html').height()-win.scrollTop())*10)/($('html').height());
+                var percent = (($('html').height()-$(window).scrollTop())*10)/($('html').height());
 
                 $('#filter2').css({
                     'bottom': -percent + '%'

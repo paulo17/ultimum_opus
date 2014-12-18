@@ -16,7 +16,7 @@
 .myEnd{
   background: #090B14;
   #topFinish{
-    z-index: 100;
+    z-index: 1;
     margin: 0;
     padding: 0;
     position: absolute;
@@ -44,14 +44,20 @@
 
 
 #endTxt{
-    position: absolute;
-    top: 48%;
-    font-family: "Playfair Display";
-    width: 100%;
-    font-size: 2.5vw;
-    opacity: 1;
-    text-align: center;
-    color: #ffffff;
+  position: absolute;
+  top: 48%;
+  font-family: "Playfair Display";
+  width: 100%;
+  font-size: 2.5vw;
+  z-index: 3;
+  text-align: center;
+  color: #ffffff;
+  #end_1{
+    opacity: 0;
+  }
+  #end_2{
+    opacity: 0;
+  }
 }
 
 @media (min-width: 1675px){
