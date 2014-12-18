@@ -15,9 +15,12 @@ define([
         },
 
         myEndAnim: function(){
-          console.log(window.percentDone);
             if(window.percentDone<0.05){
                 TweenMax.to($("#paralax"), .85, { "opacity": '0', ease: Expo.easeInOut });
+            }
+
+            if(window.percentDone>0.05){
+                TweenMax.to($("#paralax"), .85, { "opacity": '1', ease: Expo.easeInOut });
             }
         },
         render: function(){
