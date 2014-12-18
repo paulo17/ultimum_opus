@@ -95,7 +95,8 @@ define([
             $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
-            $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()})
+            $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()});
+            $('#effect').css( { 'width' : $(window).width(), 'height' : $(window).height()})
 
             // Go Bot  tom
             window.scrollTo(0,$(window).height()*$('.panel').length);
@@ -357,20 +358,24 @@ define([
         },
         paralax:function(){
             var width = $(window).width()/2,
+            height = $(window).height()/2,
             rate1 = 0.02;
             rate2 = 0.1;
             $(window).mousemove(function(e){
-                var x = e.clientX - width;
+                var x = e.clientX - width,
+                y = e.clientY - height;
                 $('#filter1').css({
                     'left': Math.floor(x*rate1)+'px',
                 });
                 $('#filter2').css({
                     'left': Math.floor(x*rate2)+'px',
+                    'margin-top' : Math.floor(y*rate2) + 'px',
+                    /*'transition' : 'bottom 0s'*/
                 });
             });
 
             $(window).scroll(function(){
-                var percent = (($('html').height()-win.scrollTop())*50)/($('html').height());
+                var percent = (($('html').height()-win.scrollTop())*10)/($('html').height());
 
                 $('#filter2').css({
                     'bottom': -percent + '%'
