@@ -106,14 +106,17 @@
   position: absolute;
   top:0;
   overflow: hidden;
+  opacity: 0.2;
 
   #filter1{
     height: 100%;
     width: 150%;
     background-image: url('/img/dots.png');
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.3;
     margin-left: -25%;
+    left:0;
+    -webkit-animation: filterMovement 3.5s infinite linear;
   }
 
   #filter2{
@@ -121,15 +124,29 @@
     width: 150%;
     background-image: url('/img/dots.png');
     position: relative;
-    opacity: 0.2;
+    opacity: 1;
     margin-left: -23%;
     bottom: 0;
     transition: bottom 1s;
+    -webkit-animation: filterMovementX 3.5s infinite linear;
+
+  }
+  #filter3{
+    height: 1000%;
+    width: 150%;
+    background-image: url('/img/dots.png');
+    position: absolute;
+    opacity: 0.5;
+    margin-left: -23%;
+    bottom: 0;
+    transition: bottom 1s;
+    -webkit-animation: filterMovementInverse 3.5s infinite linear;
   }
   #effect{
     position: fixed;
     top:0;
     background-image: url('/img/effect.png');
+    opacity: 0.5;
   }
 }
 
@@ -158,4 +175,22 @@
 }
 @keyframes moveFromBottom {
   from { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@keyframes filterMovement{
+0%{margin-left:0px}
+  50%{margin-left: -20px}
+  100%{margin-left: 0px}
+}
+
+@keyframes filterMovementInverse{
+0%{margin-left:0px}
+  50%{margin-left: 20px}
+  100%{margin-left: 0px}
+}
+
+@keyframes filterMovementX{
+0%{margin-top:0px}
+  50%{margin-top: 20px}
+  100%{margin-top: 0px}
 }

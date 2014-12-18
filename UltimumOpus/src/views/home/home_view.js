@@ -40,7 +40,7 @@ define([
             // Listen the DOM to set it when is loaded
             pageDomAddedSignal.add(this.getMyCover, this);
             pageDomAddedSignal.add(this.paralax, this);
-
+            
             // Init all views on my home
             this.myADNView = new MyADNView(options);
             this.myCellView = new MyCellView(options);
@@ -365,11 +365,14 @@ define([
                 var x = e.clientX - width,
                 y = e.clientY - height;
                 $('#filter1').css({
-                    'left': Math.floor(x*rate1)+'px',
+                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)' 
+                });
+                $('#filter3').css({
+                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
                 });
                 $('#filter2').css({
                     'left': Math.floor(x*rate2)+'px',
-                    'margin-top' : Math.floor(y*rate2) + 'px',
+                    'transform' : 'translateY('+Math.floor(y*rate2) + 'px)',
                     /*'transition' : 'bottom 0s'*/
                 });
             });
