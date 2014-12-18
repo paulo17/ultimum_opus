@@ -21,8 +21,8 @@ define([
             if(window.percentDone<.2709){
                 $(".RContentAur").fadeIn(1000);
             }
-            if(window.percentDone<.2609 && window.percentDone<.2509) {
-                TweenMax.to($(".title_Aur"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
+            if(window.percentDone<.268 && window.percentDone<.26) {
+                TweenMax.to($(".title_Aur"), 0.35, { "left": '16%', ease: Expo.easeInOut });
             }
 
             if(window.percentDone>.2709 && $('.title_Aur').position().left > 0){

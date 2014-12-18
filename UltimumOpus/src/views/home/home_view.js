@@ -346,7 +346,6 @@ define([
         },
         scrollAnimation:function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-            console.log(el.data());
             var data = el.data();
 
 

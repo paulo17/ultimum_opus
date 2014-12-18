@@ -8,10 +8,16 @@ define([
 {
     return Backbone.View.extend({
         className: "myEnd",
-        events: {},
+        events: {
+            'mouseenter #Story':'animateStory'
+        },
         
         initialize: function(options) {
             $(window).scroll(this.myEndAnim);
+        },
+
+        animate: function(){
+            console.log('ee');
         },
 
         myEndAnim: function(){

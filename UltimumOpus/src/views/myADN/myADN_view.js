@@ -18,10 +18,10 @@ define([
 
 
         animateADN: function(){
-            if(window.percentDone<.92){
+            if(window.percentDone<.95){
                 $(".LContentADN").fadeIn(1000);
             }
-            if(window.percentDone<.89 && window.percentDone>.87){
+            if(window.percentDone<.89 && window.percentDone>.86){
                 TweenMax.to($(".title_ADN"), 0.45, { "left": '16%', ease: Expo.easeInOut });
             }
             // Hide block
