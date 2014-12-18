@@ -11,6 +11,10 @@ define([
 	        className: "content_left",
 	        events: {},
 
+	         /**
+        		*    Constructor for initialize the view
+        		*    @param object options
+        		**/
 	        initialize: function(options) {
 	            _.bindAll(this, 'render');
 
@@ -42,6 +46,7 @@ define([
 	                this.Masterpiece.fetch({
 	                    success: function(model, response, options){
 	                   	console.log(response);
+	                   	// store data response in View object
 	                        	self.tplData = response[0];
 	                        	callback.call(this);
 	                    },
@@ -74,6 +79,7 @@ define([
 	        	   }else{
 			console.log('new template');
 
+			// Adding data in template
 	        	   	this.$el.html(_.template( tpl, {
 		                titre: this.tplData.titre,
 		                legend: this.tplData.legend,

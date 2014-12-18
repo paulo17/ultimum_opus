@@ -9,21 +9,34 @@ define([
 ], function(pageDomAddedSignal, UI, Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
+
         className: "aside-menu",
+        height:null,
+        ratio: null,
+        ratioMenu:null,
+
         events: {},
-        
+
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             pageDomAddedSignal.add(this.css, this);
             pageDomAddedSignal.add(this.panel, this);
             pageDomAddedSignal.add(this.scroll, this);
-            pageDomAddedSignal.add(this.drag, this); 
-           
+            pageDomAddedSignal.add(this.drag, this);
+
         },
-        height:null,
-        ratio: null,
-        ratioMenu:null,
-        comparing:function(win, pos){
+
+        /**
+        *    Add viewing class to menu element
+        *    @param win
+        *    @param pos
+        **/
+        comparing: function(win, pos){
             $('.panel-menu').removeClass('viewing');
+
             if(win.scrollTop() > pos[1].position){
                 //console.log(pos[0].element);
                 $('#menu-'+pos[0].element).addClass('viewing');
@@ -45,8 +58,13 @@ define([
             }else if(win.scrollTop() < pos[7].position){
                 $('#menu-'+pos[8].element).addClass('viewing');
             };
+
         },
-        drag:function(){
+
+        /**
+        *
+        **/
+        drag: function(){
             var grid = Math.floor(document.querySelector('#limitation').clientHeight/9),
             ratio = $('#limitation').height()/$('html').height(),
             move =0,
@@ -57,6 +75,7 @@ define([
                 axis:'y',
                 containment:'#limitation',
                 //grid:[0, grid],
+
                 start:function(){
                     $('html').css({'overflow':'auto'});
                     $('section').css({
@@ -68,6 +87,7 @@ define([
                         });
                     },200)
                 },
+
                 stop:function(){
 
                     $('section').css({
@@ -79,9 +99,10 @@ define([
                         });
                     },500)
                 },
+
                 drag:function(){
                     $('body').css({'overflow':'auto'});
-                    
+
                     var top = this.offsetTop;
                     var percent =  ((($('#limitation').height() - top)-$('.draggable').height())*150)/($('#limitation').height()-$('.draggable').height()); //création du poin 0
                     console.log(percent);
@@ -96,8 +117,10 @@ define([
 
             })
         },
+
         positions:[],
-        css:function(){
+
+        css: function(){
             $('#menu').css({'height':'0','width':'0'});
             $('aside').css({'position':'fixed'});
 
@@ -109,23 +132,25 @@ define([
                 })
             },100);
         },
+
         panel:function(){
             var panels = document.getElementsByClassName('panel');
             var positions = [];
             for(var i=panels.length - 1; i >= 0; i--){
-                this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
+                this.positions.push({element:panels[i].id, position:panels[i].offsetTop});
             };
-            
+
         },
+
         scroll:function(){
             this.ratio = $('#limitation').height()/$('html').height();
             this.ratioMenu = $('#limitation').height()/(this.height);
-            
+
 
             var self = this,
             pos = this.positions;
             win = $(window);
-            
+
 
             win.scroll(function(){
                 var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
@@ -140,9 +165,10 @@ define([
                 self.comparing(win, pos);
             });
         },
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }
-    });
 
+    });
 });

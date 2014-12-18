@@ -8,15 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "LContentADN leftData",
+
+        // Backbone event object
         events: {
             'click #leftDiADN':'leftSidebarADN'
         },
 
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
                 $(window).scroll(this.animateADN);
         },
 
-
+        /**
+        *    Animate ADN title and content using transition
+        **/
         animateADN: function(){
             if(window.percentDone<.92){
                 $(".LContentADN").fadeIn(1000);
@@ -52,7 +60,7 @@ define([
 
             scrollToElement('.LContentADN', 600);
         },
-            
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }

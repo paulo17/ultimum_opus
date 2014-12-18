@@ -8,15 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "RContentAur myPanel",
+
+        // Backbone event object
         events: {
             'click #rightDiAur':'rightSidebarAur'
         },
 
-
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animateAur);
         },
 
+        /**
+        *    Animate Aurore title and content using transition
+        **/
         animateAur: function(){
             if(window.percentDone<.2709){
                 $(".RContentAur").fadeIn(1000);
@@ -31,6 +39,9 @@ define([
             }
         },
 
+        /**
+        *    Print right sidebar
+        **/
         rightSidebarAur: function(){
             //Block Scroll
             $('html,body').css({'overflow':'hidden'});
@@ -51,7 +62,7 @@ define([
             }
             scrollToElement('.RContentAur', 600);
         },
-            
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }

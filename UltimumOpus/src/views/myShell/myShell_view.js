@@ -8,14 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "LContentShell leftData myPanel",
+
+        // Backbone event object
         events: {
             'click #leftDiShell':'leftSidebarShell'
         },
-        
+
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animLineShell);
         },
 
+        /**
+        *    Print sidebar left
+        **/
         leftSidebarShell: function(){
 
             $('html,body').css({'overflow':'hidden'});
@@ -36,7 +45,9 @@ define([
 
         },
 
-
+        /**
+        *    Main SVG animation line
+        **/
         animLineShell: function(){
             if(window.length > 6298.35){
                 TweenMax.to($("#anim-shell path"), .05, { "stroke-dasharray": "1412.9, 424.8", ease: Expo.easeInOut });
@@ -56,6 +67,9 @@ define([
             }
         },
 
+        /**
+        *    Render the view
+        **/
         render: function(){
             this.$el.html(_.template( tpl ));
         }

@@ -8,15 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "RContentFlw myPanel",
+
+        // Backbone event object
         events: {
             'click #rightDiFlw':'rightSidebarFlw'
         },
 
-
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animateFlw);
         },
 
+        /**
+        *    Animate Flower title and content using transition
+        **/
         animateFlw: function(){
             if(window.percentDone<0.525){
                 $(".RContentFlw").fadeIn(1000);
@@ -30,6 +38,10 @@ define([
                 $(".RContentFlw").fadeOut(700);
             }
         },
+
+        /**
+        *    Print right sidebar
+        **/
         rightSidebarFlw: function(){
             //Block Scroll
             $('html,body').css({'overflow':'hidden'});
@@ -43,6 +55,9 @@ define([
             TweenMax.to($("#route_home"), 0.75, { "left": '-50.2%', ease: Expo.easeInOut });
         },
 
+        /**
+        *
+        **/
         getFlw: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;

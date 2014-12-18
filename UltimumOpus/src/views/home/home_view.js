@@ -24,6 +24,8 @@ define([
 {
     return Backbone.View.extend({
         el: "#content",
+
+        // Backbone Event object
         events: {
             'click .Sidebar':'closeSidebar',
             'click .btnDiscover':'lowerSound',
@@ -31,12 +33,15 @@ define([
             'click .rightBtn':'rightBtn',
             'mouseover #home':'test',
             'keydown':'keydown',
-            'mouseenter .RContentFlw': function(){ this.imageAnimation($('.RContentFlw'))},
-            'mouseenter .LContentADN' : function(){this.imageAnimation($('.LContentADN'))},
-            'mouseenter .RContentAur' : function(){this.imageAnimation($('.RContentAur'))}
-            
+            'mouseenter .RContentFlw': function(){ this.imageAnimation($('.RContentFlw')) },
+            'mouseenter .LContentADN' : function(){ this.imageAnimation($('.LContentADN')) },
+            'mouseenter .RContentAur' : function(){ this.imageAnimation($('.RContentAur')) }
         },
 
+        /**
+        *    View constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
 
             // Listen the DOM to set it when is loaded
@@ -58,8 +63,9 @@ define([
             this.loaderVieww = new LoaderView(options);
         },
 
-
-
+        /**
+        *    Remove all init View
+        **/
         remove: function() {
             // Remove view after his init
             this.myADNView.remove();
@@ -82,9 +88,10 @@ define([
             Backbone.View.prototype.remove.apply(this, arguments);
         },
 
-
-
-        // Set DOM in current Window
+        /**
+        *    Set view size height and width
+        *    to Window size
+        **/
         getMyCover: function(){
 
             // Set !div in current height and width
@@ -104,16 +111,28 @@ define([
             // Go Bot  tom
             window.scrollTo(0,$(window).height()*$('.panel').length);
 
+            // Starting Home
             this.startHome();
 
+            // Adding Scroll event using jQuery
             $(window).scroll(this.myAnimScroll);
             $(window).scroll(this.detect_scroll);
         },
-        settingData:function(){
+
+        /**
+        *    Setting data value at 1
+        *    for LContentADN, RContentAur and RcontentFlw div
+        **/
+        settingData: function(){
             $('.LContentADN').data('value', 1);
             $('.RContentAur').data('value', 1);
             $('.RContentFlw').data('value', 1);
         },
+
+        /**
+        *    Initialize and start the home page
+        *    Adding music and animation
+        **/
         startHome: function(){
             //setSound to 10%
             var mySound = $('#mySound');
@@ -129,7 +148,6 @@ define([
                 TweenMax.to($(".second"), 6.95, { "opacity": '1', ease: Expo.easeInOut });
                 $('body').scrollTop($(window).height()*$('.panel').length);
             }, 5000);
-
 
             // Make shine on title
             $({blurRadius: 10}).animate({blurRadius: 0}, {
@@ -158,7 +176,9 @@ define([
 
         },
 
-        // setVolum on click btn Discover
+        /**
+        *    Lower sound when user click for show masterpiece content
+        **/
         lowerSound: function(){
             //Lower sound
             var mySound = $('#mySound');
@@ -166,22 +186,32 @@ define([
             $('#footer').addClass('bgFooter');
         },
 
-        //set css on click btn left discvoer
-
+        /**
+        *    Event left button click for showing feature information
+        *    @param event e
+        **/
         leftBtn: function(e){
             $('.content_left').remove();
+            // get feature data
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
             console.log('leftBtn click feature = ' + feature);
+            // init LeftView and pass feature parameter
             this.leftDiscoverView = new LeftDiscoverView({'feature': feature});
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
 
             $('#logo').css({'color':'black'});
         },
 
+        /**
+        *    Event right button click for showing feature information
+        *    @param event e
+        **/
         rightBtn: function(e){
             $('.content_right').remove();
+            // get feature data
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
             console.log('rightBtn click feature = ' + feature);
+            // init RightView and pass feature parameter
             this.rightDiscoverView = new RightDiscoverView({'feature': feature});
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
 
@@ -189,10 +219,15 @@ define([
             $('.volumn').css({'fill':'black'});
         },
 
-        detect_scroll:function(){
+        /**
+        *    Event callback when detecting scroll event
+        *    Set SVG animation using scroll percent
+        *    and render the line on the screen
+        **/
+        detect_scroll: function(){
 
-            var  maxScrollTop = $(document).height() - $(window).height(),
-                 percentDone = $(window).scrollTop() / maxScrollTop;
+            var  maxScrollTop = $(document).height() - $(window).height();
+            var percentDone = $(window).scrollTop() / maxScrollTop;
             var myOpac = (1-percentDone)*5;
 
             // set Anim Scroll with SVG % render
@@ -211,7 +246,6 @@ define([
                     if(window.percentDone<0.488){
                         window.length = window.length + 510;
                     }
-
                     if(window.percentDone<0.32602){
                         window.length = window.length + 140;
                     }
@@ -233,25 +267,28 @@ define([
                     //draw the line
                     line.style.strokeDasharray = [ window.length ,pathLength].join(' ');
                 }
+
             if(percentDone<0.99){
                 //Show line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
             }
+
             if(percentDone>0.985){
                 //Hide line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '0', ease: Expo.easeInOut });
             }
+
             if(percentDone<0.92) {
                 //Get footer on scroll
                 TweenMax.to($("#footer"), 2.85, { "top": '0px', ease: Expo.easeInOut });
             }
         },
 
+        /**
+        *    Callback function for click event closeSidebar
+        **/
         closeSidebar: function(){
             $('html,body').css({'overflow':'auto'});
-
-            //Set footer color
-
 
             // Set Sound to 60%
             var mySound = $('#mySound');
@@ -272,11 +309,12 @@ define([
                 $('#logo').css({'color':'white'});
                 $('.volumn').css({'fill':'white'});
             }, 400);
+
             //Set sound to volume 100%
             var mySound = $('#mySound');
             mySound.animate({volume:.1}, 750);
 
-            //---- Come back -----//
+            // Come back
             if ($(".leftActive")[0]){
                 TweenMax.to($("#leftSidebar"), 0.75, { "left": '-70%', ease: Expo.easeInOut });
                 TweenMax.to($(".leftData"), 0.75, { "right": '0', ease: Expo.easeInOut });
@@ -295,7 +333,11 @@ define([
 
         },
 
-        //---Image view on scroll ADN & Flower ----//
+        /**
+        *    Image view on scroll ADN & Flower
+        *    Use scroll percent for showing multiple image
+        *    @param el
+        **/
         imageAnimation:function(el){
             var view = this,
             self = el[0],
@@ -306,22 +348,22 @@ define([
             if(self.classList.contains('scrollable')){
                 return;
             }else{
-                
+
                 if(self.classList.contains('LContentADN')){
                     object = document.querySelector('#animated-adn');
                     type = 'adn',
                     self= $('.LContentADN');
-                    
+
                 }else if(self.classList.contains('RContentFlw')){
                     object = document.querySelector('#animated-flower');
                     type = 'flower',
                     self= $('.RContentFlw');
-                    
+
                 }else if(self.classList.contains('RContentAur')){
                     object = document.querySelector('#animated-aurore');
                     type = 'aurore',
                     self= $('.RContentAur');
-                    
+
                 };
 
                 el[0].addEventListener('mousewheel', function(e){
@@ -333,18 +375,35 @@ define([
                 el[0].classList.add('scrollable');
             };
         },
-        overflowAuto:function(){
+
+        /**
+        *    Set the html page to automatic overflow
+        **/
+        overflowAuto: function(){
             setTimeout(function(){
                 $('html,body').css({'overflow':'auto'});
             }, 100);
         },
-        overflowHidden:function(callback){
+
+        /**
+        *    Set the html page to hidden overflow
+        **/
+        overflowHidden: function(callback){
             setTimeout(function(){
                 $('html,body').css({'overflow':'hidden'});
             }, 100);
             callback.call(this);
         },
-        scrollAnimation:function(e, el, object, type){
+
+        /**
+        *    Scroll animation for Flower and ADN
+        *    using multiple image render
+        *    @param e
+        *    @param el
+        *    @param object
+        *    @param type
+        **/
+        scrollAnimation: function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
             console.log(el.data());
             var data = el.data();
@@ -354,7 +413,6 @@ define([
             if(delta === -1){
                 if(cpt > 1){
                     cpt--;
-                    //overflow.hidden();
                     object.src = "img/masterpiece/sequences/"+type+" ("+cpt+").png";
                     el.data('value', cpt);
                 }else{
@@ -377,7 +435,11 @@ define([
                 };
             };
         },
-        paralax:function(){
+
+        /**
+        *    Parallax background
+        **/
+        paralax: function(){
             var width = $(window).width()/2,
             height = $(window).height()/2,
             rate1 = 0.02;
@@ -386,7 +448,7 @@ define([
                 var x = e.clientX - width,
                 y = e.clientY - height;
                 $('#filter1').css({
-                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)' 
+                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
                 });
                 $('#filter3').css({
                     'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
@@ -424,7 +486,6 @@ define([
             this.loaderVieww.render();
 
             // Set content on view on div choose
-
             this.$el.find('#menu').append(this.menuView.el);
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
@@ -440,5 +501,6 @@ define([
             // Dispatch all events in others views of this view
             this.delegateEvents();
         }
+
     });
 });

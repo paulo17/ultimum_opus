@@ -9,13 +9,18 @@ define([
 {
     return Backbone.View.extend({
         className: "Footer_Content",
+
+        // Backbone Event object
         events: {
             'click #player':'myPlayer'
         },
-        
+
+        /**
+        *    View constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
         },
-
 
         myPlayer: function(){
             var mySound = $('#mySound');
@@ -31,9 +36,10 @@ define([
                 mySound.animate({volume: 0}, 750);
             }
         },
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }
-    });
 
+    });
 });
