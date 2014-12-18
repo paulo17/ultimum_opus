@@ -31,7 +31,6 @@ define([
             'click .btnDiscover':'lowerSound',
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
-            'mouseover #home':'test',
             'keydown':'keydown',
             'mouseenter .RContentFlw': function(){ this.imageAnimation($('.RContentFlw')) },
             'mouseenter .LContentADN' : function(){ this.imageAnimation($('.LContentADN')) },
@@ -173,7 +172,6 @@ define([
                     $(".second").animate({textShadowBlur:1}, {duration: 2500});
                 }});
             }, 1000);
-
         },
 
         /**
@@ -271,6 +269,7 @@ define([
             if(percentDone<0.99){
                 //Show line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+
             }
 
             if(percentDone>0.985){
@@ -405,10 +404,9 @@ define([
         **/
         scrollAnimation: function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-            console.log(el.data());
             var data = el.data();
 
-            console.log(data);
+
             var cpt = data.value;
             if(delta === -1){
                 if(cpt > 1){
@@ -443,19 +441,19 @@ define([
             var width = $(window).width()/2,
             height = $(window).height()/2,
             rate1 = 0.02;
-            rate2 = 0.1;
+            rate2 = 0.008;
             $(window).mousemove(function(e){
                 var x = e.clientX - width,
                 y = e.clientY - height;
                 $('#filter1').css({
-                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
+                    'transform': 'rotateY('+(-Math.floor(x*rate2))+'deg)'
                 });
                 $('#filter3').css({
-                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
+                    'transform': 'rotateY('+(-Math.floor(x*rate2))+'deg)'
                 });
                 $('#filter2').css({
-                    'left': Math.floor(x*rate2)+'px',
-                    'transform' : 'translateY('+Math.floor(y*rate2) + 'px)',
+                    'left': Math.floor(x*rate1)+'px',
+                    'transform' : 'translateY('+Math.floor(y*rate1) + 'px)',
                     /*'transition' : 'bottom 0s'*/
                 });
             });

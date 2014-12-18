@@ -58,7 +58,7 @@ define([
             if(window.percentDone<0.66){
                 $(".LContentShell").fadeIn(1000);
             }
-            if(window.percentDone<.63 && window.percentDone<.61){
+            if(window.percentDone<.65 && window.percentDone<.64){
                 TweenMax.to($(".shellTitle"), 0.35, { "left": '16%', ease: Expo.easeInOut });
             }
             if(window.percentDone>.70 && $('.shellTitle').position().left > 0){

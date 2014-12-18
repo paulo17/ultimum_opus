@@ -8,12 +8,15 @@ define([
 {
     return Backbone.View.extend({
         className: "myEnd",
-        events: {},
 
         /**
         *    Constructor for initialize the view
         *    @param object options
         **/
+        events: {
+            'mouseenter #Story':'animateStory'
+        },
+
         initialize: function(options) {
             $(window).scroll(this.myEndAnim);
         },
@@ -21,10 +24,17 @@ define([
         /**
         *    Stop the parallax animation at the end of the page
         **/
+        animate: function(){
+            console.log('ee');
+        },
+
         myEndAnim: function(){
-          console.log(window.percentDone);
             if(window.percentDone<0.05){
                 TweenMax.to($("#paralax"), .85, { "opacity": '0', ease: Expo.easeInOut });
+            }
+
+            if(window.percentDone>0.05){
+                TweenMax.to($("#paralax"), .85, { "opacity": '0.2', ease: Expo.easeInOut });
             }
         },
 
