@@ -15,6 +15,7 @@ define([
         initialize: function(options) {
             pageDomAddedSignal.add(this.css, this);
             pageDomAddedSignal.add(this.panel, this);
+            pageDomAddedSignal.add(this.stepsPos, this); 
             pageDomAddedSignal.add(this.scroll, this);
             pageDomAddedSignal.add(this.drag, this); 
            
@@ -32,18 +33,26 @@ define([
                 $('#menu-'+pos[1].element).addClass('viewing');
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 $('#menu-'+pos[2].element).addClass('viewing');
+                console.log(pos[2].element);
             }else if(win.scrollTop() > pos[4].position && win.scrollTop() < pos[2].position){
                  $('#menu-'+pos[3].element).addClass('viewing');
+                 console.log(pos[3].element);
             }else if(win.scrollTop() > pos[5].position && win.scrollTop() < pos[3].position){
                  $('#menu-'+pos[4].element).addClass('viewing');
+                 console.log(pos[4].element);
             }else if(win.scrollTop() > pos[6].position && win.scrollTop() < pos[4].position){
                 $('#menu-'+pos[5].element).addClass('viewing');
+                console.log(pos[5].element);
             }else if(win.scrollTop() > pos[7].position && win.scrollTop() < pos[5].position){
                 $('#menu-'+pos[6].element).addClass('viewing');
-            }else if(win.scrollTop() > pos[8].position && win.scrollTop() < pos[6].position){
+                console.log(pos[6].element);
+            }else if(win.scrollTop() > 0 && win.scrollTop() < pos[6].position){
                 $('#menu-'+pos[7].element).addClass('viewing');
-            }else if(win.scrollTop() < pos[7].position){
+                console.log(win.scrollTop());
+                console.log(pos[8].position);
+            }else if(win.scrollTop() == 0){
                 $('#menu-'+pos[8].element).addClass('viewing');
+                console.log(pos[8].element);
             };
         },
         drag:function(){
@@ -58,6 +67,7 @@ define([
                 containment:'#limitation',
                 //grid:[0, grid],
                 start:function(){
+                    this.style.left = 0;
                     $('html').css({'overflow':'auto'});
                     $('section').css({
                         'display':'block',
@@ -81,17 +91,12 @@ define([
                 },
                 drag:function(){
                     $('body').css({'overflow':'auto'});
-                    
+                    this.style.left = 0;
                     var top = this.offsetTop;
                     var percent =  ((($('#limitation').height() - top)-$('.draggable').height())*150)/($('#limitation').height()-$('.draggable').height()); //création du poin 0
                     console.log(percent);
                     move = Math.floor(top/ratio);
-                    //moveUl=(((topL/self.ratioMenu)*100)/self.height);
-                    //console.log(moveUl);
                     $(window).scrollTop(move);
-                    /*$('section ul').css({
-                        'bottom': 50 - percent+'%'
-                    });*/
                 }
 
             })
@@ -114,6 +119,7 @@ define([
             var positions = [];
             for(var i=panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
+                console.log(this.positions);
             };
             
         },
@@ -129,7 +135,6 @@ define([
 
             win.scroll(function(){
                 var percent = (($('html').height()-win.scrollTop())*150)/($('html').height());
-             //   console.log(percent);
                 $('.draggable').css({
                     'top': win.scrollTop()*self.ratio + 'px',
                 });
@@ -139,6 +144,13 @@ define([
 
                 self.comparing(win, pos);
             });
+        },
+        stepsPos:function(){
+            var margin = ($('#steps').height()-(9*10)+5)/9;
+            console.log(margin);
+            $('.step-menu').css({
+               'margin-top' : margin + 'px'
+            })
         },
         render: function(){
             this.$el.html(_.template( tpl ));

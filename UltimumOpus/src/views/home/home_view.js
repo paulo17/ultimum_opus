@@ -122,7 +122,11 @@ define([
             setTimeout(function() {
                 $( "#loader" ).fadeOut( "slow", function(){
                     $('html,body').css({'overflow':'auto'});
+                    var li = document.getElementsByClassName('step-animation');
 
+                    for(var i = 0; i < li.length; i++){
+                        $('#limitation ul li:nth-child('+i+')').animate({'opacity':'0'}, i*500);
+                    };
                 });
                 TweenMax.to($(".first"), 1.5, { "left": '0', ease: Expo.easeInOut });
                 TweenMax.to($(".first"), 2.95, { "opacity": '1', ease: Expo.easeInOut });
@@ -346,7 +350,6 @@ define([
         },
         scrollAnimation:function(e, el, object, type){
             var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-            console.log(el.data());
             var data = el.data();
 
 
