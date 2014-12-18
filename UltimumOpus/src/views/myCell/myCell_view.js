@@ -8,15 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "RContentCell myPanel",
+
+        // Backbone event object
         events: {
             'click #rightDiCell':'rightSidebarCell'
         },
 
-
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animateCell);
         },
 
+        /**
+        *    Animate Cellule title and content using transition
+        **/
         animateCell: function(){
             if(window.percentDone<0.831){
                 $(".RContentCell").fadeIn(1000);
@@ -31,6 +39,9 @@ define([
             }
         },
 
+        /**
+        *    Print right sidebar
+        **/
         rightSidebarCell: function(){
             //Block Scroll
             $('html,body').css({'overflow':'hidden'});
@@ -53,10 +64,10 @@ define([
             scrollToElement('.RContentCell', 600);
         },
 
-
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

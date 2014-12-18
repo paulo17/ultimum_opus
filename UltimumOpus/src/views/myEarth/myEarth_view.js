@@ -8,15 +8,24 @@ define([
 {
     return Backbone.View.extend({
         className: "LContentEarth leftData myPanel",
+
+        // Backbone event object
         events: {
             'click #leftDiEarth':'leftSidebarEarth'
         },
 
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animLineEarth);
 
         },
 
+        /**
+        *    Animate Earth title and content using transition
+        **/
         animLineEarth: function(){
             if(window.percentDone<.164){
                 $(".LContentEarth").fadeIn(1000);
@@ -32,6 +41,9 @@ define([
             }
         },
 
+        /**
+        *    Print left sidebar
+        **/
         leftSidebarEarth: function(){
             $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".earthTitle"), 1.25, { "left": '73%', ease: Expo.easeInOut });
@@ -43,12 +55,14 @@ define([
             TweenMax.to($(".LContentEarth"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
         },
 
+        /**
+        *
+        **/
         getEarth: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
             }
-
             scrollToElement('.LContentEarth', 600);
         },
 

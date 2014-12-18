@@ -8,14 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "LContentCab leftData myPanel",
+
+        // Backbone event object
         events: {
             'click #leftDiCab':'leftSidebarCab'
         },
 
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animLineCab);
         },
 
+        /**
+        *    Print left sidebar
+        **/
         leftSidebarCab: function(){
             $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".cabTitle"), 1.25, { "left": '74%', ease: Expo.easeInOut });
@@ -36,6 +45,10 @@ define([
             scrollToElement('.LContentCab', 600);
         },
 
+        /**
+        *    Main SVG animation line on Cab image
+        *    Add title and content transition when appears
+        **/
         animLineCab: function(){
           if(window.length > 11384.637220818546){
               TweenMax.to($(".line_1"), .45, { "stroke-dasharray": "711.4, 713.8", ease: Expo.easeInOut });
@@ -58,6 +71,11 @@ define([
                 TweenMax.to($(".line_8"),1.25, { "stroke-dasharray": "0, 713.8", ease: Expo.easeInOut });
 
             }
+
+            if(window.percentDone<.38 && window.percentDone>.37){
+                TweenMax.to($(".cabTitle"), 0.45, { "left": '16%', ease: Expo.easeInOut });
+            }
+
             if(window.percentDone>.417 &&  $('.cabTitle').position().left > 0){
                 $('.cabTitle').css({'left':'-23.5%'});
                 $(".LContentCab").fadeOut(700);
@@ -65,14 +83,12 @@ define([
             if(window.percentDone<.403){
                 $(".LContentCab").fadeIn(1000);
             }
-            if(window.percentDone<.38 && window.percentDone>.37){
-                TweenMax.to($(".cabTitle"), 0.35, { "left": '16%',"opacity": '1', ease: Expo.easeInOut });
-            }
         },
 
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

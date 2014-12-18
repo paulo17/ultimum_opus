@@ -8,28 +8,40 @@ define([
 {
     return Backbone.View.extend({
         className: "RContentFlw myPanel",
+
+        // Backbone event object
         events: {
             'click #rightDiFlw':'rightSidebarFlw'
         },
 
-
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animateFlw);
         },
 
+        /**
+        *    Animate Flower title and content using transition
+        **/
         animateFlw: function(){
             if(window.percentDone<0.525){
                 $(".RContentFlw").fadeIn(1000);
             }
-            if(window.percentDone<.498 && window.percentDone>.48){
-                TweenMax.to($(".title_flw"), 0.65, { "left": '16%', ease: Expo.easeInOut });
+            if(window.percentDone<.508 && window.percentDone>.49){
+                TweenMax.to($(".title_flw"), 0.45, { "left": '16%', ease: Expo.easeInOut });
             }
             // Hide block
             if(window.percentDone>.542 &&  $('.title_flw').position().left > 0){
-                $('.title_flw').css({'left':'30.5%'});
+                $('.title_flw').css({'left':'-30.5%'});
                 $(".RContentFlw").fadeOut(700);
             }
         },
+
+        /**
+        *    Print right sidebar
+        **/
         rightSidebarFlw: function(){
             //Block Scroll
             $('html,body').css({'overflow':'hidden'});
@@ -43,6 +55,9 @@ define([
             TweenMax.to($("#route_home"), 0.75, { "left": '-50.2%', ease: Expo.easeInOut });
         },
 
+        /**
+        *
+        **/
         getFlw: function(){
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;

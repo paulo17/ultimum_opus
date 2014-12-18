@@ -10,14 +10,19 @@ define([
     var AppView = Backbone.View.extend({
         el: "#main",
         percent: 0,
+
+        // Backbone Event object
         events: {
         },
 
+        /**
+        *    View constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(document).ready(function($){
                 $('#Parallax').mousemove(
                     function(e){
-                        console.log("ddddd");
                         /* Work out mouse position */
                         var offset = $(this).offset();
                         var xPos = e.pageX - offset.left;
@@ -32,12 +37,8 @@ define([
                             function(){
                                 var diffX = $('#Parallax').width() - $(this).width();
                                 var diffY = $('#Parallax').height() - $(this).height();
-
                                 var myX = diffX * (mouseXPercent / 100); //) / 100) / 2;
-
-
                                 var myY = diffY * (mouseYPercent / 100);
-
 
                                 var cssObj = {
                                     'left': myX + 'px',
@@ -48,17 +49,17 @@ define([
 
                             }
                         );
-
                     }
                 );
             });
         },
 
-
-
         resize: function(){
         },
 
+        /**
+        *    Remove init View
+        **/
         remove: function() {
             if(this.content) {
                 this.content.remove();
@@ -83,7 +84,7 @@ define([
                 this.content.render();
             }
         }
-    });
 
+    });
     return new AppView();
 });
