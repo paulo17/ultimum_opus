@@ -12,6 +12,8 @@ define([
         events: {},
 
         initialize: function(options) {
+            console.log('initialize');
+
             _.bindAll(this, 'render');
 
             // init model
@@ -23,11 +25,13 @@ define([
             this.render = _.wrap(this.render, function(render) {
                 // get data before render
                 _this.beforeRender(feature, function(){
+                    console.log('call render after beforeRender');
                     render();
                 });
                 return _this;
             });
 
+            this.render();
         },
 
         /**
@@ -66,7 +70,7 @@ define([
         *    Render the view and put parameter for template
         **/
         render: function(){
-            console.log('render template');
+            console.log('render template starting');
             console.log(this.tplData);
             if (typeof this.tplData == 'undefined'){
                 this.$el.html(_.template( tpl ) );
@@ -84,6 +88,7 @@ define([
                         date: this.tplData.date,
                         video: this.tplData.video,
                 }));
+
             }
             return this;
         }

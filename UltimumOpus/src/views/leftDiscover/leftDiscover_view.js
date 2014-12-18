@@ -28,6 +28,7 @@ define([
 	                return _this;
 	            });
 
+	            this.render();
 	        },
 
 	        /**
@@ -85,7 +86,8 @@ define([
 		                video: this.tplData.video,
 	            	}));
 	        	   }
-	            return this;
-	        }
+	        	   return this;
+	         }
+
 	});
 });

@@ -161,18 +161,20 @@ define([
         //set css on click btn left discvoer
 
         leftBtn: function(e){
+            $('.content_left').remove();
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
+            console.log('leftBtn click feature = ' + feature);
             this.leftDiscoverView = new LeftDiscoverView({'feature': feature});
-            this.leftDiscoverView.render();
             this.$el.find('#leftSidebar').append(this.leftDiscoverView.el);
 
             $('#logo').css({'color':'black'});
         },
 
         rightBtn: function(e){
+            $('.content_right').remove();
             var feature = $(e.target.parentNode.parentNode).attr('data-feature');
+            console.log('rightBtn click feature = ' + feature);
             this.rightDiscoverView = new RightDiscoverView({'feature': feature});
-            this.rightDiscoverView.render();
             this.$el.find('#rightSidebar').append(this.rightDiscoverView.el);
 
             $('#player').css({'color':'black'});
