@@ -235,7 +235,7 @@ define([
             if(percentDone<0.99){
                 //Show line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
-                
+
             }
             if(percentDone>0.985){
                 //Hide line
@@ -381,18 +381,18 @@ define([
             var width = $(window).width()/2,
             height = $(window).height()/2,
             rate1 = 0.02;
-            rate2 = 0.1;
+            rate2 = 0.008;
             $(window).mousemove(function(e){
                 var x = e.clientX - width,
                 y = e.clientY - height;
                 $('#filter1').css({
-                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)' 
+                    'transform': 'rotateY('+(-Math.floor(x*rate2))+'deg)' 
                 });
                 $('#filter3').css({
-                    'transform': 'rotateY('+(-Math.floor(x*rate1))+'deg)'
+                    'transform': 'rotateY('+(-Math.floor(x*rate2))+'deg)'
                 });
                 $('#filter2').css({
-                    'left': Math.floor(x*rate2)+'px',
+                    'left': Math.floor(x*rate1)+'px',
                     'transform' : 'translateY('+Math.floor(y*rate1) + 'px)',
                     /*'transition' : 'bottom 0s'*/
                 });
