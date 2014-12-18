@@ -20,7 +20,7 @@ define([
             }
 
             if(window.percentDone>0.05){
-                TweenMax.to($("#paralax"), .85, { "opacity": '1', ease: Expo.easeInOut });
+                TweenMax.to($("#paralax"), .85, { "opacity": '0.2', ease: Expo.easeInOut });
             }
         },
         render: function(){

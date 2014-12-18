@@ -235,6 +235,7 @@ define([
             if(percentDone<0.99){
                 //Show line
                 TweenMax.to($("#route_home"), 0.75, { "opacity": '1', ease: Expo.easeInOut });
+                
             }
             if(percentDone>0.985){
                 //Hide line
@@ -348,7 +349,7 @@ define([
             console.log(el.data());
             var data = el.data();
 
-            console.log(data);
+
             var cpt = data.value;
             if(delta === -1){
                 if(cpt > 1){
@@ -392,7 +393,7 @@ define([
                 });
                 $('#filter2').css({
                     'left': Math.floor(x*rate2)+'px',
-                    'transform' : 'translateY('+Math.floor(y*rate2) + 'px)',
+                    'transform' : 'translateY('+Math.floor(y*rate1) + 'px)',
                     /*'transition' : 'bottom 0s'*/
                 });
             });
