@@ -4,7 +4,7 @@ define([
     'config',
     'text!templates/app/app.html',
     'css!templates/app/app.css',
-    'signals/page_dom_added_signal',
+    'signals/page_dom_added_signal'
 ], function(Backbone, _, Config, tpl, css, pageDomAddedSignal)
 {
     var AppView = Backbone.View.extend({
@@ -20,6 +20,8 @@ define([
         *    @param object options
         **/
         initialize: function(options) {
+            pageDomAddedSignal.add(this.detectMob, this);
+
             $(document).ready(function($){
                 $('#Parallax').mousemove(
                     function(e){
@@ -54,7 +56,22 @@ define([
             });
         },
 
-        resize: function(){
+        detectMob: function () {
+            if( navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+                || window.innerWidth <= 750
+                || window.innerHeight <= 640
+            ){
+                $('.m-notif').show();
+            }
+            else {
+                $('.m-notif').hide();
+            }
         },
 
         /**
