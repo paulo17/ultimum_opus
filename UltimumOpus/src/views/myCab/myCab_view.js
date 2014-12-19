@@ -8,14 +8,23 @@ define([
 {
     return Backbone.View.extend({
         className: "LContentCab leftData myPanel",
+
+        // Backbone event object
         events: {
             'click #leftDiCab':'leftSidebarCab'
         },
 
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             $(window).scroll(this.animLineCab);
         },
 
+        /**
+        *    Print left sidebar
+        **/
         leftSidebarCab: function(){
             $('html,body').css({'overflow':'hidden'});
             TweenMax.to($(".cabTitle"), 1.25, { "left": '74%', ease: Expo.easeInOut });
@@ -36,6 +45,10 @@ define([
             scrollToElement('.LContentCab', 600);
         },
 
+        /**
+        *    Main SVG animation line on Cab image
+        *    Add title and content transition when appears
+        **/
         animLineCab: function(){
           if(window.length > 11384.637220818546){
               TweenMax.to($(".line_1"), .45, { "stroke-dasharray": "711.4, 713.8", ease: Expo.easeInOut });
@@ -75,6 +88,7 @@ define([
         render: function(){
             this.$el.html(_.template( tpl ));
         }
+
     });
 
 });

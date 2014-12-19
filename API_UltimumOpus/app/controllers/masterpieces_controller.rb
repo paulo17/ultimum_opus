@@ -2,19 +2,27 @@ class MasterpiecesController < ApplicationController
 	before_filter :restrict_access
 	respond_to :json
 
+	##
+	# => New Masterpiece
+	##
 	def new
 		@masterpiece = Masterpiece.new
 	end
 
+	##
+	# => Get all Masterpiece and render to the view
+	##
 	def index
 		@masterpieces = Masterpiece.all
-
 		respond_to do |format|
 			format.html
 			format.json { render json: @masterpieces}
 		end
 	end
 
+	##
+	# => Create new Masterpiece and upload image
+	##
 	def create
 		@masterpiece = Masterpiece.new(params[:masterpiece]
 			.permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend, :feature))
@@ -34,10 +42,16 @@ class MasterpiecesController < ApplicationController
 		end
 	end
 
+	##
+	# => Edit Masterpiece by ID
+	##
 	def edit
 		@masterpiece = Masterpiece.find(params[:id])
 	end
 
+	##
+	# => Update Masterpiece by ID
+	##
 	def update
 		@masterpiece = Masterpiece.find(params[:id])
 
@@ -48,6 +62,9 @@ class MasterpiecesController < ApplicationController
 		end
 	end
 
+	##
+	# => Show Masterpiece by ID
+	##
 	def show
 		if Masterpiece.exists?(:id => params[:id])
 			@masterpiece = Masterpiece.find(params[:id])
@@ -60,6 +77,9 @@ class MasterpiecesController < ApplicationController
 		end
 	end
 
+	##
+	# => Get Masterpiece by Feature
+	##
 	def feature
 		@masterpiece = Masterpiece.where('feature' => params[:feature])
 		if !@masterpiece.empty?
@@ -69,13 +89,18 @@ class MasterpiecesController < ApplicationController
 		end
 	end
 
+	##
+	# => Delete Masterpiece by ID
+	##
 	def destroy
 		@masterpiece = Masterpiece.find(params[:id])
 		@masterpiece.destroy
-
 		redirect_to masterpieces_path
 	end
 
+	##
+	# => Upload image to the server
+	##
 	private
 	def uploadImage(image)
 		uploaded_io = image
@@ -86,11 +111,17 @@ class MasterpiecesController < ApplicationController
 		return @image_path
 	end
 
+	##
+	# => Masterpiece authorized params
+	##
 	private
 	def masterpiece_params
 		params.require(:masterpiece).permit(:titre, :date, :text, :image, :image2, :image3, :video, :legend, :feature)
 	end
 
+	##
+	# => Secure restrict access
+	##
 	private
 	def restrict_access
 		@request = request.fullpath
@@ -106,5 +137,4 @@ class MasterpiecesController < ApplicationController
 	  		end if Rails.env.production?
   		end
   	end
-
 end

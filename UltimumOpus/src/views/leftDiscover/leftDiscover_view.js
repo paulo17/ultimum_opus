@@ -11,6 +11,10 @@ define([
 	        className: "content_left",
 	        events: {},
 
+	         /**
+        		*    Constructor for initialize the view
+        		*    @param object options
+        		**/
 	        initialize: function(options) {
 	            _.bindAll(this, 'render');
 
@@ -41,7 +45,7 @@ define([
 	                this.Masterpiece.url = "http://apiultimumopus.maximeberthelot.fr/masterpieces/feature/" + feature;
 	                this.Masterpiece.fetch({
 	                    success: function(model, response, options){
-	                   	console.log(response);
+	                   	// store data response in View object
 	                        	self.tplData = response[0];
 	                        	callback.call(this);
 	                    },
@@ -58,7 +62,6 @@ define([
 	        **/
 	        beforeRender: function(feature, callback) {
 	            this.getByFeature(feature, function(){
-	                console.log('data request done');
 	                callback.call(this);
 	            });
 	        },
@@ -67,8 +70,6 @@ define([
 	        *    Render the view and put parameter for template
 	        **/
 	        render: function(){
-	        	   console.log('render template');
-            	   console.log(this.tplData);
 	        	   if (typeof this.tplData == 'undefined'){
 	        	   	this.$el.html(_.template( tpl ) );
 	        	   }else{
