@@ -27,7 +27,7 @@ define([
 
         // Backbone Event object
         events: {
-            'click .Sidebar':'closeSidebar',
+            'click #logo':'closeSidebar',
             'click .btnDiscover':'lowerSound',
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
@@ -60,11 +60,9 @@ define([
             this.menuView = new MenuView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
-        },
 
-        /**
-        *    Remove all init View
-        **/
+
+        },
         remove: function() {
             // Remove view after his init
             this.myADNView.remove();
@@ -252,7 +250,7 @@ define([
                     if(window.percentDone<0.3633){
                         window.length = window.length + 210;
                     }
-                    if(window.percentDone<0.325){
+                    if(window.percentDone<0.355){
                         window.length = window.length + 600;
                     }
                     if(window.percentDone<0.275){

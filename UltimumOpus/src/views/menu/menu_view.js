@@ -9,16 +9,25 @@ define([
 ], function(pageDomAddedSignal, UI, Backbone, _, Config, tpl, css)
 {
     return Backbone.View.extend({
+
         className: "aside-menu",
+        height:null,
+        ratio: null,
+        ratioMenu:null,
+
         events: {},
-        
+
+        /**
+        *    Constructor for initialize the view
+        *    @param object options
+        **/
         initialize: function(options) {
             pageDomAddedSignal.add(this.css, this);
             pageDomAddedSignal.add(this.panel, this);
             pageDomAddedSignal.add(this.stepsPos, this); 
             pageDomAddedSignal.add(this.scroll, this);
-            pageDomAddedSignal.add(this.drag, this); 
-           
+            pageDomAddedSignal.add(this.drag, this);
+
         },
         height:null,
         ratio: null,
@@ -33,13 +42,13 @@ define([
                 oldClass = 'visible'
                 stepClass = 'hidden';
             }
+            
             $('.panel-menu').removeClass('viewing');
+
             if(win.scrollTop() > pos[1].position){
-                //console.log(pos[0].element);
                 $('#menu-'+pos[0].element).addClass('viewing');
                 //$('#step-'+pos[0].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
-                //console.log(pos[1].element);
                 $('#menu-'+pos[1].element).addClass('viewing');
                 $('#step-'+pos[1].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
@@ -67,8 +76,13 @@ define([
                 $('#menu-'+pos[8].element).addClass('viewing');
                 $('#step-'+pos[8].element).switchClass( oldClass, stepClass);
             };
+
         },
-        drag:function(){
+
+        /**
+        *
+        **/
+        drag: function(){
             var grid = Math.floor(document.querySelector('#limitation').clientHeight/9),
             ratio = $('#limitation').height()/$('html').height(),
             move =0,
@@ -79,6 +93,7 @@ define([
                 axis:'y',
                 containment:'#limitation',
                 //grid:[0, grid],
+
                 start:function(){
                     this.style.left = 0;
                     $('html').css({'overflow':'auto'});
@@ -91,6 +106,7 @@ define([
                         });
                     },200)
                 },
+
                 stop:function(){
 
                     $('section').css({
@@ -102,20 +118,26 @@ define([
                         });
                     },500)
                 },
+
                 drag:function(){
                     $('body').css({'overflow':'auto'});
                     this.style.left = 0;
+
                     var top = this.offsetTop;
                     var percent =  ((($('#limitation').height() - top)-$('.draggable').height())*150)/($('#limitation').height()-$('.draggable').height()); //création du poin 0
                     console.log(percent);
                     move = Math.floor(top/ratio);
+                    //moveUl=(((topL/self.ratioMenu)*100)/self.height);
+
                     $(window).scrollTop(move);
                 }
 
             })
         },
+
         positions:[],
-        css:function(){
+
+        css: function(){
             $('#menu').css({'height':'0','width':'0'});
             $('aside').css({'position':'fixed'});
 
@@ -127,26 +149,29 @@ define([
                 })
             },100);
         },
+
         panel:function(){
             var panels = document.getElementsByClassName('panel');
             var positions = [];
             for(var i=panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
                 console.log(this.positions);
+                this.positions.push({element:panels[i].id, position:panels[i].offsetTop});
             };
-            
         },
+
         scroll:function(){
 
             this.ratio = $('#limitation').height()/$('html').height();
             this.ratioMenu = $('#limitation').height()/(this.height);
-            
 
             var self = this,
             pos = this.positions,
             win = $(window),
             previousScroll = 0;
             
+            pos = this.positions;
+            win = $(window);
 
             win.scroll(function(){
                 var currentScroll = $(this).scrollTop()
@@ -165,7 +190,6 @@ define([
                 $('section ul').css({
                     'bottom': 50 - percent+'%'
                 });
-
                 self.comparing(win, pos);
             });
         },
@@ -176,9 +200,10 @@ define([
                'margin-top' : margin + 'px'
             })
         },
+
         render: function(){
             this.$el.html(_.template( tpl ));
         }
-    });
 
+    });
 });

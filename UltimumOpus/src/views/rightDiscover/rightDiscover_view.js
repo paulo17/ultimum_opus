@@ -49,6 +49,7 @@ define([
                     success: function(model, response, options){
                         // Store data in View object
                         self.tplData = response[0];
+                        window.myData = self.tplData;
                         callback.call(this);
                     },
                     error: function(error){
@@ -75,7 +76,11 @@ define([
             if (typeof this.tplData == 'undefined'){
                 this.$el.html(_.template( tpl ) );
             }else{
-                // Adding data in template
+
+                $('#img').on('load', function(){
+                    $('.masterpiece').fadeIn();
+                });
+
                 this.$el.html(_.template( tpl, {
                         titre: this.tplData.titre,
                         legend: this.tplData.legend,
@@ -85,7 +90,7 @@ define([
                         image2: this.tplData.image3,
                         image2: this.tplData.image3,
                         date: this.tplData.date,
-                        video: this.tplData.video,
+                        video: this.tplData.video
                 }));
             }
             return this;

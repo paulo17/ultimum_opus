@@ -31,13 +31,13 @@ define([
             var scrollToElement = function(el, ms){
                 var speed = (ms) ? ms : 600;
                 $('html,body').animate({scrollTop: $(el).offset().top}, speed);
-                TweenMax.to($(".shellTitle"), 1.25, { "left": '70%', ease: Expo.easeInOut });
+                TweenMax.to($(".shellTitle"), .75, { "left": '70%', ease: Expo.easeInOut });
 
                 $('.leftData').addClass('leftActive');
 
 
                 TweenMax.to($("#route_home"), 0.75, { "left": '50%', ease: Expo.easeInOut });
-                TweenMax.to($("#leftSidebar"), 0.75, { "left": '0px', ease: Expo.easeInOut });
+                TweenMax.to($("#leftSidebar"), .75, { "left": '0px', ease: Expo.easeInOut });
                 TweenMax.to($(".LContentShell"), 0.75, { "right": '-50%', ease: Expo.easeInOut });
             }
 
@@ -58,7 +58,7 @@ define([
             if(window.percentDone<0.66){
                 $(".LContentShell").fadeIn(1000);
             }
-            if(window.percentDone<.65 && window.percentDone<.64){
+            if(window.percentDone<.65 && window.percentDone>.64){
                 TweenMax.to($(".shellTitle"), 0.35, { "left": '16%', ease: Expo.easeInOut });
             }
             if(window.percentDone>.70 && $('.shellTitle').position().left > 0){

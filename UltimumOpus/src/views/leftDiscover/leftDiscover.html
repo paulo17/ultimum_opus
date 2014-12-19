@@ -1,21 +1,22 @@
-<!-- Template for Rightdiscover View -->
 <div class="masterpiece">
+	<svg version="1.1" id="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+		<path fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" d="M13,13l14.2,14.2 M27,13L13,27"/>
+		<g>
+			<path d="M20,1c10.5,0,19,8.5,19,19s-8.5,19-19,19S1,30.5,1,20S9.5,1,20,1 M20,0C9,0,0,9,0,20s9,20,20,20s20-9,20-20S31,0,20,0L20,0
+				z"/>
+		</g>
+	</svg>
 	<div id="ctnImg">
 		<p id="bg">
-			<img  src="http://apiultimumopus.maximeberthelot.fr<%= image %>">
+			<img  id="img" src="http://apiultimumopus.maximeberthelot.fr<%= image %>">
 		</p>
 	</div>
+	<div class="filtre"></div>
 	<div class="masterpiece-content">
-		<div class="legend">
-			<%= legend %>
-		</div>
-
-		<div class="title">
-			<h1><%= titre %></h1>
-		</div>
-
-		<div class="text">
-			<%= text %>
-		</div>
+		<p class="legend"><%= legend %></p>
+		<h1 class="title"><%= titre %></h1>
+		<p class="text"><%= text %></p>
 	</div>
+	<div class="filtre_bot"></div>
 </div>

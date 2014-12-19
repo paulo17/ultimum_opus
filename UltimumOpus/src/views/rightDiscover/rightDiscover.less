@@ -9,35 +9,110 @@
 }
 
 .content_right{
-	height: 100%;
+  #close{
+	width: 25px;
+	position: absolute;
+	left: 5%;
+	top: 3%;
+	cursor: pointer;
+  }
 }
 
 .masterpiece{
-	height: 100%;
-	margin: 0 auto;
-	padding-left: 15%;
-	padding-right: 15%;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size: 70%;
-	.masterpiece-content{
-		padding-top: 50%;
+  height: 100%;
+  margin: 0 auto;
+  padding-left: 15%;
+  padding-right: 15%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  .masterpiece-content{
+	position: relative;
+	height: 450px;
+	width: 100%;
+	top: 0%;
+	left: 0%;
+	overflow: scroll;
+  }
+  #ctnImg {
+	height: 345px;
+	position: relative;
+	width: 100%;
+	left: 0%;
+	background: white;
+	#bg {
+	  height: auto;
+	  width: 100%;
+	  text-align: center;
+	  img {
+		width: 60%;
+		position: relative;
+		padding: 10% 0;
+	  }
 	}
-	.title{
-		text-align: left;
-		h1{
-			font-size: 0.5em;
-			text-transform: uppercase;
-		}
-	}
-	.legend{
-		font-size: 0.3em;
-		font-style: italic;
-		text-align: center;
-		line-height: 0.8;
-	}
-	.text{
-		font-size: 0.3em;
-		text-align: justify;
-	}
+  }
+
+  .title{
+	text-align: left;
+	padding: 0px 0px 28px 0px;
+	width: 100%;
+	font-size: 1.7vw;
+	position: relative;
+  }
+
+  .legend{
+	font-size: 1vw;
+	font-style: italic;
+	text-align: justify;
+	line-height: 1.8;
+	padding: 6%;
+	font-family: Playfair Display;
+  }
+  .text{
+	font-size: 1vw;
+	text-align: justify;
+	line-height: 2.1;
+	overflow: auto;
+  }
 }
+
+#leftSidebar{
+  width: 60%;
+  position: fixed;
+  height: 100%;
+  background: #ffffff;
+  top: 0px;
+  left: -70%;
+  z-index: 11000;
+  .content_left{
+	#close{
+	  width: 25px;
+	  position: absolute;
+	  right: 5%;
+	  top: 3%;
+	  cursor: pointer;
+	}
+	.masterpiece{
+
+	}
+  }
+}
+
+  .filtre {
+	background: url('img/grad.png') repeat-x;
+	width: 82%;
+	position: absolute;
+	top: 40%;
+	height: 50px;
+	z-index: 100;
+  }
+
+  .filtre_bot{
+	background: url('img/grad.png') repeat-x;
+	width: 82%;
+	position: absolute;
+	bottom: 1%;
+	height: 50px;
+	z-index: 100;
+	transform: rotate(180deg);
+  }
