@@ -24,7 +24,6 @@ define([
         initialize: function(options) {
             pageDomAddedSignal.add(this.css, this);
             pageDomAddedSignal.add(this.panel, this);
-            pageDomAddedSignal.add(this.stepsPos, this); 
             pageDomAddedSignal.add(this.scroll, this);
             pageDomAddedSignal.add(this.drag, this);
 
@@ -33,50 +32,30 @@ define([
         ratio: null,
         ratioMenu:null,
         comparing:function(win, pos){
-            var stepClass,
-            oldClass;
-            if($('.draggable').hasClass('up')){
-                oldClass = 'hidden'
-                stepClass ='visible';
-            }else{
-                oldClass = 'visible'
-                stepClass = 'hidden';
-            }
-            
+                       
             $('.panel-menu').removeClass('viewing');
 
             if(win.scrollTop() > pos[1].position){
                 $('#menu-'+pos[0].element).addClass('viewing');
-                //$('#step-'+pos[0].element).switchClass( oldClass, stepClass);
+                
             }else if(win.scrollTop() > pos[2].position && win.scrollTop() < pos[0].position){
                 $('#menu-'+pos[1].element).addClass('viewing');
-                $('#step-'+pos[1].element).switchClass( oldClass, stepClass);
+                
             }else if(win.scrollTop() > pos[3].position && win.scrollTop() < pos[1].position){
                 $('#menu-'+pos[2].element).addClass('viewing');
-                $('#step-'+pos[2].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[4].position && win.scrollTop() < pos[2].position){
                  $('#menu-'+pos[3].element).addClass('viewing');
-                $('#step-'+pos[3].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[5].position && win.scrollTop() < pos[3].position){
                  $('#menu-'+pos[4].element).addClass('viewing');
-                $('#step-'+pos[4].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[6].position && win.scrollTop() < pos[4].position){
                 $('#menu-'+pos[5].element).addClass('viewing');
-                $('#step-'+pos[5].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > pos[7].position && win.scrollTop() < pos[5].position){
                 $('#menu-'+pos[6].element).addClass('viewing');
-                $('#step-'+pos[6].element).switchClass( oldClass, stepClass);
             }else if(win.scrollTop() > 0 && win.scrollTop() < pos[6].position){
                 $('#menu-'+pos[7].element).addClass('viewing');
-                $('#step-'+pos[7].element).switchClass( oldClass, stepClass);
-                if(!($('.draggable').hasClass('up'))){
-                    $('#step-'+pos[8].element).switchClass( oldClass, stepClass);
-                }
             }else if(win.scrollTop() == 0){
                 $('#menu-'+pos[8].element).addClass('viewing');
-                $('#step-'+pos[8].element).switchClass( oldClass, stepClass);
             };
-
         },
 
         /**
@@ -151,12 +130,11 @@ define([
         },
 
         panel:function(){
+            //Get panels
             var panels = document.getElementsByClassName('panel');
-            var positions = [];
-            for(var i=panels.length - 1; i >= 0; i--){
+            //put position and element id in var
+            for(var i= panels.length - 1; i >= 0; i--){
                 this.positions.push({element:panels[i].id, position:panels[i].offsetTop}); 
-                console.log(this.positions);
-                this.positions.push({element:panels[i].id, position:panels[i].offsetTop});
             };
         },
 
@@ -188,19 +166,11 @@ define([
                     'top': win.scrollTop()*self.ratio + 'px',
                 });
                 $('section ul').css({
-                    'bottom': 50 - percent+'%'
+                    'bottom': 60 - percent+'%'
                 });
                 self.comparing(win, pos);
             });
         },
-        stepsPos:function(){
-            var margin = ($('#steps').height()-(9*10)+5)/9;
-            console.log(margin);
-            $('.step-menu').css({
-               'margin-top' : margin + 'px'
-            })
-        },
-
         render: function(){
             this.$el.html(_.template( tpl ));
         }
