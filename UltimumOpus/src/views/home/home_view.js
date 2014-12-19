@@ -96,7 +96,17 @@ define([
         getMyCover: function(){
 
             // Set !div in current height and width
-            $('.panel').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#menu').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#home').css( { 'width' : $(window).width(), 'height' : $(window).height()+21 } );
+            $('#ADN').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Shell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cell').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Cab').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#about').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()});
           //  $('#effect').css( { 'width' : $(window).width(), 'height' : $(window).height()})
 

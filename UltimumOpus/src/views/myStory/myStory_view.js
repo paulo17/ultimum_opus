@@ -43,18 +43,21 @@ define([
                                 $(".endctnt").animate({textShadowBlur:1}, {duration: 2500});
                             }});
                         }, 1000);
-                        $("#esa").fadeIn(3000);
+                        $("#esa").fadeIn(1500, function(){
+                            $("#rs").fadeIn(1500);
+                        });
                     })
                 })
             }
 
             if(window.percentDone>0.05){
                 TweenMax.to($("#paralax"), .85, { "opacity": '.2', ease: Expo.easeInOut });
-                $("#esa").fadeIn(70, function () {
-                    $("#end_1").fadeIn(70, function(){
-                        $("#end_2").fadeIn(70);
-                    })
-                })
+                $("#esa").fadeOut(300, function(){
+                    $("#rs").fadeOut(500);
+                });
+                $("#end_1").css({'display':'none'});
+                $("#end_2").css({'display':'none'});
+2
             }
 
             // Make shine on title
