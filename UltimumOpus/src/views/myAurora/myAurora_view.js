@@ -50,9 +50,9 @@ define([
             this.getAur();
 
             TweenMax.to($("#rightSidebar"), 0.75, { "right": '0px', ease: Expo.easeInOut });
-            TweenMax.to($(".title_Aur"), 1.25, { "left": '22%', ease: Expo.easeInOut });
+            TweenMax.to($(".title_Aur"), 1.25, { "left": '12%', ease: Expo.easeInOut });
             TweenMax.to($("#myAurContent"), 0.75, { "left": '-100%', ease: Expo.easeInOut });
-            TweenMax.to($("#Aurora .RContentAur #rightBlock"), 0.75, { "left": '-46%', ease: Expo.easeInOut });
+            TweenMax.to($("#Aurora .RContentAur #rightBlock"), 0.75, { "left": '-37%', ease: Expo.easeInOut });
             TweenMax.to($("#route_home"), 0.75, { "left": '-50.2%', ease: Expo.easeInOut });
         },
 
