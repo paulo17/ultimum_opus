@@ -13,14 +13,8 @@
 }
 .viewing{
 	-webkit-filter: blur(0.000068538762866054px);
-	text-shadow: #FFF 0px 0px 10px;
+	text-shadow: #FFF 0px 0px 40px;
 	opacity: 1;
-}
-.visible{
-	opacity: 0.2 !important;
-}
-.hidden{
-	opacity: 0 !important;
 }
 aside{
 	position: fixed;
@@ -33,33 +27,48 @@ aside{
 
 	nav{
 		height: 50%;
-		width: 21px;
+		width: 100%;
 		position: absolute;
 		top: 50%;
-		left:50%;
-		transform:translate(-50%,-50%);
+		transform:translateY(-50%);
 		div{
-			height: 21px;
-			width: 21px;
-			border-radius: 50%;
+			height: 10%;
+			width: 100%;
 			background-color: white;
 			position: absolute;
 			left: 0;
 			bottom: 0;
-			opacity: 0.1;
-			transition: opacity 1s;
+			opacity: 0.3;
+			background-color: rgba(255, 255, 255, 0);
+			transition: background-color 1s;
 			z-index: 400;
-
+			transition:opacity 1s;
 			p{
 				width: 100%;
-				height: 100%;
+				height: 74%;
 				display: block;
-				font-size: 1vw;
+				font-size: 0.8vw;
 				text-align: center;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				color: white;
+			}
+			img:nth-child(2){
+				position: absolute;
+				top: -50%;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			img:nth-child(3){
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%) rotate(180deg);
 			}
 		}
 		div:hover{
-			opacity: 0.8;
+			opacity: 1;
 		}
 		ul{
 			margin: 0;
