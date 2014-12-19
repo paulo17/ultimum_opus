@@ -1,4 +1,61 @@
-// Config
-@import 'config/config.less';
+#about{
+  //display: none;
 
-// Less file for About View
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 20020;
+  position: fixed;
+  top: 0%;
+  display: none;
+  left: 0;
+  #close{
+    cursor: pointer;
+    left: 5%;
+    top: 5%;
+    width: 25px;
+    position: absolute;
+  }
+  .content{
+    padding: 10%;
+    color: #ffffff;
+    #title{
+      text-transform: uppercase;
+      font-size: 2.8vw;
+      text-align: center;
+    }
+    #text{
+      text-align: justify;
+      padding: 5% 12%;
+      color: #ffffff;
+      font-size: 1.4vw;
+
+    }
+    .rs{
+      width: 300px;
+      position: absolute;
+      left: 44%;
+      cursor: pointer;
+      bottom: 27%;
+      a{
+        text-decoration: none;
+        img{
+          padding: 0 25px;
+          width: 40px;
+
+          }
+        }
+    }
+    .team{
+      width: 100%;
+      font-family: "Playfair Display";
+      font-style: italic;
+      padding: 10% 0 0 3%;
+      p{
+        font-size: 1.4vw;
+        float: left;
+        width: 16.66%;
+        height: auto;
+        text-shadow: 0, 0, 11, white;
+      }
+    }
+  }
+}

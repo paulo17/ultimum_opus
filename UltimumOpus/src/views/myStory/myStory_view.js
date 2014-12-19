@@ -32,13 +32,13 @@ define([
             if(window.percentDone<0.05) {
                 TweenMax.to($("#paralax"), .85, {"opacity": '0', ease: Expo.easeInOut});
 
-                $("#end_1").fadeIn(600, function () {
-                    $("#end_2").fadeIn(600)
+                $("#end_1").fadeIn(3000, function () {
+                    $("#end_2").fadeIn(3000)
                 })
             }
 
             if(window.percentDone>0.05){
-                TweenMax.to($("#paralax"), .85, { "opacity": '1', ease: Expo.easeInOut });
+                TweenMax.to($("#paralax"), .85, { "opacity": '.2', ease: Expo.easeInOut });
             }
         },
 

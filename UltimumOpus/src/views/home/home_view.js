@@ -17,10 +17,11 @@ define([
     'views/myAurora/myAurora_view',
     'views/myEarth/myEarth_view',
     'views/myStory/myStory_view',
+    'views/about/about_view',
     'views/menu/menu_view',
     'gsap',
     'utils/visible'
-], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView, MenuView, TweenMax, visible)
+], function(Backbone, _, Config,pageDomAddedSignal, tpl, css, LoaderView, FooterView,MyShellView,MyCabView, MyADNView, MyCellView, RightDiscoverView, LeftDiscoverView, MyFlowerView, MyAuroraView, MyEarthView, MyStoryView,AboutView, MenuView, TweenMax, visible)
 {
     return Backbone.View.extend({
         el: "#content",
@@ -32,6 +33,8 @@ define([
             'click .leftBtn':'leftBtn',
             'click .rightBtn':'rightBtn',
             'keydown':'keydown',
+            'click #btn-about':'showAbout',
+            'click #about':'hideAbout',
             'mouseenter .RContentFlw': function(){ this.imageAnimation($('.RContentFlw')) },
             'mouseenter .LContentADN' : function(){ this.imageAnimation($('.LContentADN')) },
             'mouseenter .RContentAur' : function(){ this.imageAnimation($('.RContentAur')) }
@@ -58,6 +61,7 @@ define([
             this.myAuroraView = new MyAuroraView(options);
             this.myStoryView = new MyStoryView(options);
             this.menuView = new MenuView(options);
+            this.aboutView = new AboutView(options);
             this.footerView = new FooterView(options);
             this.loaderVieww = new LoaderView(options);
 
@@ -101,6 +105,7 @@ define([
             $('#Flower').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Story').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Earth').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
+            $('#about').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#Aurora').css( { 'width' : $(window).width(), 'height' : $(window).height() } );
             $('#paralax').css( { 'width' : $(window).width(), 'height' : $('html').height()- 2 * $(window).height()});
             $('#effect').css( { 'width' : $(window).width(), 'height' : $(window).height()})
@@ -174,6 +179,14 @@ define([
                     $(".second").animate({textShadowBlur:1}, {duration: 2500});
                 }});
             }, 1000);
+        },
+
+        showAbout: function(){
+            $('#about').fadeIn(600);
+        },
+
+        hideAbout: function(){
+            $('#about').fadeOut(600);
         },
 
         /**
@@ -483,9 +496,11 @@ define([
             this.menuView.render();
             this.footerView.render();
             this.loaderVieww.render();
+            this.aboutView.render();
 
             // Set content on view on div choose
             this.$el.find('#menu').append(this.menuView.el);
+            this.$el.find('#about').append(this.aboutView.el);
             this.$el.find('#ADN').append(this.myADNView.el);
             this.$el.find('#Cell').append(this.myCellView.el);
             this.$el.find('#Shell').append(this.myShellView.el);
