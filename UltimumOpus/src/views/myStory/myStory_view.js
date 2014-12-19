@@ -43,12 +43,18 @@ define([
                                 $(".endctnt").animate({textShadowBlur:1}, {duration: 2500});
                             }});
                         }, 1000);
+                        $("#esa").fadeIn(3000);
                     })
                 })
             }
 
             if(window.percentDone>0.05){
                 TweenMax.to($("#paralax"), .85, { "opacity": '.2', ease: Expo.easeInOut });
+                $("#esa").fadeIn(70, function () {
+                    $("#end_1").fadeIn(70, function(){
+                        $("#end_2").fadeIn(70);
+                    })
+                })
             }
 
             // Make shine on title
