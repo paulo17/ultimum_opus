@@ -17,10 +17,9 @@ define([
         myEndAnim: function(){
             if(window.percentDone<0.05){
                 TweenMax.to($("#paralax"), .85, { "opacity": '0', ease: Expo.easeInOut });
-                TweenMax.to($("#end_1"), 1.25, { "opacity": '1', ease: Expo.easeInOut,  onComplete:animate});
-                function animate() {
-                    TweenMax.to($("#end_2"), 1.25, { "opacity": '1', ease: Expo.easeInOut });
-                }
+                $("#end_1").fadeIn(600, function(){
+                    $("#end_2").fadeIn(600)
+                })
             }
 
             if(window.percentDone>0.05){
